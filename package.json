@@ -33,9 +33,13 @@
     "@feathersjs/express": "^1.2.1",
     "@feathersjs/feathers": "^3.1.4",
     "@feathersjs/socketio": "^3.2.1",
+    "app-root-path": "^2.0.1",
     "compression": "^1.7.1",
     "cors": "^2.8.4",
+    "feathers-mongoose": "^6.1.0",
     "helmet": "^3.12.0",
+    "mongoose": "^5.0.14",
+    "morgan": "^1.9.0",
     "serve-favicon": "^2.5.0",
     "winston": "^2.4.1"
   },
