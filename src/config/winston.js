@@ -23,9 +23,9 @@ const options = {
       formatter,      
     },
     console: {
-      level: 'debug',
+      level: 'info',
       handleExceptions: true,
-      json: false,
+      json: true,
       colorize: true,
       timestamp,
       formatter,

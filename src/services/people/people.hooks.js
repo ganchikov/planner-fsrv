@@ -1,15 +1,11 @@
 
 
-const generateId = require('../../hooks/generate-id');
-
-const getchildren = require('../../hooks/getchildren');
-
 module.exports = {
   before: {
     all: [],
     find: [],
     get: [],
-    create: [generateId()],
+    create: [],
     update: [],
     patch: [],
     remove: []
@@ -17,8 +13,8 @@ module.exports = {
 
   after: {
     all: [],
-    find: [getchildren()],
-    get: [getchildren()],
+    find: [],
+    get: [],
     create: [],
     update: [],
     patch: [],
