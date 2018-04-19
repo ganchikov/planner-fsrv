@@ -6,9 +6,11 @@ const Services = require('../constants/services');
 
 module.exports = function (options = {}) {
   return async context => {
-    const idGenerator = context.app.service(Services.idgenerator);
+    const service = context.service;
     const item = context.data;
-    item.id = await idGenerator.generateId(context.path);
+    if (service.generateId) {
+      await service.generateId(item);
+    }    
     return context;
   };
 };

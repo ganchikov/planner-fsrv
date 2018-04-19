@@ -6,9 +6,11 @@ const Services = require('../constants/services');
 
 module.exports = function (options = {}) {
   return async context => {
-    const teamService = context.app.service(Services.teams);
+    const service = context.service;
     const items = context.result.data;
-    await teamService.getChildren(items);
+    if (service.getChildren) {
+      await service.getChildren(items);
+    }
     return context;
   };
 };

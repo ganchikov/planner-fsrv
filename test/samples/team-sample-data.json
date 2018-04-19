@@ -1,0 +1,90 @@
+[{
+    "name": "Alpha",
+    "members" : [
+        {
+            "name": "John",
+            "start_date": "2018-01-01",
+            "absences": [
+                {
+                    "start_date": "2018-01-01",
+                    "end_date": "2018-01-31",
+                    "name": "vacation",
+                    "confirmed": "true"
+                },
+                {
+                    "start_date": "2018-02-01",
+                    "end_date": "2018-02-25",
+                    "name": "vacation",
+                    "confirmed": "false"
+                },
+                {
+                    "start_date": "2018-03-01",
+                    "end_date": "2018-03-31",
+                    "name": "vacation",
+                    "confirmed": "false"
+                },
+                {
+                    "start_date": "2018-04-01",
+                    "end_date": "2018-04-25",
+                    "name": "vacation",
+                    "confirmed": "true"
+                }                                
+            ]
+        },
+        {
+            "name": "Smith",
+            "start_date": "2018-01-01",
+            "absences": []
+        },
+        {
+            "name": "Paul",
+            "start_date": "2018-01-01",
+            "absences": []
+        }
+    ]
+},
+{
+    "name": "Beta",
+    "members" : [
+        {
+            "name": "Erik",
+            "start_date": "2018-01-01",
+            "absences": []
+        },
+        {
+            "name": "Patric",
+            "start_date": "2018-01-01",
+            "absences": []
+        },
+        {
+            "name": "Raul",
+            "start_date": "2018-01-01",
+            "absences": []
+        }
+    ]
+},
+{
+    "name": "Gamma",
+    "members" : [
+        {
+            "name": "Tom",
+            "start_date": "2018-01-01",
+            "absences": []
+        },
+        {
+            "name": "GNom",
+            "start_date": "2018-01-01",
+            "absences": []
+        },
+        {
+            "name": "BROm",
+            "start_date": "2018-01-01",
+            "absences": []
+        },
+        {
+            "name": "HOM",
+            "start_date": "2018-01-01",
+            "absences": []
+        }
+    ]
+}]

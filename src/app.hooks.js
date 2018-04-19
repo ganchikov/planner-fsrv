@@ -1,12 +1,14 @@
 // Application hooks that run for every service
 const logger = require('./hooks/logger');
+const generateId = require('./hooks/generate-id');
+const getchildren = require('./hooks/getchildren');
 
 module.exports = {
   before: {
     all: [ logger() ],
     find: [],
     get: [],
-    create: [],
+    create: [generateId()],
     update: [],
     patch: [],
     remove: []
@@ -14,8 +16,8 @@ module.exports = {
 
   after: {
     all: [ logger() ],
-    find: [],
-    get: [],
+    find: [ getchildren()],
+    get: [getchildren()],
     create: [],
     update: [],
     patch: [],

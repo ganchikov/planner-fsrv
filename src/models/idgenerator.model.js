@@ -2,6 +2,7 @@
 // 
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
+
 module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
@@ -13,5 +14,5 @@ module.exports = function (app) {
     _id: false
   });
 
-  return mongooseClient.model('idgenerator', idgenerator);
+  return mongooseClient.model('counter', idgenerator);
 };

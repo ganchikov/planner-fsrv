@@ -1,0 +1,8 @@
+curl -vX POST http://localhost:8001/api/teams -d @team-sample-data.json --header "Content-Type: application/json"
+
+curl -vX POST http://localhost:8001/api/teams -d @team-minisample-data.json --header "Content-Type: application/json"
+
+
+curl -vX POST  http://localhost:8001/api/absence -d '{"name": "XYZ", "start_date": "01.01.2018", "end_date": "01.31.2018", "confirmed": "true"}' --header "Content-Type: application/json"
+
+curl -vX PUT  http://localhost:8001/api/person -d '{"name": "QQ", "id": 1}' --header "Content-Type: application/json"

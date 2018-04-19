@@ -1,9 +1,11 @@
 // Initializes the `teams` service on path `/teams`
 const createService = require('feathers-mongoose');
+const routeBuilder = require('../routebuilder');
 const createModel = require('../../models/teams.model');
 const hooks = require('./teams.hooks');
 
-const {teams} = require('../../constants/services');
+
+const {idgenerator, teams} = require('../../constants/services');
 
 module.exports = function (app) {
   const Model = createModel(app);
@@ -16,16 +18,23 @@ module.exports = function (app) {
   };
 
   // Initialize our service with any options it requires
-  app.use('/teams', createService(options));
+  const route = routeBuilder(teams);
+
+  app.use(route, createService(options));
 
   // Get our initialized service so that we can register hooks and filters
-  const service = app.service(teams);
-
+  const service = app.service(route);
+  
   service.getChildren = async (items) => {    
     if (!items || !(items instanceof Array) ) return;
     for (const item of items) {
       await Model.populate(item, {path: 'members', populate: {path: 'absences'}}); 
     }
+  };
+
+  service.generateId = async(item) => {
+    const idGenerator = app.service(routeBuilder(idgenerator));   
+    item.id = await idGenerator.generateId();
   };
 
   service.hooks(hooks);
