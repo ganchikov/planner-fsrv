@@ -14,39 +14,45 @@ class Service {
     };
   }
 
-  async create (data, params) {
-    if (Array.isArray(data)) {
-      await Promise.all(data.map(current => this.createTeam(current)));
-    }
-
-    return data;
+  async create (teams, params) {
+    const promises = [];
+    for (const i in teams) {
+      let team = teams[i];
+      promises.push(this.createTeam(team));
+    }                
+    const insTeams = await Promise.all(promises);
+    return insTeams;    
   }
 
-  async createTeam(data) {
+  async createTeam(team) {
     const teamsService = this.options.teamsService;
-    const members = data.members;
-    if (members && Array.isArray(members)) {
-      data.members = await Promise.all(members.map(current => this.createPerson(current)._id));
-    } 
-    const team = await teamsService.create(data);
-    
-    
-    return team;
+    const members = team.members;
+    const promises = [];
+    for (const i in members) {
+      let person = members[i];
+      promises.push(this.createPerson(person));
+    }
+    const insMembers = await Promise.all(promises);
+    team.members = insMembers.map(item => item._id);
+    return await teamsService.create(team);
   }
 
-  async createPerson(data) {
+  async createPerson(person) {
     const peopleService = this.options.peopleService;    
-    const absences = data.absences;
-    if (absences && Array.isArray(absences)) {
-      data.absences = await Promise.all(absences.map(current => this.createAbsence(current)._id));
-    } 
-    const person = await peopleService.create(data);
-    return person;   
+    const absences = person.absences;
+    const promises = [];
+    for (const i in absences) {
+      let absence = absences[i];
+      promises.push(this.createAbsence(absence));      
+    }
+    const insAbsences = await Promise.all(promises);
+    person.absences = insAbsences.map(item => item._id);
+    return await peopleService.create(person);
   }
 
-  async createAbsence(data) {
+  async createAbsence(absence) {
     const absencesService = this.options.absencesService;
-    return await absencesService.create(data);
+    return await absencesService.create(absence);    
   }
 
 

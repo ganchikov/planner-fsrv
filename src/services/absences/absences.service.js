@@ -25,7 +25,7 @@ module.exports = function (app) {
   const service = app.service(route);
 
   service.generateId = async(item) => {
-    const idGenerator = app.service(idgenerator);   
+    const idGenerator = app.service(routeBuilder(idgenerator));   
     item.id = await idGenerator.generateId();
   };
 
