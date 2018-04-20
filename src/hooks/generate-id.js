@@ -4,7 +4,7 @@
 // eslint-disable-next-line no-unused-vars
 const Services = require('../constants/services');
 
-module.exports = function (options = {}) {
+module.exports = function () {
   return async context => {
     const service = context.service;
     const item = context.data;

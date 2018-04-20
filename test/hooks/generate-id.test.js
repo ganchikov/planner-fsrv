@@ -9,8 +9,12 @@ describe('\'generate-id\' hook', () => {
     app = feathers();
 
     app.use('/dummy', {
-      async get(id) {
-        return { id };
+      async create(item) {
+        return { item };
+      },
+
+      async generateId(item) {
+        return item.id = 'test';
       }
     });
 
@@ -20,8 +24,8 @@ describe('\'generate-id\' hook', () => {
   });
 
   it('runs the hook', async () => {
-    const result = await app.service('dummy').get('test');
+    const result = await app.service('dummy').create({});
     
-    assert.deepEqual(result, { id: 'test' });
+    assert.deepEqual(result, { item: {id: 'test' }});
   });
 });
