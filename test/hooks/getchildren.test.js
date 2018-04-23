@@ -10,7 +10,7 @@ describe('\'getchildren\' hook', () => {
 
     app.use('/dummy', {
       async get(id) {
-        const result = {id, children: []};
+        const result = {data: {id, children: []}};
         return result;
       },
 
@@ -30,7 +30,6 @@ describe('\'getchildren\' hook', () => {
   it('runs the hook', async () => {
     const result = await app.service('dummy').get('test');
     
-    assert.deepEqual(result, { id: 'test' });
-    assert.deepEqual(result, {children: [{child: 'test'}]} );
+    assert.deepEqual(result, {data: {id: 'test', children: [{child: 'test'}]}});
   });
 });

@@ -22,11 +22,12 @@
     "npm": ">= 3.0.0"
   },
   "scripts": {
-    "test": "npm run eslint && npm run mocha",
+    "test": "mocha 'test/**/*.test.js'",
     "eslint": "eslint src/. test/. --config .eslintrc.json",
     "start": "node src/",
     "debug": "nodemon --inspect src/",
-    "mocha": "mocha test/ --recursive --exit"
+    "mocha": "SET NODE_ENV=test& mocha test/ --recursive --exit",
+    "mocha-debug": "SET NODE_ENV=test& mocha test/ --recursive --inspect-brk --exit"
   },
   "dependencies": {
     "@feathersjs/configuration": "^1.0.2",
@@ -46,8 +47,10 @@
   },
   "devDependencies": {
     "eslint": "^4.15.0",
+    "feathers-memory": "^2.1.1",
     "mocha": "^5.0.5",
     "request": "^2.83.0",
-    "request-promise": "^4.2.2"
+    "request-promise": "^4.2.2",
+    "shx": "^0.2.2"
   }
 }
