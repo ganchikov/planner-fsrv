@@ -14,7 +14,7 @@ module.exports = function (app) {
     Model,
     paginate
   };
-  const route = routeBuilder(people);
+  const route = routeBuilder(app, people);
 
   // Initialize our service with any options it requires
   app.use(route, createService(options));
@@ -30,7 +30,7 @@ module.exports = function (app) {
   };
 
   service.generateId = async(item) => {
-    const idGenerator = app.service(routeBuilder(idgenerator));   
+    const idGenerator = app.service(routeBuilder(app, idgenerator));   
     item.id = await idGenerator.generateId();
   };
 

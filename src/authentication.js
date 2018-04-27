@@ -4,8 +4,15 @@ const local = require('@feathersjs/authentication-local');
 const oauth2 = require('@feathersjs/authentication-oauth2');
 const Auth0Strategy = require('passport-auth0');
 
+// Bring in the oauth-handler
+const makeHandler = require('./oauth-handler');
+const verifier = require('./oauth-verifier');
+
+
 module.exports = function (app) {
   const config = app.get('authentication');
+
+  const handler = makeHandler(app);
 
   // Set up authentication with the secret
   app.configure(authentication(config));
@@ -14,7 +21,9 @@ module.exports = function (app) {
 
   app.configure(oauth2(Object.assign({
     name: 'auth0',
-    Strategy: Auth0Strategy
+    Strategy: Auth0Strategy,
+    handler: handler(config.auth0.callbackURL),
+    verifier,
   }, config.auth0)));
 
   // The `authentication` service is used to create a JWT.

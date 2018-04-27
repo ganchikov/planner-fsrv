@@ -1,26 +1,27 @@
 // Initializes the `data-loader` service on path `/loader`
 const createService = require('./data-loader.class.js');
 const hooks = require('./data-loader.hooks');
-const {teams, people, absences} = require('../../constants/services');
+const {teams, people, absences, dataloader} = require('../../constants/services');
 const routeBuilder = require('../routebuilder');
 
 module.exports = function (app) {
   
   const paginate = app.get('paginate');
 
-  const teamsService = app.service(routeBuilder(teams));
-  const peopleService = app.service(routeBuilder(people));
-  const absencesService = app.service(routeBuilder(absences));
+  const teamsService = app.service(routeBuilder(app, teams));
+  const peopleService = app.service(routeBuilder(app, people));
+  const absencesService = app.service(routeBuilder(app, absences));
+
+  const route = routeBuilder(app, dataloader);
 
   const options = {
-    name: 'data-loader',
+    name: dataloader,
     paginate,
     teamsService,
     peopleService,
     absencesService
   };
 
-  const route = routeBuilder('loader');
   // Initialize our service with any options it requires
   app.use(route, createService(options));
 

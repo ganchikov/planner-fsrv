@@ -16,7 +16,7 @@ module.exports = function (app) {
     paginate
   };
 
-  const route = routeBuilder(absences);
+  const route = routeBuilder(app, absences);
 
   // Initialize our service with any options it requires
   app.use(route, createService(options));
@@ -25,7 +25,7 @@ module.exports = function (app) {
   const service = app.service(route);
 
   service.generateId = async(item) => {
-    const idGenerator = app.service(routeBuilder(idgenerator));   
+    const idGenerator = app.service(routeBuilder(app, idgenerator));   
     item.id = await idGenerator.generateId();
   };
 

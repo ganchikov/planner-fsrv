@@ -1,5 +1,5 @@
-const routePrefix = 'api';
-const apiVer = 'v1';
-module.exports = (routeName) => {
+module.exports = (app, routeName) => {
+    const routePrefix = app.get('routePrefix');
+    const apiVer = app.get('apiVer');
     return `/${routePrefix}/${apiVer}/${routeName}`;
 };

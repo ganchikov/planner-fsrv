@@ -18,7 +18,7 @@ module.exports = function (app) {
   };
 
   // Initialize our service with any options it requires
-  const route = routeBuilder(teams);
+  const route = routeBuilder(app, teams);
 
   app.use(route, createService(options));
 
@@ -33,7 +33,7 @@ module.exports = function (app) {
   };
 
   service.generateId = async(item) => {
-    const idGenerator = app.service(routeBuilder(idgenerator));   
+    const idGenerator = app.service(routeBuilder(app, idgenerator));   
     item.id = await idGenerator.generateId();
   };
 
