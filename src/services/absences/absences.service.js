@@ -1,6 +1,6 @@
 // Initializes the `absences` service on path `/absences`
 const createService = require('feathers-mongoose');
-const routeBuilder = require('../routebuilder');
+const routeBuilder = require('../../helpers/routebuilder');
 const createModel = require('../../models/absences.model');
 const hooks = require('./absences.hooks');
 const {idgenerator, absences} = require('../../constants/services');

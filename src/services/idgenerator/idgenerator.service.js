@@ -1,6 +1,6 @@
 // Initializes the `idgenerator` service on path `/idgenerator`
 const createService = require('feathers-mongoose');
-const routeBuilder = require('../routebuilder');
+const routeBuilder = require('../../helpers/routebuilder');
 const createModel = require('../../models/idgenerator.model');
 const {idgenerator} = require('../../constants/services');
 const hooks = require('./idgenerator.hooks');

@@ -1,6 +1,6 @@
 // Initializes the `people` service on path `/people`
 const createService = require('feathers-mongoose');
-const routeBuilder = require('../routebuilder');
+const routeBuilder = require('../../helpers/routebuilder');
 const createModel = require('../../models/people.model');
 const hooks = require('./people.hooks');
 const {idgenerator, people} = require('../../constants/services');

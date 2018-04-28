@@ -2,6 +2,8 @@
 const createService = require('feathers-mongoose');
 const createModel = require('../../models/users.model');
 const hooks = require('./users.hooks');
+const routeBuilder = require('../../helpers/routebuilder');
+const {users} = require('../../constants/services');
 
 module.exports = function (app) {
   const Model = createModel(app);
@@ -13,11 +15,12 @@ module.exports = function (app) {
     paginate
   };
 
+  const route = routeBuilder(app, users);
   // Initialize our service with any options it requires
-  app.use('/users', createService(options));
+  app.use(route, createService(options));
 
   // Get our initialized service so that we can register hooks and filters
-  const service = app.service('users');
+  const service = app.service(route);
 
   service.hooks(hooks);
 };
