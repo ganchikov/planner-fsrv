@@ -27,12 +27,18 @@ module.exports = function (app) {
   app.configure(jwt());
   app.configure(local());
 
-  app.configure(oauth2(Object.assign({
-    name: 'auth0',
-    Strategy: Auth0Strategy,
-    handler: handler(config.auth0.callbackURL),
-    verifier,
-  }, config.auth0)));
+  const oauth2cfg = Object.assign(
+    config.auth0, {
+      name: 'auth0',
+      Strategy: Auth0Strategy,
+      handler: handler(config.auth0.callbackURL),
+      verifier,
+
+      // callbackURL: 'http(s)://hostname[:port]/auth/<provider>/callback',
+      service: routeBuilder(app, users)
+    });
+
+  app.configure(oauth2(oauth2cfg));
 
   // The `authentication` service is used to create a JWT.
   // The before `create` hook registers strategies that can be used

@@ -34,8 +34,8 @@
       "passwordField": "password"
     },
     "auth0": {
-      "clientID": "b3Gr31SEPcFfy1yjHCEI6MWKd3SVspLT",
-      "clientSecret": "85cIV6Fm-Lo2ftHXq79ogFVpob_Cq6Wsb_vPam9-wGxkZF-99GlUmvgxp-u5c0tO",
+      "clientID": "vcE5nGaE1cIgX7XbdHdgQdc4TMEkJLju",
+      "clientSecret": "DzXQH4CCy0G73OTJVDEXL9HU-vAiLU7Pf8lIrzr1tD9K03iybDR_vteZFHNyvhzL",
       "successRedirect": "/",
       "domain": "xplanner.auth0.com"
     },

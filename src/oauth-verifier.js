@@ -13,3 +13,5 @@ class CustomVerifier extends Verifier {
   }
 }
 
+module.exports = CustomVerifier;
+
