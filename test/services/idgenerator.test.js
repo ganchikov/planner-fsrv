@@ -1,6 +1,6 @@
 const assert = require('assert');
 const app = require('../../src/app');
-const routeBuilder = require('../../src/services/routebuilder');
+const routeBuilder = require('../../src/helpers/routebuilder');
 
 
 describe('\'idgenerator\' service', () => {
