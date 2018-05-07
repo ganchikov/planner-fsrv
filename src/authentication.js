@@ -13,7 +13,28 @@ const verifier = require('./oauth-verifier');
 
 
 module.exports = function (app) {
+
   const config = app.get(auth);
+
+  const clientID = config.auth0.clientID;
+  const clientSecret = config.auth0.clientSecret;
+
+  const strategy = new Auth0Strategy(
+    {
+      domain: config.auth0.domain,
+      clientID,
+      clientSecret,
+      callbackURL: 'http://localhost:3030/callback'
+    },
+    function(accessToken, refreshToken, extraParams, profile, done) {
+      // accessToken is the token to call Auth0 API (not needed in the most cases)
+      // extraParams.id_token has the JSON Web Token
+      // profile has all the information from the user
+      return done(null, profile);
+    }
+  );
+
+  
 
   const route = routeBuilder(app, auth);
 
@@ -31,7 +52,7 @@ module.exports = function (app) {
     config.auth0, {
       name: 'auth0',
       Strategy: Auth0Strategy,
-      handler: handler(config.auth0.callbackURL),
+      // handler: handler(config.auth0.callbackURL),
       verifier,
 
       // callbackURL: 'http(s)://hostname[:port]/auth/<provider>/callback',
@@ -39,6 +60,7 @@ module.exports = function (app) {
     });
 
   app.configure(oauth2(oauth2cfg));
+  app.passport.use(strategy);
 
   // The `authentication` service is used to create a JWT.
   // The before `create` hook registers strategies that can be used
@@ -54,5 +76,10 @@ module.exports = function (app) {
     }
   });
 
-  
+  app.use('/callback', app.passport.authenticate('auth0', {
+    failureRedirect: '/failure'
+  }), (req, res) => {
+    res.redirect('/success.html');
+  });
+
 };
