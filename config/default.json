@@ -36,7 +36,7 @@
     "auth0": {
       "clientID": "vcE5nGaE1cIgX7XbdHdgQdc4TMEkJLju",
       "clientSecret": "DzXQH4CCy0G73OTJVDEXL9HU-vAiLU7Pf8lIrzr1tD9K03iybDR_vteZFHNyvhzL",
-      "successRedirect": "/",
+      "successRedirect": "/success.html",
       "domain": "xplanner.auth0.com",
       "responseType": "code",
       "audience": "https://xplanner.auth0.com/userinfo",

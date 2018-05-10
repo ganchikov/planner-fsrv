@@ -34,11 +34,9 @@ module.exports = function (app) {
     }
   );
 
-  
-
   const route = routeBuilder(app, auth);
 
-  const handler = makeHandler(app);
+  // const handler = makeHandler(app);
 
   // Set up authentication with the secret
   app.configure(authentication(Object.assign(config, {
@@ -76,10 +74,10 @@ module.exports = function (app) {
     }
   });
 
-  app.use('/callback', app.passport.authenticate('auth0', {
-    failureRedirect: '/failure'
-  }), (req, res) => {
-    res.redirect('/success.html');
-  });
+  // app.use('/callback', app.passport.authenticate('auth0', {
+  //   failureRedirect: '/failure'
+  // }), (req, res) => {
+  //   res.redirect('/success.html');
+  // });
 
 };
