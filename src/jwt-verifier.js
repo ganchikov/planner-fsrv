@@ -10,7 +10,8 @@ const checkJwt = jwt({
       cache: true,
       rateLimit: true,
       jwksRequestsPerMinute: 5,
-      jwksUri: 'https://xplanner.auth0.com/.well-known/jwks.json'
+      jwksUri: 'https://xplanner.auth0.com/.well-known/jwks.json',
+      strictSsl: false,
     }),
   
     // Validate the audience and the issuer.
