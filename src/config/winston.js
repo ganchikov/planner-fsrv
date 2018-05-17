@@ -39,7 +39,7 @@ const options = {
       new winston.transports.Console(options.console)
     ],
     exitOnError: false, // do not exit on handled exceptions   
-    handleExceptions: false
+    handleExceptions: true
 
   });
 

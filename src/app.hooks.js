@@ -2,10 +2,11 @@
 const logger = require('./hooks/logger');
 const generateId = require('./hooks/generate-id');
 const getchildren = require('./hooks/getchildren');
+const checkJwt = require('./hooks/check-jwt');
 
 module.exports = {
   before: {
-    all: [ logger() ],
+    all: [ checkJwt(), logger() ],
     find: [],
     get: [],
     create: [generateId()],
@@ -25,7 +26,7 @@ module.exports = {
   },
 
   error: {
-    all: [ logger() ],
+    all: [logger()],
     find: [],
     get: [],
     create: [],

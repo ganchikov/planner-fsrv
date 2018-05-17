@@ -50,25 +50,22 @@ app.configure(services);
 // Set up event channels (see channels.js)
 app.configure(channels);
 
-///TODO: not working currently, consider removing/fixing - needs for avoid self signed cert in chain issue, currently strictSSL set to false
-app.configure(httpsrequest);
+// ///TODO: not working currently, consider removing/fixing - needs for avoid self signed cert in chain issue, currently strictSSL set to false
+// app.configure(httpsrequest);
 
-app.use(morgan('combined', {stream: winston.stream}));
+// app.use(morgan('combined', {stream: winston.stream}));
 // Configure a middleware for 404s and the error handler
 app.use(express.notFound());
-app.use(function(err, req, res, next) {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-    winston.error(`${err.status || 500} - ${err.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
-    process.emit('uncaughtException', err);
-    // render the error page
-    res.status(err.status || 500);
-    res.send();
-    // res.render('error');
-  });
-// app.use(express.errorHandler({ winston }));
 
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  // winston.error(`${err.status || 500} - ${err.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
+
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.status(err.status || 500).send(err.message);
+});
+// app.use(express.errorHandler({ winston }));
 app.hooks(appHooks);
 
 
