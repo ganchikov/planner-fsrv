@@ -17,8 +17,6 @@ module.exports = function (app) {
           const clientSecret = config.auth0.clientSecret;
           const redirect_uri = '/';
           const code = req.query.code;
-          console.log(code);
-
           const options = { method: 'POST',
           url: auth0route,
           headers: { 'content-type': 'application/json' },
@@ -32,7 +30,6 @@ module.exports = function (app) {
         
           request(options, function (error, response, body) {
             if (error) throw new Error(error);
-            console.log(body);
           });
 
           // app.passport.createJWT(req.feathers.payload, options).then(token => {
