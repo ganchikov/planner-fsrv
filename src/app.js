@@ -20,7 +20,7 @@ const mongoose = require('./mongoose');
 
 const authentication = require('./authentication');
 
-const httpsrequest = require('./https-request');
+// const httpsrequest = require('./https-request');
 
 const app = express(feathers());
 

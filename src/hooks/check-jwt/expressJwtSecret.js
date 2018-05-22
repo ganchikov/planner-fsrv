@@ -1,4 +1,4 @@
-const { ArgumentError } = require('../../../errors');
+const { ArgumentError } = require('../../errors');
 const JwksClient = require('./JwksClient');
 
 

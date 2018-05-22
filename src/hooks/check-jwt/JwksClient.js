@@ -1,5 +1,5 @@
 const request = require('request');
-const {JwksError, SigningKeyNotFoundError} = require('../../../errors');
+const {JwksError, SigningKeyNotFoundError} = require('../../errors');
 
 
 function certToPEM(cert) {

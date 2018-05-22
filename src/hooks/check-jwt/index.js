@@ -1,5 +1,5 @@
 const expressJwt = require('./expressJwt');
-const expressJwtSecret = require('./lib/expressJwtSecret');
+const expressJwtSecret = require('./expressJwtSecret');
 
 module.exports = () => {
   return expressJwt(
