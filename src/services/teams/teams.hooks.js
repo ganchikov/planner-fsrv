@@ -3,8 +3,8 @@ const jwtauthz = require('../../hooks/jwt-authz');
 module.exports = {
   before: {
     all: [],
-    find: [jwtauthz(['read:teams-api'])],
-    get: [jwtauthz(['read:teams-api'])],
+    find: [jwtauthz(['read:team-api'])],
+    get: [jwtauthz(['read:team-api'])],
     create: [],
     update: [],
     patch: [],
