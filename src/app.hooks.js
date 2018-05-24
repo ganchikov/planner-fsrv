@@ -4,6 +4,8 @@ const generateId = require('./hooks/generate-id');
 const getchildren = require('./hooks/getchildren');
 const checkJwt = require('./hooks/check-jwt');
 
+const removeJwt = require('./hooks/remove-jwt');
+
 module.exports = {
   before: {
     all: [ checkJwt(), logger() ],
@@ -16,7 +18,7 @@ module.exports = {
   },
 
   after: {
-    all: [ logger() ],
+    all: [removeJwt(), logger()],
     find: [ getchildren()],
     get: [getchildren()],
     create: [],

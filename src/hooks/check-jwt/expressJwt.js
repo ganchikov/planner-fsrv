@@ -9,6 +9,9 @@ module.exports = options => {
 
     return async context => {
         try {
+            if (context.app.get('jwt')) {
+                return context;
+            }
             const authHeader = context.params.headers.authorization;
             if (!authHeader) {
                 throw new UnauthorizedError('credentials_required', { message: 'No authorization token was found' });
@@ -42,8 +45,15 @@ module.exports = options => {
                         resolve(decoded);
                     }
                 });
-            });        
-            context.data = {user: result};
+            }); 
+            context.app.set('jwt', result);
+            // if (!context.data) {
+            //     context.data = {user: result};
+            // } else {
+            //     context.data.user = result;
+            // }
+            
+            return context;
         } catch (err) {
             throw err;
         }

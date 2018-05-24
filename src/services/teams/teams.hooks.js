@@ -1,14 +1,15 @@
 const jwtauthz = require('../../hooks/jwt-authz');
+const permissions = require('../../constants/permissions');
 
 module.exports = {
   before: {
     all: [],
-    find: [jwtauthz(['read:team-api'])],
-    get: [jwtauthz(['read:team-api'])],
-    create: [],
-    update: [],
-    patch: [],
-    remove: []
+    find: [jwtauthz([permissions.team.read])],
+    get: [jwtauthz([permissions.team.read])],
+    create: [jwtauthz([permissions.team.edit])],
+    update: [jwtauthz([permissions.team.edit])],
+    patch: [jwtauthz([permissions.team.edit])],
+    remove: [jwtauthz([permissions.team.edit])]
   },
 
   after: {
