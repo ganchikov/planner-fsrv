@@ -7,7 +7,7 @@ module.exports = expectedScopes => {
                 throw new Error('Parameter expectedScopes must be an array of strings representing the scopes for the endpoint(s)');
             }
             if (expectedScopes.length === 0){
-                return context();
+                return context;
             }
             const noPermissionError = `User doesn't have required permission(s): ${expectedScopes.toString()}`;
             if (!context.data || !context.data.user || typeof context.data.user.scope !== 'string') { 
@@ -19,7 +19,7 @@ module.exports = expectedScopes => {
             });
         
             if (allowed) {
-                return context();
+                return context;
             } else {
                 throw new UnauthorizedError('no_permission', { message: noPermissionError });
             }    
