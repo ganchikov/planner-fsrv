@@ -1,8 +1,13 @@
 const {UnauthorizedError} = require('../errors');
+const {auth} = require('../constants/services');
 
 module.exports = expectedScopes => {
     return async context => {
         try {
+            const config = context.app.get(auth);
+            if (!config.enabled) {
+                return context;
+            }
             if (!Array.isArray(expectedScopes)){
                 throw new Error('Parameter expectedScopes must be an array of strings representing the scopes for the endpoint(s)');
             }

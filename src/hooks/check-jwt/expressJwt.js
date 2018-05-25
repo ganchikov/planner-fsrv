@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
-const async = require('async');
 
 const { UnauthorizedError } = require('../../errors');
+const {auth} = require('../../constants/services');
 
 module.exports = options => {
     
@@ -9,6 +9,10 @@ module.exports = options => {
 
     return async context => {
         try {
+            const config = context.app.get(auth);
+            if (!config.enabled) {
+                return context;                
+            }
 
             const authHeader = context.params.headers.authorization;
             if (!authHeader) {
