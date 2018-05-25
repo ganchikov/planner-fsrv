@@ -29,9 +29,9 @@ module.exports = function (app) {
     // if (!counter_id) {counter_id = 'universal';}
     counter_id = 'universal';
 
-    let counter = await Model.findByIdAndUpdate(counter_id, {$inc: {sequence_val: 1}}, {new: true}).exec();
+    let counter = await Model.findOneAndUpdate({counter_id}, {$inc: {sequence_val: 1}}, {new: true}).exec();
     if (!counter) {
-      counter = await Model.create({_id: counter_id});
+      counter = await Model.create({counter_id});
     }
     // console.log('find invoked');
     return counter.sequence_val;

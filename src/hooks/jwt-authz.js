@@ -10,10 +10,10 @@ module.exports = expectedScopes => {
                 return context;
             }
             const noPermissionError = `User doesn't have required permission(s): ${expectedScopes.toString()}`;
-            if (!context.app.get('jwt')) { 
+            if (!context.data || !context.data.user) { 
                 throw new UnauthorizedError('no_permission', { message: noPermissionError });
-            }
-            var scopes = context.app.get('jwt').scope.split(' ');
+            }            
+            var scopes = context.data.user.scope.split(' ');
             var allowed = expectedScopes.some(function(scope){
                 return scopes.indexOf(scope) !== -1;
             });

@@ -7,11 +7,10 @@ module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
   const idgenerator = new Schema({
-    _id: { type: String, required: true},
+    counter_id: { type: String, required: true},
     sequence_val: {type: Number,default: 1}
   }, {
-    timestamps: true,
-    _id: false
+    timestamps: true
   });
 
   return mongooseClient.model('counter', idgenerator);

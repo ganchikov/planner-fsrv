@@ -16,43 +16,40 @@ class Service {
 
   async create (teams, params) {
     const promises = [];
-    for (const i in teams) {
-      let team = teams[i];
-      promises.push(this.createTeam(team));
+    for (const team of teams) {
+      promises.push(this.createTeam(team, params));
     }                
     const insTeams = await Promise.all(promises);
     return insTeams;    
   }
 
-  async createTeam(team) {
+  async createTeam(team, params) {
     const teamsService = this.options.teamsService;
     const members = team.members;
     const promises = [];
-    for (const i in members) {
-      let person = members[i];
-      promises.push(this.createPerson(person));
+    for (const person of members) {
+      promises.push(this.createPerson(person, params));
     }
     const insMembers = await Promise.all(promises);
     team.members = insMembers.map(item => item._id);
-    return await teamsService.create(team);
+    return await teamsService.create(team, params);
   }
 
-  async createPerson(person) {
+  async createPerson(person, params) {
     const peopleService = this.options.peopleService;    
     const absences = person.absences;
     const promises = [];
-    for (const i in absences) {
-      let absence = absences[i];
-      promises.push(this.createAbsence(absence));      
+    for (const absence of absences) {
+      promises.push(this.createAbsence(absence, params));      
     }
     const insAbsences = await Promise.all(promises);
     person.absences = insAbsences.map(item => item._id);
-    return await peopleService.create(person);
+    return await peopleService.create(person, params);
   }
 
-  async createAbsence(absence) {
+  async createAbsence(absence, params) {
     const absencesService = this.options.absencesService;
-    return await absencesService.create(absence);    
+    return await absencesService.create(absence, params);    
   }
 
 
