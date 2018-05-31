@@ -1,22 +1,9 @@
 /* eslint-disable no-console */
-const fs = require('fs');
-const https = require('https');
-const logger = require('./config/winston');
 const app = require('./app');
 const port = app.get('port');
 
-const httpsServer = https.createServer({
-  key: fs.readFileSync('./.sslcert/localhost.key'),
-  cert: fs.readFileSync('./.sslcert/localhost.cert')
-}, app).listen(443);
-
-httpsServer.on('listening', () =>
-  logger.info('Feathers secured application started on https://%s:443', app.get('host'))
-);
-
-app.setup(httpsServer);
-
 const server = app.listen(port);
+const logger = app.get('logger');
 
 /// TODO: only for dev testign purposes - don't forget to remove -> shift to default config section
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;

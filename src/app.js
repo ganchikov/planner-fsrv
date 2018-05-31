@@ -5,6 +5,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const winston = require('./config/winston');
+const logger = require('./config/winston');
 
 const feathers = require('@feathersjs/feathers');
 const configuration = require('@feathersjs/configuration');
@@ -15,10 +16,9 @@ const middleware = require('./middleware');
 const services = require('./services');
 const appHooks = require('./app.hooks');
 const channels = require('./channels');
-
 const mongoose = require('./mongoose');
-
 const authentication = require('./authentication');
+const https = require('./https');
 
 // const httpsrequest = require('./https-request');
 
@@ -35,6 +35,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(favicon(path.join(app.get('public'), 'favicon.ico')));
 // Host the public folder
 app.use('/', express.static(app.get('public')));
+//setup logger
+app.set('logger', logger);
 
 // Set up Plugins and providers
 app.configure(express.rest());
@@ -50,6 +52,8 @@ app.configure(services);
 // Set up event channels (see channels.js)
 app.configure(channels);
 
+// Set up https mode
+app.configure(https);
 // ///TODO: not working currently, consider removing/fixing - needs for avoid self signed cert in chain issue, currently strictSSL set to false
 // app.configure(httpsrequest);
 
