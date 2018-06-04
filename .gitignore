@@ -113,3 +113,9 @@ data/
 
 # SSL certs
 .sslcert
+
+# OpenNode
+.openode
+
+# Luxoft cert
+luxoft-root-ca-Base64.cer
