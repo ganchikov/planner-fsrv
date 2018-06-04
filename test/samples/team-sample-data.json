@@ -2,7 +2,7 @@
     "name": "Alpha",
     "members" : [
         {
-            "name": "John",
+            "name": "John Smith",
             "start_date": "2018-01-01",
             "absences": [
                 {
@@ -32,12 +32,12 @@
             ]
         },
         {
-            "name": "Smith",
+            "name": "Bill Stone",
             "start_date": "2018-01-01",
             "absences": []
         },
         {
-            "name": "Paul",
+            "name": "Brian Love",
             "start_date": "2018-01-01",
             "absences": []
         }
@@ -47,17 +47,17 @@
     "name": "Beta",
     "members" : [
         {
-            "name": "Erik",
+            "name": "Erik Shultz",
             "start_date": "2018-01-01",
             "absences": []
         },
         {
-            "name": "Patric",
+            "name": "Patric Wilson",
             "start_date": "2018-01-01",
             "absences": []
         },
         {
-            "name": "Raul",
+            "name": "Gareth Emery",
             "start_date": "2018-01-01",
             "absences": []
         }
@@ -67,22 +67,17 @@
     "name": "Gamma",
     "members" : [
         {
-            "name": "Tom",
+            "name": "Michael Corn",
             "start_date": "2018-01-01",
             "absences": []
         },
         {
-            "name": "GNom",
+            "name": "BIll Davies",
             "start_date": "2018-01-01",
             "absences": []
         },
         {
-            "name": "BROm",
-            "start_date": "2018-01-01",
-            "absences": []
-        },
-        {
-            "name": "HOM",
+            "name": "Richard Kim",
             "start_date": "2018-01-01",
             "absences": []
         }

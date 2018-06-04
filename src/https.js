@@ -11,8 +11,8 @@ if (!fs.existsSync(sslCertPath.concat('/localhost.key') || !fs.existsSync(sslCer
 }
 
 const httpsServer = https.createServer({
-    key: fs.readFileSync('./.sslcert/localhost.key'),
-    cert: fs.readFileSync('./.sslcert/localhost.cert')
+    key: fs.readFileSync('./.sslcert/domain-key.key'),
+    cert: fs.readFileSync('./.sslcert/domain-crt.cert')
   }, app).listen(443);
   
   httpsServer.on('listening', () =>
