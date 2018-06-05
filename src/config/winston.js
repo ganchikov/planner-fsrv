@@ -4,7 +4,7 @@ const fs = require('fs');
 
 const config = winston.config;
 const timestamp = () => {
-    return new Date(Date.now()).toDateString();
+    return new Date(Date.now()).toUTCString();
 };
 const formatter = (options) => {
     return `${config.colorize(options.level, options.level.toUpperCase())} 
