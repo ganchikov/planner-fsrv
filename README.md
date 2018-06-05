@@ -76,3 +76,5 @@ Licensed under the [MIT license](LICENSE).
 ##mongo hosting
 cloud.mongodb.com
 
+[![CircleCI](https://circleci.com/gh/ganchikov/planner-fsrv.svg?style=svg)](https://circleci.com/gh/ganchikov/planner-fsrv)
+
