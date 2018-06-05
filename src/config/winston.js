@@ -1,5 +1,7 @@
 const appRoot = require('app-root-path');
 const winston = require('winston');
+const fs = require('fs');
+
 const config = winston.config;
 const timestamp = () => {
     return Date.now();
@@ -10,10 +12,13 @@ const formatter = (options) => {
     `;
 };
 
+const logDir = `${appRoot}/logs`;
+const logFile = logDir.concat('/app.log');
+
 const options = {
     file: {
       level: 'info',
-      filename: `${appRoot}/logs/app.log`,
+      filename: logFile,
       handleExceptions: true,
       json: true,
       maxsize: 5242880, // 5MB
@@ -32,22 +37,27 @@ const options = {
     },
   };
 
+if (!fs.existsSync(logDir)) {
+  fs.mkdirSync(logDir);
+} else if (!fs.existsSync(logFile)) {
+  fs.writeFileSync(logFile, null);
+}
 
-  const logger = new winston.Logger({
-    transports: [
-      new winston.transports.File(options.file),
-      new winston.transports.Console(options.console)
-    ],
-    exitOnError: false, // do not exit on handled exceptions   
-    handleExceptions: true
+const logger = new winston.Logger({
+  transports: [
+    new winston.transports.File(options.file),
+    new winston.transports.Console(options.console)
+  ],
+  exitOnError: false, // do not exit on handled exceptions   
+  handleExceptions: true
 
-  });
+});
 
-  logger.stream = {
-    // write: function(message, encoding) {        
-    write: function(message) {        
-      logger.info(message);
-    },
-  };
+logger.stream = {
+  // write: function(message, encoding) {        
+  write: function(message) {        
+    logger.info(message);
+  },
+};
 
-  module.exports = logger;
+module.exports = logger;
