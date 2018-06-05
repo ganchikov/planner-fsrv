@@ -4,11 +4,11 @@ const fs = require('fs');
 
 const config = winston.config;
 const timestamp = () => {
-    return Date.now();
+    return new Date(Date.now()).toDateString();
 };
 const formatter = (options) => {
-    return `${options.timestamp()} ${config.colorize(options.level, options.level.toUpperCase())} 
-      ${options.message} ${options.meta && Object.keys(options.meta).length ? '\n\t' + JSON.stringify(options.meta) : null}
+    return `${config.colorize(options.level, options.level.toUpperCase())} 
+      ${options.message} ${options.timestamp()} ${options.meta && Object.keys(options.meta).length ? '\n\t' + JSON.stringify(options.meta) : null}
     `;
 };
 
@@ -23,7 +23,7 @@ const options = {
       json: true,
       maxsize: 5242880, // 5MB
       maxFiles: 5,
-      colorize: false,
+      colorize: true,
       timestamp,
       formatter,      
     },

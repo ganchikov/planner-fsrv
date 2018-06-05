@@ -4,7 +4,6 @@ const compress = require('compression');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const winston = require('./config/winston');
 const logger = require('./config/winston');
 
 const feathers = require('@feathersjs/feathers');
@@ -63,13 +62,11 @@ app.use(express.notFound());
 
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
-  // winston.error(`${err.status || 500} - ${err.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
-
+  logger.error(`${err.status || 500} - ${err.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
   res.status(err.status || 500).send(err.message);
 });
-// app.use(express.errorHandler({ winston }));
 app.hooks(appHooks);
 
 

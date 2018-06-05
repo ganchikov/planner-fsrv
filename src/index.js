@@ -9,8 +9,7 @@ const logger = app.get('logger');
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 
 process.on('unhandledRejection', (reason, p) =>
-  logger.error('Unhandled Rejection at: Promise ', p, reason)
-);
+  logger.error(p, reason));
 
 server.on('listening', () =>
   logger.info('Feathers application started on http://%s:%d', app.get('host'), port)
