@@ -41,25 +41,30 @@ jobs:
       # - run: 
       #     name: test
       #     command: npm test
-  deploy-job:
-    docker:
-      - image: my-image
-    working_directory: /tmp/my-project 
-    steps:
+
+      # deploy to openode ci
       - run:
           name: Deploy Master to openode CI
           command: ./node_modules/.bin/openode deploy -t $OPENODE_TOKEN -s $OPENODE_SITENAME
-workflows:
-  version: 2
+#   deploy-job:
+#     docker:
+#       - image: my-image
+#     working_directory: /tmp/my-project 
+#     steps:
+#       - run:
+#           name: Deploy Master to openode CI
+#           command: ./node_modules/.bin/openode deploy -t $OPENODE_TOKEN -s $OPENODE_SITENAME
+# workflows:
+#   version: 2
 
-  -deploy:
-    jobs:
-      - build-job
-      - deploy-job:
-        requires:
-          - build-job
-        filters:
-          branches:
-            only: master
+#   -deploy:
+#     jobs:
+#       - build-job
+#       - deploy-job:
+#         requires:
+#           - build-job
+#         filters:
+#           branches:
+#             only: master
 
 
