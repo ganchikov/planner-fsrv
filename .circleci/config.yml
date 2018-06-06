@@ -10,7 +10,7 @@ defaults: &defaults
 
 version: 2
 jobs:
-  build:
+  build-job:
     <<: *defaults
 
     steps:
@@ -66,13 +66,13 @@ jobs:
       - run:
           name: Deploy Master to openode CI
           command: ./node_modules/.bin/openode deploy -t $OPENODE_TOKEN -s $OPENODE_SITENAME
-          
+
 workflows:
   version: 2
 
   commit:
     jobs:
-      - build
+      - build-job
 
   nightly_build:
     triggers:
@@ -83,9 +83,9 @@ workflows:
               only:
                 - master
     jobs:
-      - build
+      - build-job
       - test-job:
-          requires: build
+          requires: build-job
       - deploy-job:
           requires: test-job
           filters:
@@ -94,10 +94,10 @@ workflows:
 
   deploy:
     jobs:
-      - build
+      - build-job
       - hold:
           type: approval
-          requires: build
+          requires: build-job
       - deploy-job:
           requires:
             - hold
