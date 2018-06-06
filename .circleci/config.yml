@@ -27,6 +27,11 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
+
+      - persist_to_workspace:
+          root: ./
+          paths: 
+            - ./
   test-job:
     <<: *defaults
     steps:
@@ -47,15 +52,8 @@ jobs:
     <<: *defaults
 
     steps:
-      - checkout
-      - run: 
-          name: update-npm
-          command: 'sudo npm install -g npm@latest'
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+      - attach_workspace:
+        at: ./
       - run:
           name: Deploy Master to openode CI
           command: ./node_modules/.bin/openode deploy -t $OPENODE_TOKEN -s $OPENODE_SITENAME
