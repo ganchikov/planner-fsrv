@@ -69,7 +69,7 @@ workflows:
                 - master
     jobs:
       - build-job
-      - test-job
+      - test-job:
           requires: 
             - build-job
       - deploy-job:
