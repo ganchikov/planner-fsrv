@@ -58,8 +58,8 @@ jobs:
 
     steps:
       - run:
-        name: 'create release folder'
-        command: mkdir release
+          name: 'create release folder'
+          command: 'mkdir release'
       - attach_workspace:
           at: /release
       - run:
