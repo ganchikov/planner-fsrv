@@ -29,9 +29,13 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - persist_to_workspace:
-          root: ./
           paths: 
-            - ./
+            - config
+            - node_modules
+            - package-lock.json
+            - package.json
+            - public
+            - src
   test-job:
     <<: *defaults
     steps:
@@ -53,10 +57,10 @@ jobs:
 
     steps:
       - attach_workspace:
-        at: ./
+          at: /release
       - run:
           name: Deploy Master to openode CI
-          command: ./node_modules/.bin/openode deploy -t $OPENODE_TOKEN -s $OPENODE_SITENAME
+          command: ./release/node_modules/.bin/openode deploy -t $OPENODE_TOKEN -s $OPENODE_SITENAME
 
 workflows:
   version: 2
