@@ -76,6 +76,7 @@ workflows:
   commit:
     jobs:
       - build
+
   nightly_build:
     triggers:
       - schedule:
@@ -86,19 +87,20 @@ workflows:
                 - master
     jobs:
       - build
-      - test-job
+      - test-job:
           requires: build
-      - deploy-job
+      - deploy-job:
           requires: test-job
           filters:
             branches:
               only: master
+
   deploy:
     jobs:
       - build
-      - hold
-        type: approval
-        requires: build
+      - hold:
+          type: approval
+          requires: build
       - deploy-job:
           requires:
             - hold
