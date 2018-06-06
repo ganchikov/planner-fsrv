@@ -1,0 +1,108 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+# 
+defaults: &defaults 
+  docker:
+  # specify the version you desire here
+  - image: circleci/node:8.11.2
+  working_directory: ~/repo
+
+version: 2
+jobs:
+  build-job:
+    <<: *defaults
+
+    steps:
+      - checkout
+      - run: 
+          name: update-npm
+          command: 'sudo npm install -g npm@latest'
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: 
+          name: install-npm-wee
+          command: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+        
+      
+
+      # deploy to openode ci
+      # - run:
+      #     name: Deploy Master to openode CI
+      #     command: ./node_modules/.bin/openode deploy -t $OPENODE_TOKEN -s $OPENODE_SITENAME
+  test-job:
+    <<: *defaults
+
+    steps:
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+    # run tests!
+      - run: 
+          name: test
+          command: npm test
+
+  deploy-job:
+    <<: *defaults
+
+    steps:
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - run:
+          name: Deploy Master to openode CI
+          command: ./node_modules/.bin/openode deploy -t $OPENODE_TOKEN -s $OPENODE_SITENAME
+
+workflows:
+  version: 2
+
+  commit:
+    jobs:
+      - build-job
+
+  nightly_build:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - build-job
+      - test-job:
+          requires: build-job
+      - deploy-job:
+          requires: test-job
+          filters:
+            branches:
+              only: master
+
+  deploy:
+    jobs:
+      - build-job
+      - hold:
+          type: approval
+          requires: build-job
+      - deploy-job:
+          requires:
+            - hold
+          filters:
+            branches:
+              only: master
+
+
