@@ -22,11 +22,10 @@
     "npm": ">= 3.0.0"
   },
   "scripts": {
-    "test": "mocha 'test/**/*.test.js'",
+    "test": "SET NODE_ENV=test& mocha test/**/*.test.js --exit",
     "eslint": "eslint src/. test/. --config .eslintrc.json",
     "start": "node src/",
     "debug": "nodemon --inspect src/",
-    "mocha": "SET NODE_ENV=test& mocha test/ --recursive --exit",
     "mocha-debug": "SET NODE_ENV=test& mocha test/ --recursive --inspect-brk --exit"
   },
   "dependencies": {
