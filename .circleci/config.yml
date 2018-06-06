@@ -4,7 +4,7 @@
 #
 version: 2
 jobs:
-  build-job:
+  build:
     docker:
       # specify the version you desire here
       - image: circleci/node:8.11.2
@@ -37,15 +37,21 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
         
-      # run tests!
-      # - run: 
-      #     name: test
-      #     command: npm test
+      
 
       # deploy to openode ci
       # - run:
       #     name: Deploy Master to openode CI
       #     command: ./node_modules/.bin/openode deploy -t $OPENODE_TOKEN -s $OPENODE_SITENAME
+  test-job:
+   docker:
+      - image: circleci/node:8.11.2
+    working_directory: ~/repo 
+    steps:
+    # run tests!
+      - run: 
+          name: test
+          command: npm test
   deploy-job:
     docker:
       - image: circleci/node:8.11.2
@@ -56,14 +62,38 @@ jobs:
           command: ./node_modules/.bin/openode deploy -t $OPENODE_TOKEN -s $OPENODE_SITENAME
 workflows:
   version: 2
-  -deploy:
+
+  commit:
     jobs:
-      - build-job
+      - build
+  nightly_build:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - build
+      - test-job
+          requires: build
+      - deploy-job
+          requires: test-job
+          filters:
+            branches:
+              only: master
+  deploy:
+    jobs:
+      - build
+      - hold
+        type: approval
+        requires: build
       - deploy-job:
-        requires:
-          - build
-        filters:
-          branches:
-            only: master
+          requires:
+            - hold
+          filters:
+            branches:
+              only: master
 
 
