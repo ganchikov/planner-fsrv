@@ -1,6 +1,6 @@
 defaults: &defaults 
   docker:
-  # specify the version you desire here
+  # specify the version you desire here 
   - image: circleci/node:8.11.2
   working_directory: ~/repo
 version: 2
