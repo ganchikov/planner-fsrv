@@ -4,7 +4,7 @@
 #
 version: 2
 jobs:
-  build:
+  build-job:
     docker:
       # specify the version you desire here
       - image: circleci/node:8.11.2
@@ -56,10 +56,9 @@ jobs:
           command: ./node_modules/.bin/openode deploy -t $OPENODE_TOKEN -s $OPENODE_SITENAME
 workflows:
   version: 2
-
   -deploy:
     jobs:
-      - build
+      - build-job
       - deploy-job:
         requires:
           - build
