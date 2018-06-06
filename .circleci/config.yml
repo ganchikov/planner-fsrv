@@ -61,7 +61,7 @@ jobs:
           name: 'create release folder'
           command: 'mkdir release'
       - attach_workspace:
-          at: /release
+          at: ~/repo/release
       - run:
           name: Deploy Master to openode CI
           command: ./release/node_modules/.bin/openode deploy -t $OPENODE_TOKEN -s $OPENODE_SITENAME
