@@ -20,7 +20,7 @@ describe('\'absences\' service', function() {
     const generatedId = result._id;
     assert.ok(result.hasOwnProperty('id'), 'service created record');
     const createdRecord = await service.get(generatedId);
-    assert.deepStrictEqual(createdRecord, [{name: 'test'}], 'service retrieved created record');
+    assert.strictEqual(createdRecord.name, 'test', 'service retrieved created record');
   });
 
   
