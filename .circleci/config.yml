@@ -1,12 +1,13 @@
 defaults: &defaults 
   docker:
-  # specify the version you desire here 
   - image: circleci/node:8.11.2
+  - image: circleci/mongo:3.6.5-ram
+    command: [mongod, --smallfiles]
   working_directory: ~/repo
 version: 2
 jobs:
   build-job:
-    <<: *defaults
+    <<: *defaults  
     steps:
       - checkout
       - run: 
@@ -39,6 +40,8 @@ jobs:
             - src
   test-job:
     <<: *defaults
+    environment:
+      - NODE_ENV: "test"
     steps:
       - run:
           name: 'create build folder'

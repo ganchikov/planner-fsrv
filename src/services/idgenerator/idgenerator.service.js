@@ -23,11 +23,26 @@ module.exports = function (app) {
   // Get our initialized service so that we can register hooks and filters
   const service = app.service(route);
 
+  service.getLastId = async (counter_id) => {
+    if (!counter_id) {
+      counter_id = 'universal';
+    } 
+    let counter = await Model.findOne({counter_id}).exec();
+    if (counter) {
+      return counter.sequence_val;
+    } else {
+      return null;
+    }
+  };
+  
+  
   service.generateId = async (counter_id) => {
     
     ///TODO: consider moving this logic to post select hooks as it is required for UI only to render dhtmlx chart properly
     // if (!counter_id) {counter_id = 'universal';}
-    counter_id = 'universal';
+    if (!counter_id) {
+      counter_id = 'universal';
+    } 
 
     let counter = await Model.findOneAndUpdate({counter_id}, {$inc: {sequence_val: 1}}, {new: true}).exec();
     if (!counter) {

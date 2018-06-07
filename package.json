@@ -22,11 +22,11 @@
     "npm": ">= 3.0.0"
   },
   "scripts": {
-    "test": "SET NODE_ENV=test& mocha test/**/*.test.js --exit",
+    "test": "mocha test/**/*.test.js --exit",
     "eslint": "eslint src/. test/. --config .eslintrc.json",
     "start": "node src/",
     "debug": "nodemon --inspect src/",
-    "mocha-debug": "SET NODE_ENV=test& mocha test/ --recursive --inspect-brk --exit"
+    "mocha-debug": "mocha test/ --recursive --inspect-brk --exit"
   },
   "dependencies": {
     "@feathersjs/authentication": "^2.1.5",

@@ -62,10 +62,10 @@ app.use(express.notFound());
 
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
-  logger.error(`${err.status || 500} - ${err.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
+  logger.error(`${err.status || err.code || 500} - ${err.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-  res.status(err.status || 500).send(err.message);
+  res.locals.error = req.app.get('env') === 'development' || 'test'  ? err : {};
+  res.status(err.status || err.code || 500).send(err);
 });
 app.hooks(appHooks);
 

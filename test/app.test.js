@@ -36,7 +36,8 @@ describe('Feathers application tests', () => {
       }
     }).catch(res => {
       assert.equal(res.statusCode, 404);
-      assert.ok(res.error.indexOf('<html>') !== -1);
+      //no need to show HTML, status code is enough
+      // assert.ok(res.error.indexOf('<html>') !== -1);
     });
   });
 

@@ -1,10 +1,11 @@
 const assert = require('assert');
 const app = require('../../src/app');
+const routeBuilder = require('../../src/helpers/routebuilder');
+const {users} = require('../../src/constants/services');
 
 describe('\'users\' service', () => {
   it('registered the service', () => {
-    const service = app.service('users');
-
+    const service = app.service(routeBuilder(app, users));
     assert.ok(service, 'Registered the service');
   });
 });
