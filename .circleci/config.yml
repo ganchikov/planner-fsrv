@@ -89,7 +89,9 @@ workflows:
   commit:
     jobs:
       - build-job
-      - test-job
+      - test-job:
+          requires:
+            - build-job
 
   nightly_build:
     triggers:
