@@ -37,7 +37,7 @@ jobs:
             - package-lock.json
             - package.json
             - public
-            - tests
+            - test
             - src
   test-job:
     <<: *defaults
