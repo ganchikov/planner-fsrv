@@ -110,6 +110,9 @@ workflows:
       - test-job:
           requires:
             - build-job
+      - increment-build-job:
+          requires:
+            - test-job
 
   nightly_build:
     triggers:
