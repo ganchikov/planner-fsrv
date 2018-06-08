@@ -10,13 +10,15 @@
   },
   "build": {
     "date": "Fri Jun 08 2018 11:37:34 GMT+0300 (Russia TZ 2 Standard Time)",
-    "number": 1,
+    "number": 0,
     "total": 1
   },
   "commit": "21847c3",
   "config": {
     "appversion": "1.7.1",
-    "markdown": [],
+    "markdown": [
+      "README.md"
+    ],
     "json": [],
     "ignore": []
   }
