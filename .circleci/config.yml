@@ -55,6 +55,17 @@ jobs:
           command: |
             cd build
             npm test
+  version-increment-job:
+    <<: *defaults
+    steps:
+      - run:
+          name: 'create build folder'
+          command: 'mkdir build'
+      - attach_workspace:
+          at: ~/repo/build
+      - run:
+          name: 'build version increment'    
+          command: 'apv update build --tag'
   deploy-ci-job:
     <<: *defaults
 
