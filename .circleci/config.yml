@@ -66,7 +66,7 @@ jobs:
             if [ $CIRCLE_BRANCH == "master" ]; then
               cd build
               node node_modules/appversion/apv update build
-              TAG = "$(jq '.version.major|tostring + "." .version.minor|tostring + "." + .version.path|tostring + "." + .build.number|tostring' appversion.json)"
+              TAG="$(jq '.version.major|tostring + "." .version.minor|tostring + "." + .version.path|tostring + "." + .build.number|tostring' appversion.json)"
               git tag -a $TAG -m 'build tag auto-updated'
               git add .
               git commit -m "${TAG}"
