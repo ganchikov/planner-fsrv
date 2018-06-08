@@ -122,9 +122,12 @@ workflows:
       - build-job:
           requires:
                 - hold
+      - test-job:
+          requires:
+            - build-job
       - deploy-prod-job:
           requires: 
-            - build-job          
+            - test-job          
           filters:
             branches:
               only: 
