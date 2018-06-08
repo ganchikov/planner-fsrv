@@ -63,7 +63,7 @@ jobs:
       - run:
           name: 'update build #'    
           command: |
-            if [ "{$CIRCLE_BRANCH}" == "master"]; then
+            if [ "{$CIRCLE_BRANCH}" == "master" ]; then
               cd build
               apv update build
               TAG = "$(jq '.version.major + .version.minor + .version.path + .build.number' package.json)"
