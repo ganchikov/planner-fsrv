@@ -9,11 +9,11 @@
     "number": 0
   },
   "build": {
-    "date": "Fri Jun 08 2018 11:37:34 GMT+0300 (Russia TZ 2 Standard Time)",
-    "number": 0,
-    "total": 1
+    "date": "Fri Jun 08 2018 17:11:56 GMT+0300 (Russia TZ 2 Standard Time)",
+    "number": 4,
+    "total": 5
   },
-  "commit": "21847c3",
+  "commit": "303dc77",
   "config": {
     "appversion": "1.7.1",
     "markdown": [

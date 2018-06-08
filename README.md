@@ -78,6 +78,16 @@ cloud.mongodb.com
 
 #CI
 circleci.com
+Project settings:
+Build Environment -> Ubuntu 14.04
+Environment Variables: 
+    - OPENODE_SITE
+    - OPENODE_SITE_CI
+    - OPENODE_TOKEN
+    - EMAIL
+    - GIT_AUTHOR_NAME
+    - GIT_COMMITTER_NAME    
+
 
 [![AppVersion-version](https://img.shields.io/badge/AppVersion-0.1.0-brightgreen.svg?style=flat)](https://github.com/delvedor/appversion?#version)
 

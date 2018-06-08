@@ -5,6 +5,8 @@ const absences = require('./absences/absences.service.js');
 const dataLoader = require('./data-loader/data-loader.service.js');
 const users = require('./users/users.service.js');
 
+const appver = require('./appver/appver.service.js');
+
 // eslint-disable-next-line no-unused-vars
 module.exports = function (app) {
   app.configure(teams);
@@ -13,4 +15,5 @@ module.exports = function (app) {
   app.configure(absences);
   app.configure(dataLoader);
   app.configure(users);
+  app.configure(appver);
 };

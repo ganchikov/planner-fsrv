@@ -32,13 +32,7 @@ jobs:
       - persist_to_workspace:
           root: ./
           paths: 
-            - config
-            - node_modules
-            - package-lock.json
-            - package.json
-            - public
-            - test
-            - src
+            - ./
   test-job:
     <<: *defaults
     environment:
@@ -55,7 +49,7 @@ jobs:
           command: |
             cd build
             npm test
-  version-increment-job:
+  increment-build-job:
     <<: *defaults
     steps:
       - run:
@@ -64,8 +58,20 @@ jobs:
       - attach_workspace:
           at: ~/repo/build
       - run:
-          name: 'build version increment'    
-          command: 'apv update build --tag'
+          name: 'install jq'
+          command: 'sudo apt-get install jq'
+      - run:
+          name: 'update build #'    
+          command: |
+            if [ "{$CIRCLE_BRANCH}" == "master"]; then
+              cd build
+              apv update build
+              TAG = "$(jq '.version.major + .version.minor + .version.path + .build.number' package.json)"
+              git tag -a $TAG -m 'build tag auto-updated'
+              git add .
+              git commit -m "${TAG}"
+              git push origin $CIRCLE_BRANCH
+            fi
   deploy-ci-job:
     <<: *defaults
 
@@ -118,6 +124,9 @@ workflows:
       - test-job:
           requires: 
             - build-job
+      - increment-build-job:
+          requires:
+            - test-job
       - deploy-ci-job:
           requires: 
             - test-job
