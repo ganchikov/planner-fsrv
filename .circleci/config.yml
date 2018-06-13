@@ -67,9 +67,11 @@ jobs:
               cd build
               node node_modules/appversion/apv update build
               TAG="$(jq '[.version.major , .version.minor, .version.patch, .build.number | tostring] | join (".")' appversion.json)"
+              ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+              git remote set-url origin https://github.com/ganchikov/planner-fsrv.git
               git tag -a $TAG -m 'build tag auto-updated'
               git add .
-              git commit -m "${TAG}"
+              git commit -m "${TAG} [skip ci]"
               git push origin $CIRCLE_BRANCH
             fi
   deploy-ci-job:
