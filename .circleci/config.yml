@@ -55,11 +55,6 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "ed:57:1a:03:7c:26:b2:91:c3:f6:21:f2:03:ff:7e:a8"
-      - run:
-          name: 'create build folder'
-          command: |
-            mkdir build
-            cd build
       - checkout
       - run: 
           name: update-npm
@@ -80,7 +75,6 @@ jobs:
           name: 'update build #'    
           command: |
             if [ $CIRCLE_BRANCH == "master" ]; then
-              cd build
               node node_modules/appversion/apv update build             
               TAG="$(jq '[.version.major , .version.minor, .version.patch, .build.number | tostring] | join (".")' appversion.json)"
               #git clone --depth 1 https://${GIT_TOKEN}@github.com/ganchikov/planner-fsrv.git
