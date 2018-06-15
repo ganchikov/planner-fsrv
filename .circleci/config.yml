@@ -156,7 +156,7 @@ workflows:
       - build-job:
           filters:
             tags:
-              only: /^prod*/
+              only: /^prod.*/
             branches:
               ignore: /.*/
       - test-job:
@@ -164,7 +164,7 @@ workflows:
             - build-job
           filters:
             tags:
-              only: /^prod*/            
+              only: /^prod.*/            
             branches:
               ignore: /.*/
       - deploy-prod-job:
@@ -172,7 +172,7 @@ workflows:
             - test-job          
           filters:            
             tags:
-              only: /^prod*/
+              only: /^prod.*/
             branches:
               only: 
                 - master
