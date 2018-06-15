@@ -154,13 +154,12 @@ workflows:
               only: 
                 - master
   
-  deploy:
+  deploy-prod:
     jobs:      
-      - hold:
-          type: approval
       - build-job:
-          requires:
-                - hold
+          filters:
+            tags:
+              only: /^prod.*/
       - test-job:
           requires:
             - build-job
