@@ -85,7 +85,7 @@ jobs:
               git add .
               git tag -a $TAG -m 'build tag auto-updated'
               git commit -m "${TAG} [skip ci]"
-              git push
+              git push --tags
               #git push -q https://${GIT_TOKEN}@github.com/ganchikov/planner-fsrv.git ${CIRCLE_BRANCH}
             fi
   deploy-ci-job:
