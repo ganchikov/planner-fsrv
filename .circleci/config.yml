@@ -126,9 +126,6 @@ workflows:
       - test-job:
           requires:
             - build-job
-      - increment-build-job:
-          requires:
-            - test-job
 
   nightly_build:
     triggers:
@@ -163,6 +160,9 @@ workflows:
       - test-job:
           requires:
             - build-job
+          filters:
+            tags:
+              only: /^prod.*/
       - deploy-prod-job:
           requires: 
             - test-job          
@@ -170,4 +170,6 @@ workflows:
             branches:
               only: 
                 - master
+            tags:
+              only: /^prod.*/
   
