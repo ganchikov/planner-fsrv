@@ -57,9 +57,22 @@ jobs:
             - "ed:57:1a:03:7c:26:b2:91:c3:f6:21:f2:03:ff:7e:a8"
       - run:
           name: 'create build folder'
-          command: 'mkdir build'
-      - attach_workspace:
-          at: ~/repo/build
+          command: |
+            mkdir build
+            cd build
+      - checkout
+      - run: 
+          name: update-npm
+          command: 'sudo npm install -g npm@latest'
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - run: 
+          name: install-npm-wee
+          command: npm install
       - run:
           name: 'install jq'
           command: 'sudo apt-get install jq'
@@ -78,7 +91,7 @@ jobs:
               git add .
               git tag -a $TAG -m 'build tag auto-updated'
               git commit -m "${TAG} [skip ci]"
-              git push -q ${CIRCLE_BRANCH}
+              git push
               #git push -q https://${GIT_TOKEN}@github.com/ganchikov/planner-fsrv.git ${CIRCLE_BRANCH}
             fi
   deploy-ci-job:
