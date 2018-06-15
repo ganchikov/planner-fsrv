@@ -52,6 +52,9 @@ jobs:
   increment-build-job:
     <<: *defaults
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "ed:57:1a:03:7c:26:b2:91:c3:f6:21:f2:03:ff:7e:a8"
       - run:
           name: 'create build folder'
           command: 'mkdir build'
@@ -65,14 +68,18 @@ jobs:
           command: |
             if [ $CIRCLE_BRANCH == "master" ]; then
               cd build
-              node node_modules/appversion/apv update build
+              node node_modules/appversion/apv update build             
               TAG="$(jq '[.version.major , .version.minor, .version.patch, .build.number | tostring] | join (".")' appversion.json)"
-              ssh-keyscan -H github.com >> ~/.ssh/known_hosts
-              git remote set-url origin https://github.com/ganchikov/planner-fsrv.git
-              git tag -a $TAG -m 'build tag auto-updated'
+              #git clone --depth 1 https://${GIT_TOKEN}@github.com/ganchikov/planner-fsrv.git
+              #git remote set-url origin https://github.com/ganchikov/planner-fsrv.git
+              #git config credentials.helper 'cache --timeout=120'
+              #git config user.email "ganchikovm@gmail.com"
+              #git config user.name "Deployment bot"           
               git add .
+              git tag -a $TAG -m 'build tag auto-updated'
               git commit -m "${TAG} [skip ci]"
-              git push origin $CIRCLE_BRANCH
+              git push -q ${CIRCLE_BRANCH}
+              #git push -q https://${GIT_TOKEN}@github.com/ganchikov/planner-fsrv.git ${CIRCLE_BRANCH}
             fi
   deploy-ci-job:
     <<: *defaults
