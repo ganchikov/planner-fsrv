@@ -79,7 +79,6 @@ cloud.mongodb.com
 #CI
 circleci.com
 
-
 1. Project settings:
 Build Environment -> Ubuntu 14.04
 
