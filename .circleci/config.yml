@@ -148,7 +148,7 @@ workflows:
             - test-job
           filters:
             branches:
-              only: 
+              only:                 
                 - master
   
   deploy-prod:
