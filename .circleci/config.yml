@@ -156,20 +156,17 @@ workflows:
       - build-job:
           filters:
             tags:
-              only: /^prod.*/    
+              only: /prod/    
       - test-job:
           requires:
             - build-job
           filters:
             tags:
-              only: /^prod.*/            
+              only: /prod/            
       - deploy-prod-job:
           requires: 
             - test-job          
           filters:            
             tags:
-              only: /^prod.*/
-            branches:
-              only: 
-                - master
+              only: /prod/            
   
