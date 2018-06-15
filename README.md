@@ -78,16 +78,35 @@ cloud.mongodb.com
 
 #CI
 circleci.com
-Project settings:
+
+1. Project settings:
 Build Environment -> Ubuntu 14.04
-Environment Variables: 
+
+2. Environment Variables: 
     - OPENODE_SITE
     - OPENODE_SITE_CI
     - OPENODE_TOKEN
     - EMAIL
     - GIT_AUTHOR_NAME
     - GIT_COMMITTER_NAME    
-    
+
+3. Add user key to GH/CC using this article (Creating a GitHub User Key):
+
+1) Create an SSH key pair by following the GitHub instructions: https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/
+When prompted to enter a passphrase, do not enter one.
+
+2) Go to https://github.com/you/test-repo/settings/keys, and click “Add deploy key”. Enter a title in the “Title” field, then copy and paste the key you created in step 1. Check “Allow write access”, then click “Add key”.
+
+3) Go to https://circleci.com/gh/you/test-repo/edit#ssh, and add the key you created in step 1. In the “Hostname” field, enter “github.com”, and press the submit button.
+
+4) In your config.yml, add the fingerprint using the add_ssh_keys key:
+version: 2
+jobs:
+  deploy-job:
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "SO:ME:FIN:G:ER:PR:IN:T"
     
 [![AppVersion-version](https://img.shields.io/badge/AppVersion-0.1.0-brightgreen.svg?style=flat)](https://github.com/delvedor/appversion?#version)
 
