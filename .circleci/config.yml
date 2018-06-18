@@ -76,18 +76,15 @@ jobs:
           command: |
             if [ $CIRCLE_BRANCH == "master" ]; then
               node node_modules/appversion/apv update build             
-              TAG="$(jq '[.version.major , .version.minor, .version.patch, .build.number | tostring] | join (".")' appversion.json)"
-              #git clone --depth 1 https://${GIT_TOKEN}@github.com/ganchikov/planner-fsrv.git
-              #git remote set-url origin https://github.com/ganchikov/planner-fsrv.git
-              #git config credentials.helper 'cache --timeout=120'
-              #git config user.email "ganchikovm@gmail.com"
-              #git config user.name "Deployment bot"           
+              #extract tag data
+              TAG=$(jq '[.version.major , .version.minor, .version.patch, .build.number | tostring] | join (".")' appversion.json)
+              #remove first-last double quotes
+              TAG=$(sed -e 's/^"//' -e 's/"$//' <<<$TAG)    
               git add .
               git tag -a $TAG -m 'nightly build'
               git commit -m "${TAG} nightly build version update [skip ci]"
               git push
-              git push --tags
-              #git push -q https://${GIT_TOKEN}@github.com/ganchikov/planner-fsrv.git ${CIRCLE_BRANCH}
+              git push --tags              
             fi
   deploy-ci-job:
     <<: *defaults
