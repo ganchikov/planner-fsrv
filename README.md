@@ -61,12 +61,6 @@ Licensed under the [MIT license](LICENSE).
 1.1) goto http://cert.luxoft.com, follow instructions to export luxoft-root-ca as Base64 to project folder
 1.2) export NODE_EXTRA_CA_CERTS="<your cert file name>.CER"
 
-##deploy to prod via openode
-1.1) npm install -g openode
-1.2) Edit ENV Variables, set NODE_ENV = production
-1.3) openode deploy
-1.4) openode sync
-
 ##Heroku
 1.1) install cli
 1.2) export NODE_EXTRA_CA_CERTS="<path to your Luxoft cert>.cer"
@@ -83,8 +77,6 @@ Licensed under the [MIT license](LICENSE).
 
 ##mongo hosting
 cloud.mongodb.com
-
-
 
 #CI
 circleci.com

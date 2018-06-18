@@ -99,35 +99,6 @@ jobs:
           command: |
             git push https://heroku:$HEROKU_TOKEN@git.heroku.com/$HEROKU_APP.git master
 
-  deploy-ci-job:
-    <<: *defaults
-
-    steps:
-      - run:
-          name: 'create build folder'
-          command: 'mkdir build'
-      - attach_workspace:
-          at: ~/repo/build
-      - run:
-          name: Deploy Master to openode CI
-          command: |
-            cd build
-            node_modules/.bin/openode deploy -t $OPENODE_TOKEN -s $OPENODE_SITE_CI
-  deploy-prod-job:
-    <<: *defaults
-
-    steps:
-      - run:
-          name: 'create build folder'
-          command: 'mkdir build'
-      - attach_workspace:
-          at: ~/repo/build
-      - run:
-          name: Deploy Master to openode CI
-          command: |
-            cd build
-            node_modules/.bin/openode deploy -t $OPENODE_TOKEN -s $OPENODE_SITE
-
 workflows:
   version: 2
 
@@ -137,9 +108,6 @@ workflows:
       - test-job:
           requires:
             - build-job
-      - deploy-heroku-job:
-          requires:
-            - test-job
 
   nightly_build:
     triggers:
@@ -157,36 +125,11 @@ workflows:
       - increment-build-job:
           requires:
             - test-job
-      - deploy-ci-job:
+      - deploy-heroku-job:
           requires: 
             - test-job
           filters:
             branches:
               only:                 
-                - master
-  
-  deploy-prod:
-    jobs:      
-      - build-job:
-          filters:
-            tags:
-              only: /prod/    
-            branches:
-              ignore: /.*/
-      - test-job:
-          requires:
-            - build-job
-          filters:
-            tags:
-              only: /prod/  
-            branches:
-              ignore: /.*/
-      - deploy-prod-job:
-          requires: 
-            - test-job          
-          filters:                        
-            tags:
-              only: /prod/    
-            branches:
-              ignore: /.*/          
+                - master    
   
