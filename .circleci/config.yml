@@ -126,13 +126,13 @@ workflows:
             - build-job
 
   nightly_build:
-    # triggers:
-    #   - schedule:
-    #       cron: "0 0 * * *"
-    #       filters:
-    #         branches:
-    #           only:
-    #             - master
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
     jobs:
       - build-job
       - test-job:
@@ -155,16 +155,22 @@ workflows:
           filters:
             tags:
               only: /prod/    
+            branches:
+              ignore: /.*/
       - test-job:
           requires:
             - build-job
           filters:
             tags:
-              only: /prod/            
+              only: /prod/  
+            branches:
+              ignore: /.*/          
       - deploy-prod-job:
           requires: 
             - test-job          
           filters:            
             tags:
               only: /prod/            
+            branches:
+              ignore: /.*/
   
