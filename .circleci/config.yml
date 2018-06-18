@@ -79,9 +79,9 @@ jobs:
               TAG="$(jq '[.version.major , .version.minor, .version.patch, .build.number | tostring] | join (".")' appversion.json)"
               #git clone --depth 1 https://${GIT_TOKEN}@github.com/ganchikov/planner-fsrv.git
               #git remote set-url origin https://github.com/ganchikov/planner-fsrv.git
-              #git config credentials.helper 'cache --timeout=120'
-              #git config user.email "ganchikovm@gmail.com"
-              #git config user.name "Deployment bot"           
+              git config credentials.helper 'cache --timeout=120'
+              git config user.email "ganchikovm@gmail.com"
+              git config user.name "Deployment bot"           
               git add .
               git tag -a $TAG -m 'build tag auto-updated'
               git commit -m "${TAG} [skip ci]"
@@ -128,13 +128,13 @@ workflows:
             - build-job
 
   nightly_build:
-    triggers:
-      - schedule:
-          cron: "0 0 * * *"
-          filters:
-            branches:
-              only:
-                - master
+    # triggers:
+    #   - schedule:
+    #       cron: "0 0 * * *"
+    #       filters:
+    #         branches:
+    #           only:
+    #             - master
     jobs:
       - build-job
       - test-job:
