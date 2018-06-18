@@ -86,6 +86,19 @@ jobs:
               git push
               git push --tags              
             fi
+  deploy-heroku-job:
+    <<: *defaults
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "5b:c6:98:ba:8b:54:f0:60:12:00:57:80:f8:da:65:74"
+            - "b1:1c:98:9f:4d:d1:ff:2b:09:5d:81:70:8b:87:b0:f8"
+      - checkout
+      - run:
+          name: Deploy Master to Heroku
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
+
   deploy-ci-job:
     <<: *defaults
 
@@ -124,6 +137,9 @@ workflows:
       - test-job:
           requires:
             - build-job
+      - deploy-heroku-job:
+          requires:
+            - test-job
 
   nightly_build:
     triggers:
