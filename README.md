@@ -67,6 +67,14 @@ Licensed under the [MIT license](LICENSE).
 1.3) openode deploy
 1.4) openode sync
 
+##Heroku
+1.1) install cli
+1.2) export NODE_EXTRA_CA_CERTS="<path to your Luxoft cert>.cer"
+1.3) using Git Bash: winpty heroku login
+1.4) add HOME environment variable set to %USERPROFILE% (required to run git config commands)
+1.4) git config --system http.sslCAPath <path to your Luxoft cert>.cer
+
+
 ##to renew SSL certificate
 1.1)https://zerossl.com/free-ssl/#crt.
 1.2) provide email, domain name, set all checkboxes
@@ -75,6 +83,8 @@ Licensed under the [MIT license](LICENSE).
 
 ##mongo hosting
 cloud.mongodb.com
+
+
 
 #CI
 circleci.com
@@ -107,6 +117,9 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "SO:ME:FIN:G:ER:PR:IN:T"
+
+
+
 
     
 [![AppVersion-version](https://img.shields.io/badge/AppVersion-0.1.0-brightgreen.svg?style=flat)](https://github.com/delvedor/appversion?#version)
