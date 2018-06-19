@@ -14,11 +14,15 @@ module.exports = function (app) {
     paginate
   };
 
-  // Initialize our service with any options it requires
-  app.use(route, createService(options));
+  const service = createService(options);
+  
+  app.use(route, async (req, res) => {
+      const data = await service.find();
+      res.status(200).send(`${data.version.major}.${data.version.minor}.${data.version.patch}.${data.build}`);      
+  });
 
-  // Get our initialized service so that we can register hooks
-  const service = app.service(route);
+  // // Get our initialized service so that we can register hooks
+  // const service = app.service(route);
 
-  service.hooks(hooks);
+  // service.hooks(hooks);
 };

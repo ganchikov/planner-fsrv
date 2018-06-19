@@ -19,8 +19,6 @@ const mongoose = require('./mongoose');
 const authentication = require('./authentication');
 const https = require('./https');
 
-// const httpsrequest = require('./https-request');
-
 const app = express(feathers());
 
 // Load app configuration
@@ -34,6 +32,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(favicon(path.join(app.get('public'), 'favicon.ico')));
 // Host the public folder
 app.use('/', express.static(app.get('public')));
+
 //setup logger
 app.set('logger', logger);
 
@@ -68,8 +67,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || err.code || 500).send(err);
 });
 app.hooks(appHooks);
-
-
-
 
 module.exports = app;
