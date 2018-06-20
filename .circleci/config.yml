@@ -108,6 +108,9 @@ workflows:
       - test-job:
           requires:
             - build-job
+      - increment-build-job:
+          requires:
+            - test-job
       - hold:
           type: approval
           requires: 
@@ -133,9 +136,6 @@ workflows:
       - test-job:
           requires: 
             - build-job
-      - increment-build-job:
-          requires:
-            - test-job
       - deploy-heroku-job:
           requires: 
             - test-job
