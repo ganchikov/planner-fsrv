@@ -14,8 +14,18 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}\\src\\index.js"
-        },        
+            "program": "${workspaceFolder}\\src\\index.js",            
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program (Prod mode)",
+            "program": "${workspaceFolder}\\src\\index.js",
+            "env": {
+                "NODE_ENV": "production",
+                "PORT": "3030"
+            }
+        },      
         {
             "type": "node",
             "request": "launch",
