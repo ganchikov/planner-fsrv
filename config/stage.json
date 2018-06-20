@@ -1,0 +1,57 @@
+{
+  "host": "http://planner-api.openode.io/",
+  "port": "PORT",
+  "public": "../public/",
+  "routePrefix" : "api",
+  "apiVer" : "v1",
+  "paginate": {
+    "default": 10,
+    "max": 50
+  },
+  "mongodb": "mongodb://appuser:CjHQX3ymw9vTqK9x@ds016108.mlab.com:16108/plannerdb-stage",
+  "ssl": {
+    "enabled": true,
+    "sslCertPath": "../.sslcert/"
+  },  
+  "authentication": {
+    "enabled": false,
+    "secret": "31503018d4d28c43fb45672176f169ec99f6c775a8a40a727ac23cb8117075c4e204bde0cb266eaa982d1e728fd163f39e3d6a4e0d346352226ba9f92b0d1613b45bcedd3479f938392dd3e27f3e9058e98ec8eb5a745261cfba7177c58a94b0f0f13a82cde51e7f639f33a64a1cbc205a287aa2ab210242de7e96352b804c78dfc1e1242feb24557204389f6b881650e4317d80e6c019ef87378a1007a22cbc296f0f88dbf899b201ffa97391b6e750d5264f879a7026280c34fac3f3e0c84f9b7f2a91563ad37dc5753a77ff8fd93186f47f1d2a6c7e2e39f639e8f955b32aa47ae8cfb8c4be72972f53b25e3a890277dbed8081baf96cce7aa0b331762281",
+    "strategies": [
+      "jwt",
+      "local",
+      "auth0"
+    ],
+    "path": "/authentication",
+    "service": "users",
+    "jwt": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "http://localhost:3030/api/v1",
+      "subject": "anonymous",
+      "issuer": "https://xplanner.auth0.com/",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "entity": "user",
+      "usernameField": "email",
+      "passwordField": "password"
+    },
+    "auth0": {
+      "clientID": "vcE5nGaE1cIgX7XbdHdgQdc4TMEkJLju",
+      "clientSecret": "DzXQH4CCy0G73OTJVDEXL9HU-vAiLU7Pf8lIrzr1tD9K03iybDR_vteZFHNyvhzL",
+      "successRedirect": "/success.html",
+      "domain": "xplanner.auth0.com",
+      "responseType": "code",
+      "audience": "https://xplanner.auth0.com/userinfo",
+      "scope": "openid profile"
+    },
+    "cookie": {
+      "enabled": true,
+      "name": "feathers-jwt",
+      "httpOnly": false,
+      "secure": false
+    }
+  }
+}
