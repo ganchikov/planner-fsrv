@@ -8,7 +8,7 @@
     "default": 10,
     "max": 50
   },
-  "mongodb": "mongodb+srv://appuser:it8G9acIToSmJW5C@planner-qn0zk.mongodb.net/plannerdb",
+  "mongodb": "mongodb://appuser:VncZA2g6SH82pBM5@ds016118.mlab.com:16118/plannerdb",
   "ssl": {
     "enabled": true,
     "sslCertPath": "../.sslcert/"
