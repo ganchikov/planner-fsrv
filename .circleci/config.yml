@@ -108,6 +108,14 @@ workflows:
       - test-job:
           requires:
             - build-job
+      - deploy-heroku-job:
+          type: approval
+          requires: 
+            - test-job
+          filters:
+            branches:
+              only:                 
+                - master  
 
   nightly_build:
     triggers:

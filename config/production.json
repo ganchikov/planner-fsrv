@@ -9,7 +9,10 @@
     "max": 50
   },
   "mongodb": "mongodb+srv://dbuser:A4kIc22tS2qJLaP8@plannerdb-qn0zk.mongodb.net/plannerdb?retryWrites=true",
-  "sslCertPath": "../.sslcert/",
+  "ssl": {
+    "enabled": true,
+    "sslCertPath": "../.sslcert/"
+  },  
   "authentication": {
     "enabled": true,
     "secret": "31503018d4d28c43fb45672176f169ec99f6c775a8a40a727ac23cb8117075c4e204bde0cb266eaa982d1e728fd163f39e3d6a4e0d346352226ba9f92b0d1613b45bcedd3479f938392dd3e27f3e9058e98ec8eb5a745261cfba7177c58a94b0f0f13a82cde51e7f639f33a64a1cbc205a287aa2ab210242de7e96352b804c78dfc1e1242feb24557204389f6b881650e4317d80e6c019ef87378a1007a22cbc296f0f88dbf899b201ffa97391b6e750d5264f879a7026280c34fac3f3e0c84f9b7f2a91563ad37dc5753a77ff8fd93186f47f1d2a6c7e2e39f639e8f955b32aa47ae8cfb8c4be72972f53b25e3a890277dbed8081baf96cce7aa0b331762281",
