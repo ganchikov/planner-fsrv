@@ -108,10 +108,13 @@ workflows:
       - test-job:
           requires:
             - build-job
-      - deploy-heroku-job:
+      - hold:
           type: approval
           requires: 
             - test-job
+      - deploy-heroku-job:          
+          requires: 
+            - hold
           filters:
             branches:
               only:                 
