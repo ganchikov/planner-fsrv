@@ -116,8 +116,6 @@ workflows:
           requires: 
             - test-job
       - deploy-heroku-job:          
-          requires: 
-            - hold
           filters:
             branches:
               only:                 
