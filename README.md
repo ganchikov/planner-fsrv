@@ -46,9 +46,9 @@ For more information on all the things you can do with Feathers visit [docs.feat
 
 ## Changelog
 
-__0.1.0__
+__0.0.1__
 
-- Initial release
+- Initial release - skeleton version is integrated with auth0 and configured for circleci and heroku deployments
 
 ## License
 
