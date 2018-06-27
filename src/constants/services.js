@@ -1,4 +1,7 @@
 const ServiceNames = {
+    workspace: 'workspace',
+    projects: 'projects',
+    tasks: 'tasks',
     teams: 'teams',
     people: 'people',
     absences: 'absences',

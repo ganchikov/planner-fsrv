@@ -1,7 +1,7 @@
 {
   "version": {
-    "major": 0,
-    "minor": 1,
+    "major": 1,
+    "minor": 0,
     "patch": 0
   },
   "status": {
@@ -10,7 +10,7 @@
   },
   "build": {
     "date": "Wed Jun 20 2018 21:40:03 GMT+0000 (UTC)",
-    "number": 14,
+    "number": 0,
     "total": 15
   },
   "commit": "303dc77",

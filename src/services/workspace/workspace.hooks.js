@@ -4,12 +4,12 @@ const permissions = require('../../constants/permissions');
 module.exports = {
   before: {
     all: [],
-    find: [jwtauthz([permissions.teams.read])],
-    get: [jwtauthz([permissions.teams.read])],
-    create: [jwtauthz([permissions.teams.edit])],
-    update: [jwtauthz([permissions.teams.edit])],
-    patch: [jwtauthz([permissions.teams.edit])],
-    remove: [jwtauthz([permissions.teams.edit])]
+    find: [jwtauthz([permissions.workspace.read])],
+    get: [jwtauthz([permissions.workspace.read])],
+    create: [jwtauthz([permissions.workspace.read])],
+    update: [jwtauthz([permissions.workspace.read])],
+    patch: [jwtauthz([permissions.workspace.read])],
+    remove: [jwtauthz([permissions.workspace.read])]
   },
 
   after: {

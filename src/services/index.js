@@ -6,6 +6,12 @@ const dataLoader = require('./data-loader/data-loader.service.js');
 const users = require('./users/users.service.js');
 const appver = require('./appver/appver.service.js');
 
+const workspace = require('./workspace/workspace.service.js');
+
+const projects = require('./projects/projects.service.js');
+
+const tasks = require('./tasks/tasks.service.js');
+
 // eslint-disable-next-line no-unused-vars
 module.exports = function (app) {
   app.configure(teams);
@@ -15,4 +21,7 @@ module.exports = function (app) {
   app.configure(dataLoader);
   app.configure(users);
   app.configure(appver);
+  app.configure(workspace);
+  app.configure(projects);
+  app.configure(tasks);
 };

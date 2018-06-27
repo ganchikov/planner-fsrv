@@ -6,9 +6,11 @@ const checkJwt = require('./hooks/check-jwt');
 
 const removeJwt = require('./hooks/remove-jwt');
 
+const authenticate = require('./hooks/authenticate');
+
 module.exports = {
   before: {
-    all: [ checkJwt(), logger() ],
+    all: [checkJwt(), authenticate(), logger()],
     find: [],
     get: [],
     create: [generateId()],

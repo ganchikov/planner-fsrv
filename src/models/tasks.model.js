@@ -1,18 +1,18 @@
-// teams-model.js - A mongoose model
+// tasks-model.js - A mongoose model
 // 
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
 module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
-  const teams = new Schema({
-    id: {type: Number, required: true},   
+  const tasks = new Schema({
+    id: {type: Number, required: true},       
     name: { type: String, required: true },
-    members: [{type: Schema.Types.ObjectId, ref: 'person'}],
-    workspace: {type: Schema.Types.ObjectId, ref: 'workspace'}
+    description: { type: String, required: true },
+    assignee: {type: Schema.Types.ObjectId, ref: 'people'}
   }, {
     timestamps: true
   });
 
-  return mongooseClient.model('teams', teams);
+  return mongooseClient.model('tasks', tasks);
 };

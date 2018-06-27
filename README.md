@@ -114,7 +114,7 @@ jobs:
 
 
     
-[![AppVersion-version](https://img.shields.io/badge/AppVersion-0.1.0-brightgreen.svg?style=flat)](https://github.com/delvedor/appversion?#version)
+[![AppVersion-version](https://img.shields.io/badge/AppVersion-1.0.0-brightgreen.svg?style=flat)](https://github.com/delvedor/appversion?#version)
 
 [![CircleCI](https://circleci.com/gh/ganchikov/planner-fsrv.svg?style=svg)](https://circleci.com/gh/ganchikov/planner-fsrv)
 
