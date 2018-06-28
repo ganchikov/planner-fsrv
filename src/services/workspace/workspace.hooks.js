@@ -6,10 +6,10 @@ module.exports = {
     all: [],
     find: [jwtauthz([permissions.workspace.read])],
     get: [jwtauthz([permissions.workspace.read])],
-    create: [jwtauthz([permissions.workspace.read])],
-    update: [jwtauthz([permissions.workspace.read])],
-    patch: [jwtauthz([permissions.workspace.read])],
-    remove: [jwtauthz([permissions.workspace.read])]
+    create: [jwtauthz([permissions.workspace.edit])],
+    update: [jwtauthz([permissions.workspace.edit])],
+    patch: [jwtauthz([permissions.workspace.edit])],
+    remove: [jwtauthz([permissions.workspace.edit])]
   },
 
   after: {

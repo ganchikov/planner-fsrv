@@ -1,5 +1,5 @@
 {
-  "host": "http://planner-api.openode.io/",
+  "host": "planner-srv-prd.herokuapp.com",
   "port": "PORT",
   "public": "../public/",
   "routePrefix" : "api",
@@ -27,7 +27,7 @@
       "header": {
         "typ": "access"
       },
-      "audience": "http://localhost:3030/api/v1",
+      "audience": "https://planner-srv-prd.herokuapp.com/api/v1",
       "subject": "anonymous",
       "issuer": "https://xplanner.auth0.com/",
       "algorithm": "HS256",
@@ -45,7 +45,8 @@
       "domain": "xplanner.auth0.com",
       "responseType": "code",
       "audience": "https://xplanner.auth0.com/userinfo",
-      "scope": "openid profile"
+      "scope": "openid profile",
+      "strictSsl": false
     },
     "cookie": {
       "enabled": true,

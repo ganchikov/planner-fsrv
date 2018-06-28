@@ -2,5 +2,6 @@
 module.exports = {
     JwksError: require('./JwksError'),
     UnauthorizedError: require ('./UnauthorizedError'),
-    SigningKeyNotFoundError: require('./SigningKeyNotFoundError')
+    SigningKeyNotFoundError: require('./SigningKeyNotFoundError'),
+    RequestError: require('./RequestError')
 };

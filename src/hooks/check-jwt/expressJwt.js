@@ -48,11 +48,11 @@ module.exports = options => {
                     }
                 });
             }); 
-            // context.app.set('jwt', result);
-            if (!context.data) {
-                context.data = {user: result};
+            if (!context.data) {                
+                context.data = {user: result, token};
             } else {
                 context.data.user = result;
+                context.data.token = token;
             }
             
             return context;
