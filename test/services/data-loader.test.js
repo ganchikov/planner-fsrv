@@ -3,6 +3,7 @@ const app = require('../../src/app');
 const routeBuilder = require('../../src/helpers/routebuilder');
 const {dataloader} = require('../../src/constants/services');
 const {teams, people, absences} = require('../../src/constants/services');
+const {MockJwt} = require('../../src/hooks');
 
 const sampleData = [{
   name: 'Alpha',
@@ -24,7 +25,12 @@ const sampleData = [{
 
 describe('\'data-loader\' service', function() {
   this.timeout(15000);
+  
   const service = app.service(routeBuilder(app, dataloader));
+
+  service.hooks({
+    before: [MockJwt()]
+  });
 
   it('registered the service', () => {
     assert.ok(service, 'Registered the service');

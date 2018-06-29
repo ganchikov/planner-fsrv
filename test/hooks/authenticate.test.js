@@ -1,12 +1,15 @@
 const assert = require('assert');
 const feathers = require('@feathersjs/feathers');
-const authenticate = require('../../src/hooks/authenticate');
+const configuration = require('@feathersjs/configuration');
+const {MockJwt, Authenticate} = require('../../src/hooks');
+
 
 describe('\'authenticate\' hook', () => {
   let app;
 
   beforeEach(() => {
-    app = feathers();
+    let conf = configuration();
+    app = feathers().configure(conf);
 
     app.use('/dummy', {
       async get(id) {
@@ -15,8 +18,12 @@ describe('\'authenticate\' hook', () => {
     });
 
     app.service('dummy').hooks({
-      before: authenticate()
+      before: [
+      MockJwt(),
+      Authenticate()
+      ]
     });
+
   });
 
   it('runs the hook', async () => {

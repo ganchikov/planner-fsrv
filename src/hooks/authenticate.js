@@ -9,13 +9,19 @@ const RequestError = require('../errors/RequestError');
 // eslint-disable-next-line no-unused-vars
 module.exports = function (options = {}) {
   return async context => {
+    const config = context.app.get(Config.authentication);
+    if (!config.enabled) {
+      //if authentication disabled we can't get user settings & retrieve his workspace id
+      return context;
+    }
+
     ///TODO: authenticate user
     //get active workspace from user settings
     //pass workspace id to service calls for filtering data
-    const data = context.data;
+    const data = context.sessionData;
     if (!data) {
       throw new UnauthorizedError('credentials_required', { message: 'No authorization token was found' });
-    } else if(!data.user || !data.token) {
+    } else if(data.user === undefined || data.token === undefined) {
       throw new UnauthorizedError('credentials_required', { message: 'Wrong authorization data provided' });
     } else if (data.userInfo) {
       //user info data is already fetched
@@ -23,9 +29,8 @@ module.exports = function (options = {}) {
     }
     ///TODO: fetch user data from db before fetching from server
 
-    const config = context.app.get(Config.authentication);
     const authsrvUrl = config.auth0.audience;
-    const userInfo = new Promise((resolve, reject) => {
+    const userInfo = await (new Promise((resolve, reject) => {
       request({
         uri: authsrvUrl,
         strictSsl: config.auth0.strictSsl,
@@ -37,20 +42,19 @@ module.exports = function (options = {}) {
               res.statusMessage || `Http Error ${res.statusCode}`,
               res.body && (res.body.message || res.body),
               err)); 
-          }
-          reject(err);
-        }      
-        var userInfo = res.body.keys;
-        resolve(userInfo);
+          } else {
+            reject(err);
+          }          
+        } else {   
+          var userInfo = res.body.keys;
+          resolve(userInfo);
+        }
       });
-    });
+    }));
     if (userInfo) {
       ///TODO: store userInfo in database
       context.data.userInfo = userInfo;
-      return userInfo;
     }
-
-
     return context;
   };
 };

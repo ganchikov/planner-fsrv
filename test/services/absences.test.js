@@ -2,10 +2,14 @@ const assert = require('assert');
 const app = require('../../src/app');
 const routeBuilder = require('../../src/helpers/routebuilder');
 const {absences} = require('../../src/constants/services');
+const {MockJwt} = require('../../src/hooks');
 
 describe('\'absences\' service', function() {
   this.timeout(15000);
   const service = app.service(routeBuilder(app, absences));
+  service.hooks({
+    before: [MockJwt()]
+  });
   
   beforeEach(() => {
   });

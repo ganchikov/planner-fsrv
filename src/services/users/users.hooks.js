@@ -1,5 +1,5 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
-const jwtauthz = require('../../hooks/jwt-authz');
+const {JwtAuthz} = require('../../hooks');
 
 const {
   hashPassword, protect
@@ -12,7 +12,7 @@ module.exports = {
       
       return context;
     }, authenticate(['jwt','auth0']) ],
-    get: [ jwtauthz(['read:team-api'])],
+    get: [ JwtAuthz(['read:team-api'])],
     create: [hashPassword() ],
     update: [ hashPassword(),  authenticate(['jwt','auth0']) ],
     patch: [ hashPassword(),  authenticate(['jwt','auth0']) ],

@@ -1,15 +1,15 @@
-const jwtauthz = require('../../hooks/jwt-authz');
-const permissions = require('../../constants/permissions');
+const {JwtAuthz} = require('../../hooks');
+const {Permissions} = require('../../constants');
 
 module.exports = {
   before: {
     all: [],
-    find: [jwtauthz([permissions.workspace.read])],
-    get: [jwtauthz([permissions.workspace.read])],
-    create: [jwtauthz([permissions.workspace.edit])],
-    update: [jwtauthz([permissions.workspace.edit])],
-    patch: [jwtauthz([permissions.workspace.edit])],
-    remove: [jwtauthz([permissions.workspace.edit])]
+    find: [JwtAuthz([Permissions.workspace.read])],
+    get: [JwtAuthz([Permissions.workspace.read])],
+    create: [JwtAuthz([Permissions.workspace.edit])],
+    update: [JwtAuthz([Permissions.workspace.edit])],
+    patch: [JwtAuthz([Permissions.workspace.edit])],
+    remove: [JwtAuthz([Permissions.workspace.edit])]
   },
 
   after: {

@@ -48,11 +48,11 @@ module.exports = options => {
                     }
                 });
             }); 
-            if (!context.data) {                
-                context.data = {user: result, token};
+            if (!context.sessionData) {                
+                context.sessionData = {user: result, token};
             } else {
-                context.data.user = result;
-                context.data.token = token;
+                context.sessionData.user = result;
+                context.sessionData.token = token;
             }
             
             return context;

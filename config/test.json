@@ -45,7 +45,9 @@
       "domain": "xplanner.auth0.com",
       "responseType": "code",
       "audience": "https://xplanner.auth0.com/userinfo",
-      "scope": "openid profile"
+      "scope": "openid profile",
+      "strictSsl": false
+
     },
     "cookie": {
       "enabled": true,
