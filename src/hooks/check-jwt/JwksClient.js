@@ -26,9 +26,10 @@ module.exports = class JwksClient {
                 reject(new JwksError(res.body && (res.body.message || res.body) || res.statusMessage || `Http Error ${res.statusCode}`));
               }
               reject(err);
-            }      
-            var jwks = res.body.keys;
-            resolve(jwks);
+            } else {
+                var jwks = res.body.keys;
+                resolve(jwks);
+            }                
           });
       });     
     }
