@@ -1,6 +1,6 @@
 const assert = require('assert');
 const feathers = require('@feathersjs/feathers');
-const getUser = require('../../src/hooks/get-user');
+const getUser = require('../../src/hooks/get-user-info');
 
 describe('\'get-user\' hook', () => {
   let app;

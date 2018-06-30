@@ -1,6 +1,6 @@
 const assert = require('assert');
 const feathers = require('@feathersjs/feathers');
-const checkJwt = require('../../src/hooks/check-jwt');
+const checkJwt = require('../../src/hooks/check-access-token');
 const configuration = require('@feathersjs/configuration');
 
 describe('\'check-jwt\' hook', () => {
