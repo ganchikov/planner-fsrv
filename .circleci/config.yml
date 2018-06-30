@@ -145,16 +145,6 @@ workflows:
       - increment-build-job:
           requires:
             - test-job
-      - tag-build-job:
-          requires:
-            - increment-build-job
-      - deploy-heroku-job:
-          requires: 
-            - increment-build-job
-          filters:
-            branches:
-              only:                 
-                - master    
 
   nightly_build:
     triggers:
@@ -169,6 +159,9 @@ workflows:
       - test-job:
           requires: 
             - build-job
+      - tag-build-job:
+          requires:
+            - test-job
       - deploy-heroku-job:
           requires: 
             - test-job
