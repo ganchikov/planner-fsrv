@@ -150,7 +150,7 @@ workflows:
             - increment-build-job
       - deploy-heroku-job:
           requires: 
-            - increment-build-jpb
+            - increment-build-job
           filters:
             branches:
               only:                 
