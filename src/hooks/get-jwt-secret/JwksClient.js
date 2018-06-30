@@ -11,7 +11,6 @@ function certToPEM(cert) {
 module.exports = class JwksClient {
     constructor(options) {
       this.options = options;
-      this.options.strictSsl = false;
     }
   
     getJwks() {

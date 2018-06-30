@@ -16,7 +16,7 @@ const services = require('./services');
 const appHooks = require('./app.hooks');
 const channels = require('./channels');
 const mongoose = require('./mongoose');
-const authentication = require('./authentication');
+// const authentication = require('./authentication');
 const https = require('./https');
 
 const app = express(feathers());
@@ -44,7 +44,8 @@ app.configure(mongoose);
 
 // Configure other middleware (see `middleware/index.js`)
 app.configure(middleware);
-app.configure(authentication);
+///TODO: Authentication is disabled and needs to be removed further on
+// app.configure(authentication);
 // Set up our services (see `services/index.js`)
 app.configure(services);
 // Set up event channels (see channels.js)
@@ -66,6 +67,6 @@ app.use(function(err, req, res, next) {
   res.locals.error = req.app.get('env') === 'development' || 'test'  ? err : {};
   res.status(err.status || err.code || 500).send(err);
 });
-app.hooks(appHooks);
+app.hooks(appHooks(app));
 
 module.exports = app;

@@ -1,11 +1,8 @@
-function JwksError(message) {
-    Error.call(this, message);
-    Error.captureStackTrace(this, this.constructor);
+class JwksError extends Error {
+  constructor(message) {
+    super(message);
     this.name = 'JwksError';
-    this.message = message;
   }
-  
-  JwksError.prototype = Object.create(Error.prototype);
-  JwksError.prototype.constructor = JwksError;
-  
-  module.exports = JwksError;
+}
+
+module.exports = JwksError;

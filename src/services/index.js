@@ -12,6 +12,8 @@ const projects = require('./projects/projects.service.js');
 
 const tasks = require('./tasks/tasks.service.js');
 
+const authorize = require('./authorize/authorize.service.js');
+
 // eslint-disable-next-line no-unused-vars
 module.exports = function (app) {
   app.configure(teams);
@@ -24,4 +26,5 @@ module.exports = function (app) {
   app.configure(workspace);
   app.configure(projects);
   app.configure(tasks);
+  app.configure(authorize);
 };

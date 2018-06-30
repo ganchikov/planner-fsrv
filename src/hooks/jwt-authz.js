@@ -15,10 +15,10 @@ module.exports = expectedScopes => {
                 return context;
             }
             const noPermissionError = `User doesn't have required permission(s): ${expectedScopes.toString()}`;
-            if (!context.data || !context.data.user) { 
+            if (!context.sessionData || !context.sessionData.user) { 
                 throw new UnauthorizedError('no_permission', { message: noPermissionError });
             }            
-            var scopes = context.data.user.scope.split(' ');
+            var scopes = context.sessionData.user.scope.split(' ');
             var allowed = expectedScopes.some(function(scope){
                 return scopes.indexOf(scope) !== -1;
             });

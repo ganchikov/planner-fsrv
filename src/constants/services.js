@@ -9,7 +9,8 @@ const ServiceNames = {
     dataloader: 'dataloader',
     auth: 'authentication',
     users: 'users',
-    appver: 'appver'
+    appver: 'appver',
+    authorize: 'authorize'
 
 };
 
