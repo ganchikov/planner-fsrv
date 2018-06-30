@@ -14,7 +14,7 @@
     "sslCertPath": "../.sslcert/"
   },  
   "authentication": {
-    "enabled": false,
+    "enabled": true,
     "jwt": {
       "header": {
         "typ": "access"
