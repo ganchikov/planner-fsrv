@@ -81,10 +81,44 @@ jobs:
               #remove first-last double quotes
               TAG=$(sed -e 's/^"//' -e 's/"$//' <<<$TAG)    
               git add .
-              git tag -a $TAG -m 'nightly build'
-              git commit -m "${TAG} nightly build version update [skip ci]"
+              git commit -m "${TAG} CI build version update [skip ci]"
               git push
-              git push --tags              
+            fi
+  tag-build-job:
+    <<: *defaults
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "5b:c6:98:ba:8b:54:f0:60:12:00:57:80:f8:da:65:74"
+      - checkout
+      - run: 
+          name: update-npm
+          command: 'sudo npm install -g npm@latest'
+           # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+      - run: 
+          name: install-npm-wee
+          command: npm install
+      - run:
+          name: 'install jq'
+          command: 'sudo apt-get install jq'
+      - run:
+          name: 'tag build'    
+          command: |
+            if [ $CIRCLE_BRANCH == "master" ]; then
+              #extract tag data
+              TAG=$(jq '[.version.major , .version.minor, .version.patch, .build.number | tostring] | join (".")' appversion.json)
+              #remove first-last double quotes
+              TAG=$(sed -e 's/^"//' -e 's/"$//' <<<$TAG)    
+              RESTAG=$(git tag -l $TAG)
+              if [ "$RESTAG" = "" ]; then            
+                git tag -a $TAG -m 'CI build'
+                git push --tags              
+              fi              
             fi
   deploy-heroku-job:
     <<: *defaults
@@ -111,15 +145,16 @@ workflows:
       - increment-build-job:
           requires:
             - test-job
-      - hold:
-          type: approval
+      - tag-build-job:
+          requires:
+            - increment-build-job
+      - deploy-heroku-job:
           requires: 
-            - test-job
-      - deploy-heroku-job:          
+            - increment-build-jpb
           filters:
             branches:
               only:                 
-                - master  
+                - master    
 
   nightly_build:
     triggers:
