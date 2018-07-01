@@ -6,7 +6,7 @@ module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
   const authorize = new Schema({
-    access_token_hash: {type: Number, required: true},
+    token: {type: Number, required: true},
     user: {type: Schema.Types.ObjectId, ref: 'user'}
   }, {
     timestamps: true

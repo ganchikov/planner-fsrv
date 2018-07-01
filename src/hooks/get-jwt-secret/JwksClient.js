@@ -16,8 +16,8 @@ module.exports = class JwksClient {
     getJwks() {
       return new Promise((resolve, reject) => {
         request({
-            uri: this.options.jwksUri,
-            strictSsl: this.options.strictSsl,
+            uri: this.options.auth0.jwksUri,
+            strictSsl: this.options.auth0.strictSsl,
             json: true
           }, (err, res) => {
             if (err || res.statusCode < 200 || res.statusCode >= 300) {

@@ -22,5 +22,22 @@ module.exports = function (app) {
   // Get our initialized service so that we can register hooks and filters
   const service = app.service(route);
 
+  service.find = async (params) => {
+    const authId = params.authId; 
+    const result = {
+      data: []
+    };
+    if (authId) {
+      const item = await Model.findOne({authId}).exec();
+      if (item) {
+        result.data.push(item);
+      }
+    } else {
+      result.data = await Model.find().exec();
+    }
+    return result;
+    
+  };
+
   service.hooks(hooks);
 };

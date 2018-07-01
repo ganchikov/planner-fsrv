@@ -1,14 +1,10 @@
-const { authenticate } = require('@feathersjs/authentication').hooks;
-const {JwtAuthz} = require('../../hooks');
-
-const {
-  hashPassword, protect
-} = require('@feathersjs/authentication-local').hooks;
 
 module.exports = {
   before: {
     all: [],
-    find: [],
+    find: [ctx => {
+      return ctx;
+    }],
     get: [],
     create: [],
     update: [],

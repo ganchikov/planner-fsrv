@@ -5,11 +5,11 @@ const { UnauthorizedError } = require('../../errors');
 module.exports = options => {
     
     const secretCallback = options.secret;
-    const authConfig = options.authConfig;
+    const config = options.config;
 
     return async context => {
         try {        
-            if (!authConfig.enabled) {
+            if (!config.enabled) {
                 return context;                
             }
 
@@ -43,7 +43,7 @@ module.exports = options => {
                 
             const secret = await secretCallback(decodedToken.header, decodedToken.payload);
             const result = await new Promise((resolve, reject) => {
-                jwt.verify(token, secret, options, function(err, decoded) {
+                jwt.verify(token, secret, config.jwt, function(err, decoded) {
                     if (err) {
                         reject(new UnauthorizedError('invalid_token', err));
                     } else {

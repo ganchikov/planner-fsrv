@@ -1,19 +1,12 @@
-const expressJwt = require('./checkJwt');
-const expressJwtSecret = require('../get-jwt-secret/expressJwtSecret');
+const checkJwt = require('./checkJwt');
+const getJwtSecret = require('../get-jwt-secret/expressJwtSecret');
 const {authentication} = require('../../constants/config');
 
 module.exports = (app) => {
-  const authConfig = app.get(authentication);
-  return expressJwt(
+  const config = app.get(authentication);
+  return checkJwt(
     {
-      secret: expressJwtSecret({
-        jwksUri: authConfig.auth0.jwksUri,
-        strictSsl: authConfig.auth0.strictSsl
-      }),
-      authConfig
-      // // Validate the audience and the issuer.
-      // audience: authConfig.jwt.audience,
-      // issuer: authConfig.jwt.issuer,
-      // algorithms: [authConfig.jwt.algorithm]
+      secret: getJwtSecret(config),
+      config
     });
 };

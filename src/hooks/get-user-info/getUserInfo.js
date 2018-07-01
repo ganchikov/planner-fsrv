@@ -2,18 +2,15 @@ const jwt = require('jsonwebtoken');
 const {RequestError, UnauthorizedError} = require('../../errors');
 const routeBuilder = require('../../helpers/routebuilder');
 const {users} = require('../../constants/services');
-
+const hasher = require('string-hash');
 
 // eslint-disable-next-line no-unused-vars
-module.exports = function (options = {}) {
+module.exports = function (config) {
   
-  const secretCallback = options.secret;
-  const authConfig = options.authConfig;
-
   return async context => {
     // parse context data for id_token data to get user details, find relevant user id and pass it to the authorize service
     try {
-      if (!authConfig.enabled) {
+      if (!config.enabled) {
         return context;                
       }
       const token = context.data.id_token;
@@ -27,43 +24,20 @@ module.exports = function (options = {}) {
           throw new UnauthorizedError('credentials_bad_token', {message: 'Bad token provided'});
       }
 
-      if (decodedToken.header.alg !== 'RS256') {
-      // we are only supporting RS256 so fail if this happens.
-          throw new Error();
-      }
-
       const userInfo = {
-        auth0Id: decodedToken.payload.sub,        
+        authId: decodedToken.payload.sub,        
         name: decodedToken.payload.name,
         nick: decodedToken.payload.nickname
       };
 
       const userService = context.app.service(routeBuilder(context.app, users));
-      let user = await userService.find({auth0Id: userInfo.auth0Id, headers: context.params.headers});
-      if (!user) {
-        user = await userService.create(userInfo);
+      let res = await userService.find({authId: userInfo.authId, headers: context.params.headers});
+      if (res.data.length === 0) {
+        res = await userService.create(userInfo, {headers: context.params.headers});
       }
-
+      context.data.token = hasher(context.sessionData.token);
+      context.data.user = res.data[0];  
           
-      // const secret = await secretCallback(decodedToken.header, decodedToken.payload);
-      // const result = await new Promise((resolve, reject) => {
-      //     jwt.verify(token, secret, options, function(err, decoded) {
-      //         if (err) {
-      //             reject(new UnauthorizedError('invalid_token', err));
-      //         } else {
-      //             resolve(decoded);
-      //         }
-      //     });
-      // }); 
-      // if (!context.sessionData) {                
-      //     context.sessionData = {user: result, token};
-      // } else {
-      //     context.sessionData.user = result;
-      //     context.sessionData.token = token;
-      // }
-      
-      // return context;
-
       return context;      
     }
     catch (err) {
