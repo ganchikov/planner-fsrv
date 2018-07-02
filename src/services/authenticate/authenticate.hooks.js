@@ -1,9 +1,9 @@
 const {getUserInfo} = require('../../hooks');
 
-module.exports = (app) => {
+module.exports = () => {
   return {
     before: {
-      all: [getUserInfo(app)],
+      all: [getUserInfo()],
       find: [],
       get: [],
       create: [],

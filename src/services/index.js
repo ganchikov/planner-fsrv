@@ -12,7 +12,7 @@ const projects = require('./projects/projects.service.js');
 
 const tasks = require('./tasks/tasks.service.js');
 
-const authorize = require('./authorize/authorize.service.js');
+const authenticate = require('./authenticate/authenticate.service.js');
 
 // eslint-disable-next-line no-unused-vars
 module.exports = function (app) {
@@ -26,5 +26,5 @@ module.exports = function (app) {
   app.configure(workspace);
   app.configure(projects);
   app.configure(tasks);
-  app.configure(authorize);
+  app.configure(authenticate);
 };

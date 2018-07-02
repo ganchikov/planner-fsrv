@@ -7,7 +7,7 @@ module.exports = (options) => {
     throw new ArgumentError('An options object must be provided when initializing expressJwtSecret');
   }
   const client = new JwksClient(options);
-  return function secretProvider(header, payload) {
+  return function secretProvider(header) {
     return new Promise((resolve, reject) => {
       if (!header || header.alg !== 'RS256') {
         reject();

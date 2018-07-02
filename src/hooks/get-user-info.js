@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
-const {RequestError, UnauthorizedError} = require('../../errors');
-const routeBuilder = require('../../helpers/routebuilder');
-const {users} = require('../../constants/services');
+const {RequestError, UnauthorizedError} = require('../errors');
+const routeBuilder = require('../helpers/routebuilder');
+const {authentication} = require('../constants/config');
+const {users} = require('../constants/services');
 const hasher = require('string-hash');
 
 // eslint-disable-next-line no-unused-vars
@@ -10,6 +11,7 @@ module.exports = function (config) {
   return async context => {
     // parse context data for id_token data to get user details, find relevant user id and pass it to the authorize service
     try {
+      const config = context.app.get(authentication);
       if (!config.enabled) {
         return context;                
       }

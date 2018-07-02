@@ -1,5 +1,5 @@
 const checkJwt = require('./checkJwt');
-const getJwtSecret = require('../get-jwt-secret/expressJwtSecret');
+const getJwtSecret = require('./expressJwtSecret');
 const {authentication} = require('../../constants/config');
 
 module.exports = (app) => {
