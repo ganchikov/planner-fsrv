@@ -2,12 +2,12 @@
 const logger = require('./hooks/logger');
 const generateId = require('./hooks/generate-id');
 const getchildren = require('./hooks/getchildren');
-const {checkAccessToken} = require('./hooks');
+const {checkAccessToken, authenticateUser} = require('./hooks');
 
 module.exports = (app) => {
   return {
     before: {
-      all: [checkAccessToken(app), logger()],
+      all: [checkAccessToken(app), authenticateUser(), logger()],
       find: [],
       get: [],
       create: [generateId()],

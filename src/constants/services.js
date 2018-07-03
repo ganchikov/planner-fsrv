@@ -10,7 +10,7 @@ const ServiceNames = {
     auth: 'authentication',
     users: 'users',
     appver: 'appver',
-    authenticate: 'authorize'
+    authenticate: 'authenticate'
 
 };
 

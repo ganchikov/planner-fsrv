@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-
+const extractToken = require('../../helpers/extract_token');
 const { UnauthorizedError } = require('../../errors');
 
 module.exports = options => {
@@ -17,17 +17,7 @@ module.exports = options => {
             if (!authHeader) {
                 throw new UnauthorizedError('credentials_required', { message: 'No authorization token was found' });
             }
-            const parts= authHeader.split(' ');
-            if (parts.length != 2) {
-                throw new UnauthorizedError('credentials_required', { message: 'No authorization token was found' });
-            }
-        
-            const scheme = parts[0];
-            if(!/^Bearer$/i.test(scheme)) {    
-                throw new UnauthorizedError('credentials_bad_scheme', { message: 'Format is Authorization: Bearer [token]' });
-            }
-        
-            const token = parts[1];
+            const token = extractToken(authHeader);
 
             // This could fail.  If it does handle as 401 as the token is invalid.
             const decodedToken = jwt.decode(token, {complete: true});

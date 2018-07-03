@@ -1,3 +1,4 @@
+const {createWorkspace} = require('../../hooks');
 
 module.exports = {
   before: {
@@ -19,7 +20,7 @@ module.exports = {
     ],
     find: [],
     get: [],
-    create: [],
+    create: [createWorkspace()],
     update: [],
     patch: [],
     remove: []

@@ -5,12 +5,13 @@
 module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
-  const authorize = new Schema({
+  const authenticate = new Schema({
     token: {type: Number, required: true},
-    user: {type: Schema.Types.ObjectId, ref: 'user'}
+    user: {type: Schema.Types.ObjectId, ref: 'user'},
+    workspace: {type: Schema.Types.ObjectId, ref: 'workspace'}
   }, {
     timestamps: true
   });
 
-  return mongooseClient.model('authorize', authorize);
+  return mongooseClient.model('authenticate', authenticate);
 };

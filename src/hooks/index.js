@@ -6,5 +6,7 @@ module.exports = {
     Logger: require('./logger'),
     RemoveJwt: require('./remove-jwt'),
     MockJwt: require('./mock-jwt'),
-    getUserInfo: require('./get-user-info')
+    getUserInfo: require('./get-user-info'),
+    authenticateUser: require('./authenticate-user'),
+    createWorkspace: require('./create-workspace')
 };

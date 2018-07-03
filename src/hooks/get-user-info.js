@@ -38,7 +38,8 @@ module.exports = function (config) {
         res = await userService.create(userInfo, {headers: context.params.headers});
       }
       context.data.token = hasher(context.sessionData.token);
-      context.data.user = res.data[0];  
+      context.data.user = res.data[0].user;  
+      context.data.workspace = res.data[0].workspace;
           
       return context;      
     }
