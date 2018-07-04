@@ -1,4 +1,4 @@
-const {createWorkspace} = require('../../hooks');
+const {createUserWorkspace, getUserWorkspace} = require('../../hooks');
 
 module.exports = {
   before: {
@@ -19,8 +19,8 @@ module.exports = {
       // Always must be the last hook
     ],
     find: [],
-    get: [],
-    create: [createWorkspace()],
+    get: [getUserWorkspace()],
+    create: [createUserWorkspace()],
     update: [],
     patch: [],
     remove: []

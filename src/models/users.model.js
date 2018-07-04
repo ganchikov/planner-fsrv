@@ -10,7 +10,6 @@ module.exports = function (app) {
     authId: {type: String, required: true, unique: true},  
     name: {type: String, required: true},
     nick: {type: String},
-    defaultWorkspaceId: {type: Schema.Types.ObjectId, ref: 'workspace'},
     workspaces: [{type: Schema.Types.ObjectId, ref: 'workspace'}]
   }, {
     timestamps: true

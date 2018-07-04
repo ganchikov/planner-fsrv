@@ -9,7 +9,8 @@ module.exports = options => {
 
     return async context => {
         try {        
-            if (!config.enabled) {
+            if (!config.enabled || (context.params.sessionData && 
+                context.params.sessionData.authenticating)) {
                 return context;                
             }
 
@@ -32,7 +33,7 @@ module.exports = options => {
             }
                 
             const secret = await secretCallback(decodedToken.header, decodedToken.payload);
-            const result = await new Promise((resolve, reject) => {
+            await new Promise((resolve, reject) => {
                 jwt.verify(token, secret, config.jwt, function(err, decoded) {
                     if (err) {
                         reject(new UnauthorizedError('invalid_token', err));
@@ -41,13 +42,8 @@ module.exports = options => {
                     }
                 });
             }); 
-            if (!context.sessionData) {                
-                context.sessionData = {user: result, token};
-            } else {
-                context.sessionData.user = result;
-                context.sessionData.token = token;
-            }
-            
+                           
+            context.sessionData = {token};
             return context;
         } catch (err) {
             throw err;

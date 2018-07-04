@@ -8,5 +8,6 @@ module.exports = {
     MockJwt: require('./mock-jwt'),
     getUserInfo: require('./get-user-info'),
     authenticateUser: require('./authenticate-user'),
-    createWorkspace: require('./create-workspace')
+    createUserWorkspace: require('./create-user-workspace'),
+    getUserWorkspace: require('./get-user-workspace')
 };

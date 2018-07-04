@@ -31,14 +31,16 @@ module.exports = function (config) {
         name: decodedToken.payload.name,
         nick: decodedToken.payload.nickname
       };
+      
+      context.sessionData.authenticating = true;
 
       const userService = context.app.service(routeBuilder(context.app, users));
-      let res = await userService.find({authId: userInfo.authId, headers: context.params.headers});
+      let res = await userService.find({authId: userInfo.authId, headers: context.params.headers, sessionData: context.sessionData});
       if (res.data.length === 0) {
-        res = await userService.create(userInfo, {headers: context.params.headers});
+        res = await userService.create(userInfo, {headers: context.params.headers, sessionData: context.sessionData});
       }
       context.data.token = hasher(context.sessionData.token);
-      context.data.user = res.data[0].user;  
+      context.data.user = res.data[0];  
       context.data.workspace = res.data[0].workspace;
           
       return context;      

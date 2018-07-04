@@ -9,7 +9,8 @@ const hasher = require('string-hash');
 module.exports = function (options = {}) {
   return async context => {
     
-    if ('/' + context.path === routeBuilder(context.app, authenticate)) {
+    if ('/' + context.path === routeBuilder(context.app, authenticate) || 
+      (context.params.sessionData && context.params.sessionData.authenticating)) {
       // we should ignore this hook when requesting authenticate service
       //since there is a getUserInfo hook needs to be run instead
       return context;
