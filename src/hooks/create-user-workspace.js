@@ -6,8 +6,8 @@ module.exports = function (options = {}) {
   return async context => {
     const user = context.result;
     const workspaceSvc = context.app.service(routeBuilder(context.app, workspace));
-    const result = await workspaceSvc.create({user});
-    context.sessionData.workspace = result.data[0]._id;    
+    const result = await workspaceSvc.create({user},{headers: context.params.headers, sessionData: context.params.sessionData});
+    context.result.workspace = result._id;    
     return context;
   };
 };

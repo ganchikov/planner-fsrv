@@ -20,8 +20,9 @@ module.exports = function (options = {}) {
     const token = extractToken(authHeader);
     const token_hash = hasher(token);
 
+    context.sessionData.authenticating = true;
     const authSvc = context.app.service(routeBuilder(context.app, authenticate));
-    const result = authSvc.find({token: token_hash});
+    const result = await authSvc.find({token: token_hash, headers: context.params.headers, sessionData: context.sessionData});
     if (!result || !result.data || result.data.length === 0) {
       throw new UnauthorizedError('need_authentication', {message: 'Authentication required'});
     }
@@ -37,6 +38,7 @@ module.exports = function (options = {}) {
       context.sessionData.user = userId;
       context.sessionData.workspace = workspaceId;
     }
+    context.sessionData.authenticating = false;
     return context;
   };
 };

@@ -18,7 +18,7 @@ module.exports = expectedScopes => {
             if (!context.sessionData || !context.sessionData.user) { 
                 throw new UnauthorizedError('no_permission', { message: noPermissionError });
             }            
-            var scopes = context.sessionData.user.scope.split(' ');
+            var scopes = context.sessionData.decodedToken.payload.scope.split(' ');
             var allowed = expectedScopes.some(function(scope){
                 return scopes.indexOf(scope) !== -1;
             });

@@ -61,6 +61,12 @@ Licensed under the [MIT license](LICENSE).
 1.1) goto http://cert.luxoft.com, follow instructions to export luxoft-root-ca as Base64 to project folder
 1.2) export NODE_EXTRA_CA_CERTS="<your cert file name>.CER"
 
+##config npm to use certificate
+1) go to the url failing to get by npm (e.g.  https://registry.npmjs.org/)
+2) via chrome dev tools: security -> View Certificate -> Export root certificate (DER)
+3) run openssl x509 -inform dev -in <exported cert.cer> -out <cert.pem>
+4) npm config set cafile <cert.pem>
+
 ##Heroku
 1.1) install cli
 1.2) export NODE_EXTRA_CA_CERTS="<path to your Luxoft cert>.cer"

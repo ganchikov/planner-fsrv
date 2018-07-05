@@ -43,7 +43,7 @@ module.exports = options => {
                 });
             }); 
                            
-            context.sessionData = {token};
+            context.sessionData = {token, decodedToken};
             return context;
         } catch (err) {
             throw err;
