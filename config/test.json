@@ -1,6 +1,6 @@
 {
   "host": "localhost",
-  "port": 3030,
+  "port": 3031,
   "public": "../public/",
   "routePrefix" : "api",
   "apiVer" : "v1",
@@ -14,14 +14,14 @@
     "sslCertPath": "../.sslcert/"
   },  
   "authentication": {
-    "enabled": false,
+    "enabled": true,
     "jwt": {
-      "audience": "http://localhost:3030/api/v1",
+      "audience": "http://localhost:3031/api/v1",
       "issuer": "https://xplanner.auth0.com/",
-      "algorithm": "RS256"
+      "algorithm": "HS256"
     },
     "auth0": {
-      "jwksUri": "https://xplanner.auth0.com/.well-known/jwks.json",
+      "jwksUri": "http://localhost:3031/.well-known/jwks.json",
       "strictSsl": false
     }
   }

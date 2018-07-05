@@ -1,6 +1,6 @@
 const assert = require('assert');
 const feathers = require('@feathersjs/feathers');
-const createWorkspace = require('../../src/hooks/create-workspace');
+const {createUserWorkspace} = require('../../src/hooks');
 
 describe('\'create-workspace\' hook', () => {
   let app;

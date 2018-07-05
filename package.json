@@ -60,9 +60,11 @@
     "eslint": "^4.15.0",
     "feathers-memory": "^2.1.1",
     "mocha": "^5.0.5",
+    "njwt": "^0.4.0",
     "openode": "^1.4.9",
     "request": "^2.87.0",
     "request-promise": "^4.2.2",
+    "secure-random": "^1.1.1",
     "shx": "^0.2.2"
   }
 }

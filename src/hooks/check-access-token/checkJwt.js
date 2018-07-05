@@ -27,7 +27,7 @@ module.exports = options => {
                 throw new UnauthorizedError('credentials_bad_token', {message: 'Bad token provided'});
             }
 
-            if (decodedToken.header.alg !== 'RS256') {
+            if (decodedToken.header.alg !== config.jwt.algorithm) {
             // we are only supporting RS256 so fail if this happens.
                 throw new Error();
             }
