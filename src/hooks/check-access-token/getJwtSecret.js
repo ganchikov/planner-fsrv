@@ -2,11 +2,11 @@ const { ArgumentError } = require('../../errors');
 const JwksClient = require('./JwksClient');
 
 
-module.exports = (options) => {
+module.exports = (options, jwksService) => {
   if (options === null || options === undefined) {
     throw new ArgumentError('An options object must be provided when initializing expressJwtSecret');
   }
-  const client = new JwksClient(options);
+  const client = new JwksClient(options, jwksService);
   return function secretProvider(header) {
     return new Promise((resolve, reject) => {
       if (!header || header.alg !== options.jwt.algorithm) {

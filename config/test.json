@@ -18,7 +18,8 @@
     "jwt": {
       "audience": "http://localhost:3031/api/v1",
       "issuer": "https://xplanner.auth0.com/",
-      "algorithm": "HS256"
+      "algorithm": "RS256",
+      "PEM": true
     },
     "auth0": {
       "jwksUri": "http://localhost:3031/.well-known/jwks.json",
