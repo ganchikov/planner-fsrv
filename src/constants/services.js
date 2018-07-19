@@ -7,7 +7,6 @@ const ServiceNames = {
     absences: 'absences',
     idgenerator: 'idgenerator',
     dataloader: 'dataloader',
-    auth: 'authentication',
     users: 'users',
     appver: 'appver',
     authenticate: 'authenticate',

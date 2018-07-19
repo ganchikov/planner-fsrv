@@ -1,10 +1,10 @@
 const {UnauthorizedError} = require('../errors');
-const {auth} = require('../constants/services');
+const {authentication} = require('../constants/config');
 
 module.exports = expectedScopes => {
     return async context => {
         try {
-            const config = context.app.get(auth);
+            const config = context.app.get(authentication);
             if (!config.enabled) {
                 return context;
             }

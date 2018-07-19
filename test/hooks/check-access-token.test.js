@@ -4,9 +4,7 @@ const checkJwt = require('../../src/hooks/check-access-token');
 const configuration = require('@feathersjs/configuration');
 const {authentication} = require('../../src/constants/config');
 
-const routeBuilder = require('../../src/helpers/routebuilder');
-const {jwks} = require('../../src/constants/services');
-const jwtGen = require('../utils/get-jwt');
+const jwtGen = require('../../src/helpers/jwt-gen');
 
 
 describe('\'check-access-token\' hook', () => {
@@ -19,12 +17,6 @@ describe('\'check-access-token\' hook', () => {
 
   beforeEach(() => {
 
-    //mock jwks service to return fake jwks
-    app.use(routeBuilder(app, jwks), {
-      async find() {
-        return jwt.getJwks();
-      }
-    });
 
     app.use('/dummy', {
       async get(item) {
@@ -39,7 +31,7 @@ describe('\'check-access-token\' hook', () => {
   });
 
   it('runs the hook', async () => {
-    const result = await app.service('dummy').get('test', {headers: {authorization: 'BEARER ' + jwt.getJwt().compact()}});
+    const result = await app.service('dummy').get('test', {headers: {authorization: 'BEARER ' + jwt.getAccessToken().compact()}});
     assert.deepEqual(result, 'test');
   });
 });

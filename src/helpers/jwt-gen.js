@@ -11,21 +11,34 @@ module.exports = class JwtGen {
         this.publicKey = fs.readFileSync(path.join(process.cwd(), 'domain.crt')).toString();
     }
 
-    getJwt () {       
+    getAccessToken () {       
         const claims = {
-            iss: this.authConfig.jwt.issuer,
-            aud: this.authConfig.jwt.audience,
+            iss: this.authConfig.mockJwt.issuer,
+            aud: this.authConfig.mockJwt.audience,
+            scope: this.authConfig.mockJwt.scope
           };        
-        const jwt = njwt.create(claims, this.privateKey, this.authConfig.jwt.algorithm);        
+        const jwt = njwt.create(claims, this.privateKey, this.authConfig.mockJwt.algorithm);        
         jwt.setHeader('kid', '1');
         return jwt;
     }
+
+    getIdToken () {
+        const claims = {
+            name: this.authConfig.mockJwt.name,
+            sub: this.authConfig.mockJwt.sub,
+            nickname: this.authConfig.mockJwt.nickname
+
+        };
+        const jwt = njwt.create(claims, this.privateKey, this.authConfig.mockJwt.algorithm);    
+        return jwt;
+    }
+
           
     getJwks() {
         const jwks = {
             keys: [
             {
-                alg: this.authConfig.jwt.algorithm,
+                alg: this.authConfig.mockJwt.algorithm,
                 kty: 'RSA',
                 use: 'sig',
                 x5c: this.publicKey,

@@ -1,37 +1,33 @@
 const assert = require('assert');
 const app = require('../../src/app');
 const routeBuilder = require('../../src/helpers/routebuilder');
-const {absences, jwks} = require('../../src/constants/services');
+const {absences, authenticate} = require('../../src/constants/services');
 const {authentication} = require('../../src/constants/config');
-const jwtGen = require('../utils/get-jwt');
+const jwtGen = require('../../src/helpers/jwt-gen');
 
 
 describe('\'absences\' service', function() {
   this.timeout(15000);
-  const service = app.service(routeBuilder(app, absences));
+  const authService = app.service(routeBuilder(app, authenticate));
+  const tgtService = app.service(routeBuilder(app, absences));
   let authConfig = app.get(authentication);
   const jwt = new jwtGen(authConfig);
   
-  
   beforeEach(() => {
  
-    //mock jwks service to return fake jwks
-    app.use(routeBuilder(app, jwks), {
-      async find() {
-        return jwt.getJwks();
-      }
-    });
   });
 
   it('registered the service', () => {
-    assert.ok(service, 'Registered the service');
+    assert.ok(tgtService, 'Registered the service');
   });
 
   it('created the record', async () => {
-    const result = await service.create({name: 'test'}, {headers: {authorization: 'BEARER ' + jwt.getJwt().compact()}});
+    const headers = {authorization: 'BEARER ' + jwt.getAccessToken().compact()};
+    await authService.create({id_token: jwt.getIdToken().compact()}, {headers});
+    const result = await tgtService.create({name: 'test'}, {headers});
     const generatedId = result._id;
     assert.ok(result.hasOwnProperty('id'), 'service created record');
-    const createdRecord = await service.get(generatedId, {headers: {authorization: 'BEARER ' + jwt.getJwt().compact()}});
+    const createdRecord = await tgtService.get(generatedId, {headers: {authorization: 'BEARER ' + jwt.getAccessToken().compact()}});
     assert.strictEqual(createdRecord.name, 'test', 'service retrieved created record');
   });
 

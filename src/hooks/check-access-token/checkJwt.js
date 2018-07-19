@@ -1,8 +1,6 @@
 const jwt = require('jsonwebtoken');
 const extractToken = require('../../helpers/extract_token');
 const { UnauthorizedError } = require('../../errors');
-const routeBuilder = require('../../helpers/routebuilder');
-const {jwks} = require('../../constants/services');
 
 module.exports = options => {
     
@@ -15,7 +13,7 @@ module.exports = options => {
                 context.params.sessionData.authenticating)) {
                 return context;                
             }
-
+       
 
 
             const authHeader = context.params.headers.authorization;
@@ -38,7 +36,7 @@ module.exports = options => {
                 
             const secret = await secretCallback(decodedToken.header, decodedToken.payload);
             await new Promise((resolve, reject) => {
-                jwt.verify(token, secret, config.jwt, function(err, decoded) {
+                jwt.verify(token, secret, config.mockJwt, function(err, decoded) {
                     if (err) {
                         reject(new UnauthorizedError('invalid_token', err));
                     } else {

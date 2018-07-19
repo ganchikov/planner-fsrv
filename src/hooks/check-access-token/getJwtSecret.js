@@ -9,7 +9,7 @@ module.exports = (options, jwksService) => {
   const client = new JwksClient(options, jwksService);
   return function secretProvider(header) {
     return new Promise((resolve, reject) => {
-      if (!header || header.alg !== options.jwt.algorithm) {
+      if (!header || header.alg !== options.mockJwt.algorithm) {
         reject();
       }
       client.getSigningKey(header.kid).then(key => {

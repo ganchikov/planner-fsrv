@@ -1,5 +1,6 @@
 const request = require('request');
 const {JwksError, SigningKeyNotFoundError} = require('../../errors');
+const jwtGen = require('../../helpers/jwt-gen');
 
 
 function certToPEM(cert) {
@@ -10,29 +11,41 @@ function certToPEM(cert) {
 
 module.exports = class JwksClient {
     constructor(options, jwksService) {
-      this.options = options;
-      this.jwksService = jwksService;
+        this.options = options;
+        this.jwksService = jwksService;
+        ///TODO: consider refactoring later
+        // for test env (test run) use generated jwks
+        if (process.env.NODE_ENV == 'test') {
+            const jwt = new jwtGen(options);
+            options.jwks = jwt.getJwks();
+        }
     }
   
     getJwks() {
-        return this.jwksService.find();
-    //   return new Promise((resolve, reject) => {
-    //     request({
-    //         uri: this.options.auth0.jwksUri,
-    //         strictSsl: this.options.auth0.strictSsl,
-    //         json: true
-    //       }, (err, res) => {
-    //         if (err || res.statusCode < 200 || res.statusCode >= 300) {
-    //           if (res) {
-    //             reject(new JwksError(res.body && (res.body.message || res.body) || res.statusMessage || `Http Error ${res.statusCode}`));
-    //           }
-    //           reject(err);
-    //         } else {
-    //             var jwks = res.body.keys;
-    //             resolve(jwks);
-    //         }                
-    //       });
-    //   });     
+        const uri = this.options.auth0.jwksUri;
+        const strictSsl = this.options.auth0.strictSsl;
+        // if jwks is provided in options - return it, otherwise do http request
+        return new Promise((resolve, reject) => {
+          if (this.options.jwks) {
+            resolve(this.options.jwks);
+          } else {
+            request({
+                uri,
+                strictSsl,
+                json: true
+              }, (err, res) => {
+                if (err || res.statusCode < 200 || res.statusCode >= 300) {
+                  if (res) {
+                    reject(new JwksError(res.body && (res.body.message || res.body) || res.statusMessage || `Http Error ${res.statusCode}`));
+                  }
+                  reject(err);
+                } else {
+                    var jwks = res.body.keys;
+                    resolve(jwks);
+                }                
+            });
+          }        
+        });         
     }
 
     getSigningKeys() {
@@ -47,7 +60,7 @@ module.exports = class JwksClient {
                             && key.kid           // The `kid` must be present to be useful for later
                             && key.x5c && key.x5c.length // Has useful public keys (we aren't using n or e)
                 ).map(key => {
-                    return { kid: key.kid, nbf: key.nbf, publicKey: this.options.jwt.PEM ? key.x5c : certToPEM(key.x5c[0])};
+                    return { kid: key.kid, nbf: key.nbf, publicKey: this.options.mockJwt.PEM ? key.x5c : certToPEM(key.x5c[0])};
                 });
                 // If at least a single signing key doesn't exist we have a problem... Kaboom.
                 if (!signingKeys.length) {
