@@ -19,10 +19,12 @@
       "jwksUri": "http://localhost:3031/.well-known/jwks.json",
       "strictSsl": false
     },
+    "jwt": {
+      "algorithm": "RS256"
+    },
     "mockJwt": {
       "audience": "http://localhost:3031/api/v1",
       "issuer": "https://xplanner.auth0.com/",
-      "algorithm": "RS256",
       "PEM": true,
       "scope": "use:dataloader",
       "name": "Test user",

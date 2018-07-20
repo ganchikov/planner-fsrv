@@ -14,8 +14,6 @@ module.exports = options => {
                 return context;                
             }
        
-
-
             const authHeader = context.params.headers.authorization;
             if (!authHeader) {
                 throw new UnauthorizedError('credentials_required', { message: 'No authorization token was found' });
@@ -31,7 +29,7 @@ module.exports = options => {
 
             if (decodedToken.header.alg !== config.jwt.algorithm) {
             // we are only supporting RS256 so fail if this happens.
-                throw new Error();
+                throw new UnauthorizedError();
             }
                 
             const secret = await secretCallback(decodedToken.header, decodedToken.payload);

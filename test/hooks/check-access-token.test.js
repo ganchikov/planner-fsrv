@@ -34,4 +34,22 @@ describe('\'check-access-token\' hook', () => {
     const result = await app.service('dummy').get('test', {headers: {authorization: 'BEARER ' + jwt.getAccessToken().compact()}});
     assert.deepEqual(result, 'test');
   });
+
+  it('throws UnauthorizedError if no token provided', async() => {
+    try {
+      await app.service('dummy').get('test', {headers: {}});
+    }
+    catch (err) {
+      assert.equal(err.name, 'UnauthorizedError');
+    }
+  });
+
+  it('throws UnauthorizedError if bad token provided', async() => {
+    try {
+      await app.service('dummy').get('test', {headers: {authorization: 'BEARER' + '12345'}});
+    }
+    catch (err) {
+      assert.equal(err.name, 'UnauthorizedError');
+    }
+  });
 });
