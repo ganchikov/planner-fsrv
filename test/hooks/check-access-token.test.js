@@ -7,7 +7,9 @@ const {authentication} = require('../../src/constants/config');
 const jwtGen = require('../../src/helpers/jwt-gen');
 
 
-describe('\'check-access-token\' hook', () => {
+describe('\'check-access-token\' hook', function () {
+  this.timeout(15000);
+  
   const app = feathers();
   app.configure(configuration());
   let authConfig = app.get(authentication);
