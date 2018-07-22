@@ -8,7 +8,7 @@ const timestamp = () => {
 };
 const formatter = (options) => {
     return `${config.colorize(options.level, options.level.toUpperCase())} 
-      ${options.message} ${options.timestamp()} ${options.meta && Object.keys(options.meta).length ? '\n\t' + JSON.stringify(options.meta) : null}
+    ${options.timestamp()} ${options.meta && Object.keys(options.meta).length ? '\n\t' + JSON.stringify(options.meta) : null} ${options.message} 
     `;
 };
 
