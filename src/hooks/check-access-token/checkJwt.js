@@ -20,7 +20,6 @@ module.exports = options => {
             }
             const token = extractToken(authHeader);
 
-            // This could fail.  If it does handle as 401 as the token is invalid.
             const decodedToken = jwt.decode(token, {complete: true});
 
             if (!decodedToken) {
@@ -28,7 +27,6 @@ module.exports = options => {
             }
 
             if (decodedToken.header.alg !== config.jwt.algorithm) {
-            // we are only supporting RS256 so fail if this happens.
                 throw new UnauthorizedError();
             }
                 

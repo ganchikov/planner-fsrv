@@ -2,8 +2,7 @@ const extractToken = require('../helpers/extract_token');
 const routeBuilder= require('../helpers/routebuilder');
 const {authenticate} = require('../constants/services');
 const {UnauthorizedError} = require('../errors');
-const hasher = require('string-hash');
-
+const jwt = require('jsonwebtoken');
 
 // eslint-disable-next-line no-unused-vars
 module.exports = function (options = {}) {
@@ -18,11 +17,11 @@ module.exports = function (options = {}) {
 
     const authHeader = context.params.headers.authorization;
     const token = extractToken(authHeader);
-    const token_hash = hasher(token);
-
+    const decodedToken = jwt.decode(token, {complete: true});
+    
     context.sessionData.authenticating = true;
     const authSvc = context.app.service(routeBuilder(context.app, authenticate));
-    const result = await authSvc.find({token: token_hash, headers: context.params.headers, sessionData: context.sessionData});
+    const result = await authSvc.find({query: {authId: decodedToken.payload.sub}, headers: context.params.headers, sessionData: context.sessionData});
     if (!result || !result.data || result.data.length === 0) {
       throw new UnauthorizedError('need_authentication', {message: 'Authentication required'});
     }

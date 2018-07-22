@@ -44,7 +44,7 @@ module.exports = function (config) {
         context.data.user = res._id;  
         context.data.workspace = res.workspace;
       }
-      context.data.token = hasher(context.sessionData.token);
+      context.data.authId = userInfo.authId;
           
       return context;      
     }

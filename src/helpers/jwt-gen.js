@@ -15,7 +15,8 @@ module.exports = class JwtGen {
         const claims = {
             iss: this.authConfig.mockJwt.issuer,
             aud: this.authConfig.mockJwt.audience,
-            scope: this.authConfig.mockJwt.scope
+            scope: this.authConfig.mockJwt.scope,
+            sub: this.authConfig.mockJwt.sub
           };        
         const jwt = njwt.create(claims, this.privateKey, this.authConfig.jwt.algorithm);        
         jwt.setHeader('kid', '1');
@@ -27,7 +28,6 @@ module.exports = class JwtGen {
             name: this.authConfig.mockJwt.name,
             sub: this.authConfig.mockJwt.sub,
             nickname: this.authConfig.mockJwt.nickname
-
         };
         const jwt = njwt.create(claims, this.privateKey, this.authConfig.jwt.algorithm);    
         return jwt;
