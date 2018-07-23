@@ -44,7 +44,7 @@ describe('\'authenticate-user\' hook', function () {
       
     } 
     catch (err) {
-      assert.equal(err.name, 'UnauthorizedError');      
+      assert.equal(err.name, 'UnauthorizedError', 'error is not UnauthorizedError');      
     }
   });
 
@@ -54,7 +54,7 @@ describe('\'authenticate-user\' hook', function () {
       assert.deepEqual(result, { id: 'test' });      
     }
     catch (err) {
-      assert.equal(err.name, 'UnauthorizedError');            
+      assert.equal(err.name, 'UnauthorizedError', 'error is not UnauthorizedError');            
     }
   });
 

@@ -42,7 +42,7 @@ describe('\'check-access-token\' hook', function () {
       await app.service('dummy').get('test', {headers: {}});
     }
     catch (err) {
-      assert.equal(err.name, 'UnauthorizedError');
+      assert.equal(err.name, 'UnauthorizedError', 'error is not UnauthorizedError');
     }
   });
 
@@ -51,7 +51,7 @@ describe('\'check-access-token\' hook', function () {
       await app.service('dummy').get('test', {headers: {authorization: 'BEARER' + '12345'}});
     }
     catch (err) {
-      assert.equal(err.name, 'UnauthorizedError');
+      assert.equal(err.name, 'UnauthorizedError', 'error is not UnauthorizedError');
     }
   });
 });
