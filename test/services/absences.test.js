@@ -12,6 +12,7 @@ describe('\'absences\' service', function() {
   const tgtService = app.service(routeBuilder(app, absences));
   let authConfig = app.get(authentication);
   const jwt = new jwtGen(authConfig);
+  const headers = {authorization: 'BEARER ' + jwt.getAccessToken().compact()};
   
   beforeEach(() => {
  
@@ -19,6 +20,15 @@ describe('\'absences\' service', function() {
 
   it('registered the service', () => {
     assert.ok(tgtService, 'Registered the service');
+  });
+
+  it('throws UnauthorizedError if user is not authenticated', async () => {
+    try {
+      const result = await tgtService.find();
+    }
+    catch (err) {
+      assert.equal(err.name, 'UnauthorizedError', 'error is not UnauthorizedError');      
+    }
   });
 
   it('created the record', async () => {

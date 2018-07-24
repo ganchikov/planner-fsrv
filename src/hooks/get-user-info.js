@@ -38,7 +38,7 @@ module.exports = function (config) {
       let res = await userService.find({authId: userInfo.authId, headers: context.params.headers, sessionData: context.sessionData});
       if (res.data.length != 0) {
         context.data.user = res.data[0]._id;  
-        context.data.workspace = res.workspace;
+        context.data.workspace = res.data[0].workspace;
       } else {        
         res = await userService.create(userInfo, {headers: context.params.headers, sessionData: context.sessionData});        
         context.data.user = res._id;  

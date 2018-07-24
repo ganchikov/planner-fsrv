@@ -6,7 +6,7 @@ module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
   const workspace = new Schema({
-    user: {type: Schema.Types.ObjectId, ref: 'user', required: true}    
+    users: [{type: Schema.Types.ObjectId, ref: 'user'}]    
   }, {
     timestamps: true
   });

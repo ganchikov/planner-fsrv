@@ -1,9 +1,6 @@
-const {JwtAuthz} = require('../../hooks');
-const {Permissions} = require('../../constants');
-
 module.exports = {
   before: {
-    all: [JwtAuthz([Permissions.tasks.read])],
+    all: [],
     find: [],
     get: [],
     create: [],

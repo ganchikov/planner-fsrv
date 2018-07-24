@@ -1,4 +1,4 @@
-const {createUserWorkspace, getUserWorkspace} = require('../../hooks');
+const {createUserWorkspace} = require('../../hooks');
 
 module.exports = {
   before: {
@@ -7,7 +7,7 @@ module.exports = {
       return ctx;
     }],
     get: [],
-    create: [],
+    create: [createUserWorkspace()],
     update: [],
     patch: [],
     remove: []
@@ -18,9 +18,9 @@ module.exports = {
       // Make sure the password field is never sent to the client
       // Always must be the last hook
     ],
-    find: [getUserWorkspace()],
-    get: [getUserWorkspace()],
-    create: [createUserWorkspace()],
+    find: [],
+    get: [],
+    create: [],
     update: [],
     patch: [],
     remove: []
