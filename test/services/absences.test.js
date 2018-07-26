@@ -24,7 +24,7 @@ describe('\'absences\' service', function() {
 
   it('throws UnauthorizedError if user is not authenticated', async () => {
     try {
-      const result = await tgtService.find();
+      await tgtService.find({headers});
     }
     catch (err) {
       assert.equal(err.name, 'UnauthorizedError', 'error is not UnauthorizedError');      

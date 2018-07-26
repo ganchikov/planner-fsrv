@@ -3,7 +3,6 @@ const {RequestError, UnauthorizedError} = require('../errors');
 const routeBuilder = require('../helpers/routebuilder');
 const {authentication} = require('../constants/config');
 const {users} = require('../constants/services');
-const hasher = require('string-hash');
 
 // eslint-disable-next-line no-unused-vars
 module.exports = function (config) {
