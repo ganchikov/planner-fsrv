@@ -56,9 +56,9 @@ Copyright (c) 2016
 
 Licensed under the [MIT license](LICENSE).
 
-##config node to use luxoft-root-ca
+##config node to use root-ca
 
-1.1) goto http://cert.luxoft.com, follow instructions to export luxoft-root-ca as Base64 to project folder
+1.1) download root ca, follow instructions to export as Base64 to project folder
 1.2) export NODE_EXTRA_CA_CERTS="<your cert file name>.CER"
 
 ##config npm to use certificate
@@ -69,7 +69,7 @@ Licensed under the [MIT license](LICENSE).
 
 ##Heroku
 1.1) install cli
-1.2) export NODE_EXTRA_CA_CERTS="<path to your Luxoft cert>.cer"
+1.2) export NODE_EXTRA_CA_CERTS="<path to your root cert>.cer"
 1.3) using Git Bash: winpty heroku login
 1.4) add HOME environment variable set to %USERPROFILE% (required to run git config commands)
 1.4) git config --system http.sslCAPath <path to your Luxoft cert>.cer
