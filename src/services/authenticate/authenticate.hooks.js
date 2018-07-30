@@ -1,11 +1,11 @@
-const {getUserInfo} = require('../../hooks');
+const {getUserInfo, getUserAuthentication} = require('../../hooks');
 
 module.exports = {
   before: {
     all: [],
     find: [],
     get: [],
-    create: [getUserInfo()],
+    create: [getUserInfo(), getUserAuthentication()],
     update: [],
     patch: [],
     remove: []

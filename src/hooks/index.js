@@ -7,4 +7,5 @@ module.exports = {
     getUserInfo: require('./get-user-info'),
     authenticateUser: require('./authenticate-user'),
     createUserWorkspace: require('./create-user-workspace'),
+    getUserAuthentication: require('./get-user-authentication')
 };
