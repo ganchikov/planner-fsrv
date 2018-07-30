@@ -29,6 +29,6 @@ describe('\'get-user-authentication\' hook', () => {
   it('runs the hook', async () => {
     const id_token = jwt.getIdToken().compact();
     const result = await app.service('dummy').create({id_token}, {headers});
-    assert.deepEqual(result, {id_token});
+    assert.deepEqual(result.id_token, id_token);
   });
 });

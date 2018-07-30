@@ -60,7 +60,7 @@ module.exports = class JwksClient {
                             && key.kid           // The `kid` must be present to be useful for later
                             && key.x5c && key.x5c.length // Has useful public keys (we aren't using n or e)
                 ).map(key => {
-                    return { kid: key.kid, nbf: key.nbf, publicKey: this.options.mockJwt.PEM ? key.x5c : certToPEM(key.x5c[0])};
+                    return { kid: key.kid, nbf: key.nbf, publicKey: (this.options.mockJwt && this.options.mockJwt.PEM) ? key.x5c : certToPEM(key.x5c[0])};
                 });
                 // If at least a single signing key doesn't exist we have a problem... Kaboom.
                 if (!signingKeys.length) {

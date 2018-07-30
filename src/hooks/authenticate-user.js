@@ -25,17 +25,12 @@ module.exports = function (options = {}) {
     if (!result || !result.data || result.data.length === 0) {
       throw new UnauthorizedError('need_authentication', {message: 'Authentication required'});
     }
-    const userId = result.data[0].user;
     const workspaceId = result.data[0].workspace;
-
-    if (!context.sessionData) {
-      context.sessionData = {
-        user: userId,
-        workspace: workspaceId
-      };
-    } else {
-      context.sessionData.user = userId;
-      context.sessionData.workspace = workspaceId;
+    //set workspace parameter for further filtering
+    if (context.data) {
+      context.data.workspace = workspaceId;
+    } else if(context.params && context.params.query) {
+      context.params.query.workspace = workspaceId;
     }
     context.sessionData.authenticating = false;
     return context;

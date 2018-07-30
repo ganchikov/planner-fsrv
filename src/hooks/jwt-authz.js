@@ -15,7 +15,7 @@ module.exports = expectedScopes => {
                 return context;
             }
             const noPermissionError = `User doesn't have required permission(s): ${expectedScopes.toString()}`;
-            if (!context.sessionData || !context.sessionData.user) { 
+            if (!context.sessionData) { 
                 throw new UnauthorizedError('no_permission', { message: noPermissionError });
             }            
             var scopes = context.sessionData.decodedToken.payload.scope.split(' ');

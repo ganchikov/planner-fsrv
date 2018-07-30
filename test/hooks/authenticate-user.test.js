@@ -64,4 +64,9 @@ describe('\'authenticate-user\' hook', function () {
     assert.deepEqual(result, { id: 'test' });
   });
 
+  ///TODO: implement this test
+  // it('passes workspace to the target method', async () => {
+  //   assert.equal(1,1);
+  // });
+  
 });

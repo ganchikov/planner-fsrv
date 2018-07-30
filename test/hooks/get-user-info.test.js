@@ -32,4 +32,9 @@ describe('\'get-user\' hook', () => {
     assert.ok(result.data.authId, 'result data object does not contain authId property');
     assert.strictEqual(result.data.authId, authSettings.mockJwt.sub, 'authId property does not equal to JWT sub property');
   });
+
+  ///TODO: implement this test
+  // it('passes user data to the called method', async () => {
+  //   assert(1,1);
+  // });
 });

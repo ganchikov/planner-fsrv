@@ -34,7 +34,7 @@ module.exports = function (config) {
       context.sessionData.authenticating = true;
 
       const userService = context.app.service(routeBuilder(context.app, users));
-      let res = await userService.find({authId: userInfo.authId, headers: context.params.headers, sessionData: context.sessionData});
+      let res = await userService.find({query: {authId: userInfo.authId}, headers: context.params.headers, sessionData: context.sessionData});
       if (res.data.length != 0) {
         context.data.user = res.data[0]._id;  
         context.data.workspace = res.data[0].workspace;
