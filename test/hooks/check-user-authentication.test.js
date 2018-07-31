@@ -1,11 +1,11 @@
 const assert = require('assert');
 const app = require('../../src/app');
-const {getUserAuthentication, getUserInfo} = require('../../src/hooks');
+const {checkUserAuthentication, getUserInfo} = require('../../src/hooks');
 
 const {authentication} = require('../../src/constants/config');
 const jwtGen = require('../../src/helpers/jwt-gen');
 
-describe('\'get-user-authentication\' hook', () => {
+describe('\'check-user-authentication\' hook', () => {
 
   const authSettings = app.get(authentication);
   const jwt = new jwtGen(authSettings);
@@ -21,7 +21,7 @@ describe('\'get-user-authentication\' hook', () => {
 
     app.service('dummy').hooks({
       before: {
-        get: [getUserInfo(), getUserAuthentication()]
+        get: [getUserInfo(), checkUserAuthentication()]
       }
     });
   });
