@@ -9,7 +9,7 @@ module.exports = function (app) {
     id: {type: Number, required: true},       
     name: { type: String, required: true },
     description: {type: String, required: false},
-    workspace: {type: Schema.Types.ObjectId, ref: 'workspace'}
+    workspace: {type: Schema.Types.ObjectId, required: true, ref: 'workspace'},
   }, {
     timestamps: true
   });

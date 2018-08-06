@@ -60,6 +60,10 @@ Licensed under the [MIT license](LICENSE).
 
 1.1) download root ca, follow instructions to export as Base64 to project folder
 1.2) export NODE_EXTRA_CA_CERTS="<your cert file name>.CER"
+1.3) add "env" setting in launch.json config to debug: 
+    "env": {
+                "NODE_EXTRA_CA_CERTS": "xxx.cer"
+            } 
 
 ##config npm to use certificate
 1) go to the url failing to get by npm (e.g.  https://registry.npmjs.org/)

@@ -7,7 +7,7 @@ module.exports = function (app) {
   const { Schema } = mongooseClient;
   const absences = new Schema({
     id: {type: Number, required: true},
-    // parent_id: Number,
+    workspace: {type: Schema.Types.ObjectId, required: true, ref: 'workspace'},
     name: String,
     start_date: Date,
     end_date: Date,

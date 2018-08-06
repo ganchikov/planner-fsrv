@@ -2,7 +2,7 @@
 const logger = require('./hooks/logger');
 const generateId = require('./hooks/generate-id');
 const getchildren = require('./hooks/getchildren');
-const {checkAccessToken, authenticateUser} = require('./hooks');
+const {checkAccessToken, authenticateUser, getQueryForRemoval} = require('./hooks');
 
 module.exports = (app) => {
   return {
@@ -13,7 +13,7 @@ module.exports = (app) => {
       create: [generateId()],
       update: [],
       patch: [],
-      remove: []
+      remove: [getQueryForRemoval()]
     },
 
     after: {
