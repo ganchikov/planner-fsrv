@@ -29,6 +29,13 @@ module.exports = function (app) {
     }
   };
 
+  // service.removeChildren = async (items) => {
+  //   if (!items || !(items instanceof Array) ) return;
+  //   for (const item of items) {
+
+  //   }
+  // };
+
   service.generateId = async(item) => {
     const idGenerator = app.service(routeBuilder(app, idgenerator));   
     item.id = await idGenerator.generateId();

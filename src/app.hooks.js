@@ -1,8 +1,8 @@
 // Application hooks that run for every service
-const logger = require('./hooks/logger');
-const generateId = require('./hooks/generate-id');
-const getchildren = require('./hooks/getchildren');
-const {checkAccessToken, authenticateUser, getQueryForRemoval} = require('./hooks');
+const {logger, generateId, 
+  getChildren, removeChildren, 
+  checkAccessToken, authenticateUser, 
+  getQueryForRemoval} = require('./hooks');
 
 module.exports = (app) => {
   return {
@@ -18,12 +18,12 @@ module.exports = (app) => {
 
     after: {
       all: [logger()],
-      find: [ getchildren()],
-      get: [getchildren()],
+      find: [ getChildren()],
+      get: [getChildren()],
       create: [],
       update: [],
       patch: [],
-      remove: []
+      remove: [removeChildren()]
     },
 
     error: {

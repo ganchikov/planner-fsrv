@@ -8,5 +8,6 @@ module.exports = {
     authenticateUser: require('./authenticate-user'),
     createUserWorkspace: require('./create-user-workspace'),
     checkUserAuthentication: require('./check-user-authentication'),
-    getQueryForRemoval: require('./get-params-for-removal')
+    getQueryForRemoval: require('./get-params-for-removal'),
+    removeChildren: require('./remove-children')
 };

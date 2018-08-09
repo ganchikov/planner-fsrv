@@ -31,7 +31,7 @@ describe('\'authenticate-user\' hook', function () {
     const result = await authSvc.find({query: {authId: accessToken.body.sub}, headers});
     if (result.data.length > 0) {
       for (const itm of result.data) {
-        await authSvc.remove(itm._id, {headers});
+        await authSvc.remove(itm._id, {query: {}, headers});
       }
     } 
 
