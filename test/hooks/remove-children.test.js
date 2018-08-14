@@ -1,27 +1,40 @@
+const app = require('../../src/app');
 const assert = require('assert');
-const feathers = require('@feathersjs/feathers');
-const removeChildren = require('../../src/hooks/remove-children');
+const {removeChildren} = require('../../src/hooks');
+const routeBuilder = require('../../src/helpers/routebuilder');
+const {authenticate} = require('../../src/constants/services');
+const {authentication} = require('../../src/constants/config');
+const jwtGen = require('../../src/helpers/jwt-gen');
 
 describe('\'remove-children\' hook', () => {
-  let app;
+  const authSettings = app.get(authentication);
+  const jwt = new jwtGen(authSettings);
+  const headers = {authorization: 'BEARER ' + jwt.getAccessToken().compact()};
+  const authSvc = app.service(routeBuilder(app, authenticate));
 
   beforeEach(() => {
-    app = feathers();
 
     app.use('/dummy', {
       async get(id) {
         return { id };
+      },
+
+      async remove(id) {
+        return {_id: id};
+      },
+
+      async removeChildren(removed_item) {
+        return [removed_item._id];
       }
     });
 
-    app.service('dummy').hooks({
-      
-    });
   });
 
   it('runs the hook', async () => {
-    const result = await app.service('dummy').get('test');
+    await authSvc.create({id_token: jwt.getIdToken().compact()}, {headers});
+
+    const result = await app.service('dummy').remove('test', {headers});
     
-    assert.deepEqual(result, { id: 'test' });
+    assert.deepEqual(result, {_id: 'test', children: ['test']});
   });
 });

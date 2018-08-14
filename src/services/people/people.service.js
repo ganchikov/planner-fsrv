@@ -3,7 +3,7 @@ const createService = require('feathers-mongoose');
 const routeBuilder = require('../../helpers/routebuilder');
 const createModel = require('../../models/people.model');
 const hooks = require('./people.hooks');
-const {idgenerator, people} = require('../../constants/services');
+const {idgenerator, people, absences} = require('../../constants/services');
 
 module.exports = function (app) {
   const Model = createModel(app);
@@ -29,12 +29,11 @@ module.exports = function (app) {
     }
   };
 
-  // service.removeChildren = async (items) => {
-  //   if (!items || !(items instanceof Array) ) return;
-  //   for (const item of items) {
-
-  //   }
-  // };
+  service.removeChildren = async (person) => {
+    const absencesSvc = app.service(routeBuilder(app, absences));
+    const result = await absencesSvc._removeMany(person.absences);
+    return result;
+  };
 
   service.generateId = async(item) => {
     const idGenerator = app.service(routeBuilder(app, idgenerator));   

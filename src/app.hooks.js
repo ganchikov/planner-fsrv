@@ -1,8 +1,7 @@
 // Application hooks that run for every service
 const {logger, generateId, 
   getChildren, removeChildren, 
-  checkAccessToken, authenticateUser, 
-  getQueryForRemoval} = require('./hooks');
+  checkAccessToken, authenticateUser} = require('./hooks');
 
 module.exports = (app) => {
   return {
@@ -13,7 +12,7 @@ module.exports = (app) => {
       create: [generateId()],
       update: [],
       patch: [],
-      remove: [getQueryForRemoval()]
+      remove: []
     },
 
     after: {

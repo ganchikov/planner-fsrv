@@ -5,9 +5,15 @@
 module.exports = function (options = {}) {
   return async context => {
     const service = context.service;
-    const removed_id = context.result._id;
+    let removed_item;
+    if (context.result.length) {
+      removed_item = context.result[0];
+    } else {
+      removed_item = context.result;
+    }
     if (service.removeChildren) {
-      await service.removeChildren(removed_id);
+      const result = await service.removeChildren(removed_item);
+      context.result.children = result;
     }
     return context;  };
 };

@@ -43,7 +43,7 @@ describe('\'create-workspace\' hook', () => {
   });
 
   it('deletes workspace just created', async () => {
-    const result = await workspaceSvc.remove(wsId, {query: {}, headers});
+    const result = await workspaceSvc.remove(wsId, {headers});
     assert.ok(result, 'deletion ok result is not retrieved');
   });
 });
