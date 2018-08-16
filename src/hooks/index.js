@@ -8,5 +8,7 @@ module.exports = {
     authenticateUser: require('./authenticate-user'),
     createUserWorkspace: require('./create-user-workspace'),
     checkUserAuthentication: require('./check-user-authentication'),
-    removeChildren: require('./remove-children')
+    removeChildren: require('./remove-children'),
+    getDiff: require('./get-diff'),
+    processDiff: require('./process-diff')
 };

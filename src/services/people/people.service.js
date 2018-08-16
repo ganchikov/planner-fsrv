@@ -40,5 +40,18 @@ module.exports = function (app) {
     item.id = await idGenerator.generateId();
   };
 
+  service._getById = async (itemId) => {
+    const item = await Model.findById(itemId);
+    return item;
+  };
+
+  service._processDiff = async (person, diff) => {
+    if (diff.absences) {
+      const absencesSvc = app.service(routeBuilder(app, absences));
+      const result = await absencesSvc._removeMany(diff.absences);
+      return result;
+    }
+  }
+
   service.hooks(hooks);
 };
