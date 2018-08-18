@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
-const extractToken = require('../../helpers/extract_token');
-const { UnauthorizedError } = require('../../errors');
+const extractToken = require('@helpers/extract_token');
+const { UnauthorizedError } = require('@errors');
 
 module.exports = options => {
     

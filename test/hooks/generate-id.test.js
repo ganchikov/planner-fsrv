@@ -1,6 +1,6 @@
 const assert = require('assert');
 const feathers = require('@feathersjs/feathers');
-const generateId = require('../../src/hooks/generate-id');
+const {generateId} = require('@hooks');
 
 describe('\'generate-id\' hook', () => {
   let app;

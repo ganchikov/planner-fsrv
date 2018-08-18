@@ -1,8 +1,8 @@
 // Initializes the `data-loader` service on path `/loader`
 const createService = require('./data-loader.class.js');
 const hooks = require('./data-loader.hooks');
-const {teams, people, absences, dataloader} = require('../../constants/services');
-const routeBuilder = require('../../helpers/routebuilder');
+const {teams, people, absences, dataloader} = require('@constants/services');
+const routeBuilder = require('@helpers/routebuilder');
 
 module.exports = function (app) {
   

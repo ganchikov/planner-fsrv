@@ -1,5 +1,5 @@
-const {jwtAuthz} = require('../../hooks');
-const {Permissions} = require('../../constants');
+const {jwtAuthz} = require('@hooks');
+const {Permissions} = require('@constants');
 
 module.exports = {
   before: {

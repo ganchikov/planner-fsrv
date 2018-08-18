@@ -1,6 +1,6 @@
-const routeBuilder = require('../helpers/routebuilder');
-const {workspace} = require('../constants/services');
-const {DataConsistencyError} = require('../errors');
+const routeBuilder = require('@helpers/routebuilder');
+const {workspace} = require('@constants/services');
+const {DataConsistencyError} = require('@errors');
 // eslint-disable-next-line no-unused-vars
 module.exports = function (options = {}) {
   return async context => {

@@ -1,6 +1,6 @@
 const assert = require('assert');
 const feathers = require('@feathersjs/feathers');
-const getDiff = require('../../src/hooks/get-diff');
+const {getDiff} = require('@hooks');
 // const {authentication} = require('../../src/constants/config');
 // const jwtGen = require('../../src/helpers/jwt-gen');
 

@@ -1,4 +1,4 @@
-const {UnauthorizedError} = require('../errors');
+const {UnauthorizedError} = require('@errors');
 
 module.exports = (header) => {
     if (!header) {

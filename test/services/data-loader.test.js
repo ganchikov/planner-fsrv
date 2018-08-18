@@ -1,9 +1,10 @@
 const assert = require('assert');
-const app = require('../../src/app');
-const routeBuilder = require('../../src/helpers/routebuilder');
-const {dataloader, authenticate, teams, people, absences} = require('../../src/constants/services');
-const {authentication} = require('../../src/constants/config');
-const jwtGen = require('../../src/helpers/jwt-gen');
+const app = require('@src/app');
+
+const {dataloader, authenticate, teams, people, absences} = require('@constants/services');
+const {authentication} = require('@constants/config');
+const routeBuilder = require('@helpers/routebuilder');
+const jwtGen = require('@helpers/jwt-gen');
 
 const sampleData = [{
   name: 'Alpha',

@@ -1,7 +1,9 @@
+require('module-alias/register');
+
 const assert = require('assert');
 const rp = require('request-promise');
 const url = require('url');
-const app = require('../src/app');
+const app =  require('@src/app');
 
 const port = app.get('port') || 3030;
 const getUrl = pathname => url.format({

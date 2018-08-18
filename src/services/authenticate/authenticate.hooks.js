@@ -1,4 +1,4 @@
-const {getUserInfo, checkUserAuthentication} = require('../../hooks');
+const {getUserInfo, checkUserAuthentication} = require('@hooks');
 
 module.exports = {
   before: {

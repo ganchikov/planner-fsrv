@@ -1,11 +1,9 @@
 const assert = require('assert');
 const feathers = require('@feathersjs/feathers');
-const checkJwt = require('../../src/hooks/check-access-token');
 const configuration = require('@feathersjs/configuration');
-const {authentication} = require('../../src/constants/config');
-
-const jwtGen = require('../../src/helpers/jwt-gen');
-
+const {checkAccessToken} = require('@hooks');
+const {authentication} = require('@constants/config');
+const jwtGen = require('@helpers/jwt-gen');
 
 describe('\'check-access-token\' hook', function () {
   this.timeout(15000);
@@ -28,7 +26,7 @@ describe('\'check-access-token\' hook', function () {
     });
 
     app.service('dummy').hooks({
-      before: checkJwt(app)
+      before: checkAccessToken(app)
     });
   });
 

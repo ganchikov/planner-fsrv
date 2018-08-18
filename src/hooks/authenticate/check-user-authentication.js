@@ -1,6 +1,6 @@
-const routeBuilder = require('../helpers/routebuilder');
-const {authentication} = require('../constants/config');
-const {authenticate} = require('../constants/services');
+const routeBuilder = require('@helpers/routebuilder');
+const {authentication} = require('@constants/config');
+const {authenticate} = require('@constants/services');
 
 module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
   return async context => {

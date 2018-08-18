@@ -1,6 +1,6 @@
 const assert = require('assert');
 const feathers = require('@feathersjs/feathers');
-const getchildren = require('../../src/hooks/getchildren');
+const {getChildren} = require('@hooks');
 
 describe('\'getchildren\' hook', () => {
   let app;
@@ -23,7 +23,7 @@ describe('\'getchildren\' hook', () => {
     });
 
     app.service('dummy').hooks({
-      after: getchildren()
+      after: getChildren()
     });
   });
 

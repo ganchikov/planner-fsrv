@@ -1,7 +1,7 @@
-const extractToken = require('../helpers/extract_token');
-const routeBuilder= require('../helpers/routebuilder');
-const {authenticate} = require('../constants/services');
-const {UnauthorizedError} = require('../errors');
+const extractToken = require('@helpers/extract_token');
+const routeBuilder= require('@helpers/routebuilder');
+const {authenticate} = require('@constants/services');
+const {UnauthorizedError} = require('@errors');
 const jwt = require('jsonwebtoken');
 
 // eslint-disable-next-line no-unused-vars

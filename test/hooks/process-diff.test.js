@@ -1,6 +1,6 @@
 const assert = require('assert');
 const feathers = require('@feathersjs/feathers');
-const processDiff = require('../../src/hooks/process-diff');
+const {processDiff} = require('@hooks');
 
 describe('\'process-diff\' hook', () => {
   let app;

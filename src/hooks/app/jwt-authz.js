@@ -1,5 +1,5 @@
-const {UnauthorizedError} = require('../errors');
-const {authentication} = require('../constants/config');
+const {UnauthorizedError} = require('@errors');
+const {authentication} = require('@constants/config');
 
 module.exports = expectedScopes => {
     return async context => {

@@ -2,7 +2,7 @@
 // For more information on hooks see: http://docs.feathersjs.com/api/hooks.html
 
 // eslint-disable-next-line no-unused-vars
-const Services = require('../constants/services');
+const Services = require('@constants/services');
 
 module.exports = function () {
   return async context => {

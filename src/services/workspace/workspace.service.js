@@ -1,10 +1,10 @@
 // Initializes the `workspace` service on path `/workspace`
 const createService = require('feathers-mongoose');
-const createModel = require('../../models/workspace.model');
+const createModel = require('@models/workspace.model');
 const hooks = require('./workspace.hooks');
-const routeBuilder = require('../../helpers/routebuilder');
+const routeBuilder = require('@helpers/routebuilder');
 
-const {idgenerator, workspace} = require('../../constants/services');
+const {idgenerator, workspace} = require('@constants/services');
 
 
 module.exports = function (app) {

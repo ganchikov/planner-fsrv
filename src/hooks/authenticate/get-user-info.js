@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
-const {RequestError, UnauthorizedError} = require('../errors');
-const routeBuilder = require('../helpers/routebuilder');
-const {authentication} = require('../constants/config');
-const {users} = require('../constants/services');
+const {RequestError, UnauthorizedError} = require('@errors');
+const routeBuilder = require('@helpers/routebuilder');
+const {authentication} = require('@constants/config');
+const {users} = require('@constants/services');
 
 // eslint-disable-next-line no-unused-vars
 module.exports = function (config) {

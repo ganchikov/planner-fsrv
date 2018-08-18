@@ -1,9 +1,9 @@
 const assert = require('assert');
-const app = require('../../src/app');
-const routeBuilder = require('../../src/helpers/routebuilder');
-const {absences, authenticate} = require('../../src/constants/services');
-const {authentication} = require('../../src/constants/config');
-const jwtGen = require('../../src/helpers/jwt-gen');
+const app = require('@src/app');
+const {absences, authenticate} = require('@constants/services');
+const {authentication} = require('@constants/config');
+const routeBuilder = require('@helpers/routebuilder');
+const jwtGen = require('@helpers/jwt-gen');
 
 
 describe('\'absences\' service', function() {

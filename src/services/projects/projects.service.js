@@ -1,10 +1,10 @@
 // Initializes the `projects` service on path `/projects`
 const createService = require('feathers-mongoose');
-const createModel = require('../../models/projects.model');
+const createModel = require('@models/projects.model');
 const hooks = require('./projects.hooks');
-const routeBuilder = require('../../helpers/routebuilder');
+const routeBuilder = require('@helpers/routebuilder');
 
-const {idgenerator, projects} = require('../../constants/services');
+const {idgenerator, projects} = require('@constants/services');
 
 module.exports = function (app) {
   const Model = createModel(app);

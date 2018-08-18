@@ -28,6 +28,16 @@
     "debug": "nodemon --inspect src/",
     "mocha-debug": "cross-env NODE_ENV=test mocha test/ --recursive --inspect-brk --exit"
   },
+  "_moduleAliases": {
+    "@src": "src",
+    "@config": "src/config",
+    "@constants": "src/constants",
+    "@errors": "src/errors",
+    "@helpers": "src/helpers",
+    "@hooks": "src/hooks",
+    "@models": "src/models",
+    "@test": "test"
+  },
   "dependencies": {
     "@feathersjs/authentication": "^2.1.5",
     "@feathersjs/authentication-jwt": "^2.0.0",
@@ -49,6 +59,7 @@
     "helmet": "^3.12.0",
     "jwks-rsa": "^1.2.1",
     "lodash": "^4.17.10",
+    "module-alias": "^2.1.0",
     "mongoose": "^5.0.14",
     "morgan": "^1.9.0",
     "passport-auth0": "^0.6.1",

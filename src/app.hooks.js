@@ -2,7 +2,7 @@
 const {logger, generateId, 
   getChildren, removeChildren, 
   getDiff, processDiff,
-  checkAccessToken, authenticateUser} = require('./hooks');
+  checkAccessToken, authenticateUser} = require('@hooks');
 
 module.exports = (app) => {
   return {

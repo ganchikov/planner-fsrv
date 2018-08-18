@@ -1,7 +1,7 @@
 const assert = require('assert');
-const app = require('../../src/app');
-const routeBuilder = require('../../src/helpers/routebuilder');
-const {authenticate} = require('../../src/constants/services');
+const app = require('@src/app');
+const routeBuilder = require('@helpers/routebuilder');
+const {authenticate} = require('@constants/services');
 
 describe('\'authenticate\' service', () => {
   it('registered the service', () => {

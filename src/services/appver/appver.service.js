@@ -1,7 +1,7 @@
 // Initializes the `appver` service on path `/appver`
 const createService = require('./appver.class.js');
-const routeBuilder = require('../../helpers/routebuilder');
-const {appver} = require('../../constants/services');
+const routeBuilder = require('@helpers/routebuilder');
+const {appver} = require('@constants/services');
 
 module.exports = function (app) {
   

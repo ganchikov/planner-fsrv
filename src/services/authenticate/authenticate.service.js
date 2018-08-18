@@ -1,9 +1,9 @@
 // Initializes the `authorize` service on path `/authorize`
 const createService = require('feathers-mongoose');
-const createModel = require('../../models/authenticate.model');
+const createModel = require('@models/authenticate.model');
 const hooks = require('./authenticate.hooks');
-const routeBuilder = require('../../helpers/routebuilder');
-const {authenticate} = require('../../constants/services');
+const routeBuilder = require('@helpers/routebuilder');
+const {authenticate} = require('@constants/services');
 
 module.exports = function (app) {
   const Model = createModel(app);

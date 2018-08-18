@@ -1,7 +1,7 @@
 const assert = require('assert');
-const app = require('../../src/app');
-const routeBuilder = require('../../src/helpers/routebuilder');
-const {workspace} = require('../../src/constants/services');
+const app = require('@src/app');
+const routeBuilder = require('@helpers/routebuilder');
+const {workspace} = require('@constants/services');
 
 describe('\'workspace\' service', () => {
   it('registered the service', () => {

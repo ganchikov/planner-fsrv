@@ -1,5 +1,5 @@
-const routeBuilder = require('../helpers/routebuilder');
-const {workspace} = require('../constants/services');
+const routeBuilder = require('@helpers/routebuilder');
+const {workspace} = require('@constants/services');
 
 // eslint-disable-next-line no-unused-vars
 module.exports = function (options = {}) {

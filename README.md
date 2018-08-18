@@ -120,7 +120,11 @@ jobs:
           fingerprints:
             - "SO:ME:FIN:G:ER:PR:IN:T"
 
+##Misc
 
+VS Code plugins:
+- ESLint
+- Path Intellisense
 
 
     

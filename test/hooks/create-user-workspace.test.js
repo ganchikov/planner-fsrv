@@ -1,10 +1,10 @@
-const app = require('../../src/app');
+const app = require('@src/app');
 const assert = require('assert');
-const jwtGen = require('../../src/helpers/jwt-gen');
-const {authentication} = require('../../src/constants/config');
-const {createUserWorkspace} = require('../../src/hooks');
-const {workspace, users} = require('../../src/constants/services');
-const routeBuilder = require('../../src/helpers/routebuilder');
+const jwtGen = require('@helpers/jwt-gen');
+const {authentication} = require('@constants/config');
+const {createUserWorkspace} = require('@hooks');
+const {workspace, users} = require('@constants/services');
+const routeBuilder = require('@helpers/routebuilder');
 
 describe('\'create-workspace\' hook', () => {
   const dummyUsersServiceName = 'dummyUsers';

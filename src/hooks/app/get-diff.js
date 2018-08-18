@@ -1,4 +1,4 @@
-const get_diff = require('../helpers/get_diff');
+const get_diff = require('@helpers/get_diff');
 
 // eslint-disable-next-line no-unused-vars
 module.exports = function (options = {}) {

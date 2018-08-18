@@ -1,9 +1,9 @@
 const assert = require('assert');
-const app = require('../../src/app');
+const app = require('@src/app');
 
-const getUserInfo = require('../../src/hooks/get-user-info');
-const {authentication} = require('../../src/constants/config');
-const jwtGen = require('../../src/helpers/jwt-gen');
+const {getUserInfo} = require('@hooks');
+const {authentication} = require('@constants/config');
+const jwtGen = require('@helpers/jwt-gen');
 
 describe('\'get-user\' hook', () => {
   const authSettings = app.get(authentication);

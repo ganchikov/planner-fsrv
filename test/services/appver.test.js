@@ -1,5 +1,5 @@
 const assert = require('assert');
-const createService = require('../../src/services/appver/appver.class');
+const createService = require('@src/services/appver/appver.class');
 
 describe('\'appver\' service', () => {
 

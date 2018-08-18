@@ -1,10 +1,10 @@
-const app = require('../../src/app');
+const app = require('@src/app');
 const assert = require('assert');
-const authenticateUser = require('../../src/hooks/authenticate-user');
-const routeBuilder = require('../../src/helpers/routebuilder');
-const {authenticate} = require('../../src/constants/services');
-const {authentication} = require('../../src/constants/config');
-const jwtGen = require('../../src/helpers/jwt-gen');
+const {authenticateUser} = require('@hooks');
+const routeBuilder = require('@helpers/routebuilder');
+const {authenticate} = require('@constants/services');
+const {authentication} = require('@constants/config');
+const jwtGen = require('@helpers/jwt-gen');
 
 describe('\'authenticate-user\' hook', function () {
   this.timeout(15000);

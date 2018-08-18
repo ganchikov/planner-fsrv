@@ -1,8 +1,8 @@
 const checkJwt = require('./checkJwt');
 const getJwtSecret = require('./getJwtSecret');
-const {authentication} = require('../../constants/config');
-const routeBuilder = require('../../helpers/routebuilder');
-const {jwks} = require('../../constants/services');
+const {authentication} = require('@constants/config');
+const {jwks} = require('@constants/services');
+const routeBuilder = require('@helpers/routebuilder');
 
 module.exports = (app) => {
   const config = app.get(authentication);
