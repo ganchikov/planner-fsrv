@@ -8,9 +8,8 @@ module.exports = function (app) {
   const people = new Schema({
     id: {type: Number, required: true},   
     workspace: {type: Schema.Types.ObjectId, required: true, ref: 'workspace'},
-    name: { type: String, required: true },
-    absences: [{type: Schema.Types.ObjectId, ref: 'absence'}]
-  }, {
+    name: { type: String, required: true }
+    }, {
     timestamps: true
   });
 

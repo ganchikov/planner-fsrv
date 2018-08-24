@@ -34,7 +34,7 @@ describe('\'absences\' service', function() {
   it('created the record', async () => {
     const headers = {authorization: 'BEARER ' + jwt.getAccessToken().compact()};
     await authService.create({id_token: jwt.getIdToken().compact()}, {headers});
-    const result = await tgtService.create({name: 'test'}, {headers});
+    const result = await tgtService.create({name: 'test', person: null}, {headers});
     const generatedId = result._id;
     assert.ok(result.hasOwnProperty('id'), 'service created record');
     const createdRecord = await tgtService.get(generatedId, {headers: {authorization: 'BEARER ' + jwt.getAccessToken().compact()}});

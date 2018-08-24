@@ -5,7 +5,7 @@ module.exports = {
     jwtAuthz: require('./app/jwt-authz'),
     logger: require('./app/logger'),
     generateId: require('./app/generate-id'),
-    getChildren: require('./app/getchildren'),
+    addChildren: require('./app/add-children'),
     removeChildren: require('./app/remove-children'),
     getDiff: require('./app/get-diff'),
     processDiff: require('./app/process-diff'),

@@ -37,14 +37,16 @@ class Service {
 
   async createPerson(person, params) {
     const peopleService = this.options.peopleService;    
+    const personItem = await peopleService.create(person, params);
+    const personId = person._id = personItem._id;
     const absences = person.absences;
     const promises = [];
     for (const absence of absences) {
+      absence.person = personId;
       promises.push(this.createAbsence(absence, params));      
     }
-    const insAbsences = await Promise.all(promises);
-    person.absences = insAbsences.map(item => item._id);
-    return await peopleService.create(person, params);
+    person.absences = await Promise.all(promises);
+    return person;
   }
 
   async createAbsence(absence, params) {

@@ -25,11 +25,8 @@ module.exports = function (app) {
   // Get our initialized service so that we can register hooks and filters
   const service = app.service(route);
   
-  service.getChildren = async (items) => {    
-    if (!items || !(items instanceof Array) ) return;
-    for (const item of items) {
-      await Model.populate(item, {path: 'members', populate: {path: 'absences'}}); 
-    }
+  service._addChildren = async (item) => {    
+    await Model.populate(item, {path: 'members', populate: {path: 'absences'}}); 
   };
 
   service.generateId = async(item) => {

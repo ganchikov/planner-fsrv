@@ -21,17 +21,15 @@ module.exports = function (app) {
 
   // Get our initialized service so that we can register hooks and filters
   const service = app.service(route);
+  const absencesSvc = app.service(routeBuilder(app, absences));
 
-  service.getChildren = async (items) => {    
-    if (!items || !(items instanceof Array) ) return;
-    for (const item of items) {
-      await Model.populate(item, {path: 'absences'}); 
-    }
+
+  service._addChildren = async (item) => {    
+      item.absences = await absencesSvc._getByPerson(item._id);
   };
 
   service.removeChildren = async (person) => {
-    const absencesSvc = app.service(routeBuilder(app, absences));
-    const result = await absencesSvc._removeMany(person.absences);
+    const result = await absencesSvc._removeByPerson(person._id);
     return result;
   };
 
@@ -46,12 +44,11 @@ module.exports = function (app) {
   };
 
   service._processDiff = async (person, diff) => {
-    if (diff.absences) {
-      const absencesSvc = app.service(routeBuilder(app, absences));
-      const result = await absencesSvc._removeMany(diff.absences);
-      return result;
-    }
-  }
+    // if (diff.absences) {
+    //   const result = await absencesSvc._removeMany(diff.absences);
+    //   return result;
+    // }
+  };
 
   service.hooks(hooks);
 };

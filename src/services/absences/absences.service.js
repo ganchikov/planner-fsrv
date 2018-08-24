@@ -29,8 +29,13 @@ module.exports = function (app) {
     item.id = await idGenerator.generateId();
   };
 
-  service._removeMany = async(ids) => {
-    const result = await Model.deleteMany().where('_id').in(ids).exec();
+  service._getByPerson = async (person) => {
+    const result = await Model.find({person});
+    return result;
+  };
+
+  service._removeByPerson = async(ids) => {
+    const result = await Model.deleteMany().where('person').in(ids).exec();
     return result;
   };
 

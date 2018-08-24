@@ -21,13 +21,19 @@ describe('\'people\' service', () => {
     assert.ok(peopleService, 'Registered the service');
   });
 
-  it('creates the person record with child absence record', async () => {
+  it('creates the person record', async () => {
     await authService.create({id_token: jwt.getIdToken().compact()}, {headers});
-    let absenceResult = await absenceService.create({name: 'Test absence'}, {headers});
-    absenceId = absenceResult._id;
-    const personResult = await peopleService.create({name: 'Test Person', 
-    absences: [absenceId]}, {headers});
+    const personResult = await peopleService.create({name: 'Test Person'}, {headers});
     personId = personResult._id;
+    let absenceResult = await absenceService.create({name: 'Test absence', person: personId}, {headers});
+    absenceId = absenceResult._id;
+  });
+
+  it('get the person record with child absence record', async () => {
+    const personRecord = await peopleService.get(personId, {headers});
+    assert.deepEqual(personRecord, {_id: personId, name: 'Test Person', absences: [
+      {_id: absenceId, name: 'Test absence'}
+    ]}, 'wrong record retrieved');
   });
 
   it('removes the person record with child absence record', async () => {

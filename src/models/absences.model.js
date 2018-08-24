@@ -8,6 +8,7 @@ module.exports = function (app) {
   const absences = new Schema({
     id: {type: Number, required: true},
     workspace: {type: Schema.Types.ObjectId, required: true, ref: 'workspace'},
+    person: {type: Schema.Types.ObjectId, ref: 'person'},
     name: String,
     start_date: Date,
     end_date: Date,

@@ -7,9 +7,15 @@ const Services = require('@constants/services');
 module.exports = function () {
   return async context => {
     const service = context.service;
-    const items = context.result.data;
-    if (service.getChildren) {
-      await service.getChildren(items);
+    const result = context.result;
+    if (service._addChildren) {
+      if (result.data) {
+        for (const item of result.data) {
+          await service._addChildren(item);
+        }
+      } else {
+        await service._addChildren(result);
+      }
     }
     return context;
   };
