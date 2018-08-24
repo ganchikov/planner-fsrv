@@ -31,15 +31,14 @@ describe('\'people\' service', () => {
 
   it('get the person record with child absence record', async () => {
     const personRecord = await peopleService.get(personId, {headers});
-    assert.deepEqual(personRecord, {_id: personId, name: 'Test Person', absences: [
-      {_id: absenceId, name: 'Test absence'}
-    ]}, 'wrong record retrieved');
+    assert.equal(personRecord._id.toString(), personId.toString(), 'wrong person record retrieved');
+    assert.equal(personRecord.absences[0]._id.toString(), absenceId.toString(), 'wrong absence record retrieved for person');
   });
 
   it('removes the person record with child absence record', async () => {
     let result = await peopleService.remove(personId, {headers});
-    assert.equal(result._id.toString(), personId.toString());
+    assert.equal(result._id.toString(), personId.toString(), 'Wrong person id removed!');
     result = await absenceService.find({query: {_id: absenceId}, headers});
-    assert.equal(result.total, 0);
+    assert.equal(result.total, 0, 'absences for removed person remain!');
   });
 });
