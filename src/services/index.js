@@ -18,10 +18,10 @@ const teamsCalendar = require('./teams-calendar/teams-calendar.service.js');
 
 // eslint-disable-next-line no-unused-vars
 module.exports = function (app) {
-  app.configure(teams);
-  app.configure(idgenerator);
   app.configure(absences);
   app.configure(people);
+  app.configure(teams);
+  app.configure(idgenerator);
   app.configure(dataLoader);
   app.configure(users);
   app.configure(appver);

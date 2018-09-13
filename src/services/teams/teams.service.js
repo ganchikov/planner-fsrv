@@ -5,7 +5,7 @@ const createModel = require('@models/teams.model');
 const hooks = require('./teams.hooks');
 
 
-const {idgenerator, teams} = require('@constants/services');
+const {idgenerator, teams, people} = require('@constants/services');
 
 module.exports = function (app) {
   const Model = createModel(app);
@@ -24,9 +24,14 @@ module.exports = function (app) {
 
   // Get our initialized service so that we can register hooks and filters
   const service = app.service(route);
+
+  const peopleService = app.service(routeBuilder(app, people));
   
   service._addChildren = async (item) => {    
-    await Model.populate(item, {path: 'members', populate: {path: 'absences'}}); 
+    await Model.populate(item, {path: 'members'}); 
+    for (const member of item.members) {
+      await peopleService._addChildren(member);
+    }
   };
 
   service.generateId = async(item) => {
