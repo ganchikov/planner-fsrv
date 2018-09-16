@@ -23,9 +23,18 @@ module.exports = function (app) {
   const service = app.service(route);
   const absencesSvc = app.service(routeBuilder(app, absences));
 
+  service._getPeople = async (query) => {
+    const result = await Model.find(query).lean().exec();
+    return result;
+  };  
 
   service._addChildren = async (item) => {    
-      item.absences = await absencesSvc._getByPerson(item._id);
+    item.absences = await service._getChildren(item);
+  };
+
+  service._getChildren = async (item) => {
+    const absences = await absencesSvc._getByPerson(item._id);
+    return absences;
   };
 
   service.removeChildren = async (person) => {

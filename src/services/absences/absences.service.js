@@ -31,9 +31,8 @@ module.exports = function (app) {
 
   service._getByPerson = async (person) => {
     ///TODO: Beware of hack here! for some reason need to transform result from model to Doc object
-    const result = await Model.find().where('person').equals(person).exec();
-    const resultDocs = result.map(itm => itm._doc);
-    return resultDocs;
+    const result = await Model.find({person}).lean().exec();
+    return result;
   };
 
   service._removeByPerson = async(ids) => {

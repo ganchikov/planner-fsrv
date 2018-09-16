@@ -28,10 +28,21 @@ module.exports = function (app) {
   const peopleService = app.service(routeBuilder(app, people));
   
   service._addChildren = async (item) => {    
-    await Model.populate(item, {path: 'members'}); 
-    for (const member of item.members) {
-      await peopleService._addChildren(member);
-    }
+    await Model.populate(item, {path: 'members', options: {lean: true}}); 
+    // for (const member of item.members) {
+    //   await peopleService._addChildren(member);
+    // }
+  };
+
+  service._getChildren = async (item) => {
+    const childIds = item.members;
+    const children = await peopleService._getPeople({_id: {$in: childIds}});
+    return children;
+  };
+
+  service._getTeams = async (query) => {
+    const teams = (await Model.find(query).lean().exec());
+    return teams;
   };
 
   service.generateId = async(item) => {

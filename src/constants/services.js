@@ -3,6 +3,7 @@ const ServiceNames = {
     projects: 'projects',
     tasks: 'tasks',
     teams: 'teams',
+    teams_calendar: 'teams-calendar',
     people: 'people',
     absences: 'absences',
     idgenerator: 'idgenerator',
