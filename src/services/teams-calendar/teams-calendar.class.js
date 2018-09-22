@@ -42,6 +42,7 @@ class Service {
         person.type = 'task';
         person.open = true; 
         person.unscheduled = false;
+        person.absences = [];
         const absences = await this.peopleService._getChildren(person);
         result.push(...absences.map(itm => {
           itm.parent = person.id;
@@ -49,39 +50,15 @@ class Service {
           itm.type = 'task';
           itm.unscheduled = false;
           itm.open = true;
+          person.absences.push({
+            start_date: itm.start_date,
+            end_date: itm.end_date,
+          });
           return itm;
         }));
       }
     }
     return {data: result};
-  }
-
-  async get (id, params) {
-    
-
-    return {
-      id, text: `A new message with ID: ${id}!`
-    };
-  }
-
-  async create (data, params) {
-    if (Array.isArray(data)) {
-      return await Promise.all(data.map(current => this.create(current)));
-    }
-
-    return data;
-  }
-
-  async update (id, data, params) {
-    return data;
-  }
-
-  async patch (id, data, params) {
-    return data;
-  }
-
-  async remove (id, params) {
-    return { id };
   }
 }
 
