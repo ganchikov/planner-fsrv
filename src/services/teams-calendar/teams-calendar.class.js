@@ -1,4 +1,4 @@
-const {modelTypeTeam, modelTypePerson, modelTypeAbsence} = require('@src/constants/model-type');
+const {ModelType} = require('@src/constants');
 const moment = require('moment');
 
 /* eslint-disable no-unused-vars */
@@ -32,7 +32,7 @@ class Service {
       team.type = 'task';
       team.open = true;
       team.unscheduled = true;
-      team.model_type = modelTypeTeam;
+      team.model_type = ModelType.team;
       result.push(team);
       const members = await this.teamsService._getChildren(team);
       members.map(person => {
@@ -47,19 +47,20 @@ class Service {
         person.type = 'task';
         person.open = true; 
         person.absences = [];
-        person.model_type = modelTypePerson;
+        person.model_type = ModelType.person;
         const absences = await this.peopleService._getChildren(person);
 
         const dates = this.getDatesRange(absences);
         person.start_date = dates.start_date;
         person.end_date = dates.end_date;
         person.unscheduled = dates.unscheduled;
+        person.has_absences = absences.length > 0 ? true : false;
 
         result.push(...absences.map(absence => {
           absence.parent = person.id;
           absence.text = absence.name;
           absence.type = 'task';
-          absence.model_type = modelTypeAbsence;
+          absence.model_type = ModelType.absence;
           absence.unscheduled = false;
           absence.open = true;
           person.absences.push({

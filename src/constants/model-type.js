@@ -1,6 +1,6 @@
-const modelTypeTeam = 'team';
-const modelTypePerson = 'person';
-const modelTypeAbsence = 'absence';
-module.exports = modelTypeTeam;
-module.exports = modelTypePerson;
-module.exports = modelTypeAbsence;
+const modelType = {
+    team: 'team',
+    person: 'person',
+    absence: 'absence'
+};
+module.exports = modelType;

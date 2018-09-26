@@ -9,7 +9,8 @@
                     "start_date": "2018-01-01",
                     "end_date": "2018-01-31",
                     "name": "vacation",
-                    "confirmed": "true"
+                    "confirmed": "true",
+                    "absence_type": "vacation"
                 }                            
             ]
         }
