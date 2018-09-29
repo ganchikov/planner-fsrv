@@ -1,4 +1,5 @@
 const {ModelType} = require('@src/constants');
+const {CalendarItem} = require('@src/models/calendar-item.model');
 const moment = require('moment');
 
 /* eslint-disable no-unused-vars */
@@ -27,48 +28,54 @@ class Service {
     const result = [];
     const teams = await this.teamsService._getTeams();
     for (const team of teams) {
-     
-      team.text = team.name;
-      team.type = 'task';
-      team.open = true;
-      team.unscheduled = true;
-      team.model_type = ModelType.team;
-      result.push(team);
+      const teamItem = new CalendarItem(
+        team._id,
+        team.id,
+        team.name,
+        ModelType.team
+      );
+      result.push(teamItem);
+
       const members = await this.teamsService._getChildren(team);
-      members.map(person => {
-        person.parent = team.id;
-        person.text = person.name;
-        return person;
-      });
-      delete team.members;
-      result.push(...members);
+    
       for (const person of members) {
-        person.text = person.name;
-        person.type = 'task';
-        person.open = true; 
-        person.absences = [];
-        person.model_type = ModelType.person;
+
         const absences = await this.peopleService._getChildren(person);
-
         const dates = this.getDatesRange(absences);
-        person.start_date = dates.start_date;
-        person.end_date = dates.end_date;
-        person.unscheduled = dates.unscheduled;
-        person.has_absences = absences.length > 0 ? true : false;
 
-        result.push(...absences.map(absence => {
-          absence.parent = person.id;
-          absence.text = absence.name;
-          absence.type = 'task';
-          absence.model_type = ModelType.absence;
-          absence.unscheduled = false;
-          absence.open = true;
-          person.absences.push({
-            start_date: absence.start_date,
-            end_date: absence.end_date,
-          });
-          return absence;
-        }));
+        const personItem = new CalendarItem(
+          person._id,
+          person.id,
+          person.name,
+          ModelType.person,
+          team.id,
+          dates.unscheduled,
+          dates.start_date,
+          dates.end_date,
+          absences.map(itm => {
+            return {
+              id: itm.id,
+              start_date: itm.start_date,
+              end_date: itm.end_date
+            };
+          })
+        );
+        result.push(personItem);
+
+        for (const absence of absences) {
+          const absenceItem = new CalendarItem(
+            absence._id,
+            absence.id,
+            absence.name,
+            ModelType.absence,
+            person.id,
+            false,
+            absence.start_date,
+            absence.end_date
+          );
+          result.push(absenceItem);
+        }
+        
       }
     }
     return {data: result};
