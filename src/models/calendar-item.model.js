@@ -8,6 +8,8 @@ class CalendarItem {
                 unscheduled = true,
                 start_date = new Date(Date.now()), 
                 end_date = new Date(Date.now()), 
+                absence_type = undefined,
+                confirmed = undefined,
                 dates =[] ) {
         this.type = 'task';
         this._id = _id;
@@ -18,6 +20,8 @@ class CalendarItem {
         this.unscheduled = unscheduled;
         this.start_date = start_date;
         this.end_date = end_date;
+        this.absence_type = absence_type;
+        this.confirmed = confirmed;
         this.dates = dates;
 
     }

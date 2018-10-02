@@ -52,6 +52,8 @@ class Service {
           dates.unscheduled,
           dates.start_date,
           dates.end_date,
+          undefined,
+          undefined,
           absences.map(itm => {
             return {
               id: itm.id,
@@ -71,7 +73,9 @@ class Service {
             person.id,
             false,
             absence.start_date,
-            absence.end_date
+            absence.end_date,
+            absence.absence_type,
+            absence.confirmed
           );
           result.push(absenceItem);
         }
