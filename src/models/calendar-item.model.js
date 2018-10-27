@@ -10,7 +10,7 @@ class CalendarItem {
                 end_date = new Date(Date.now()), 
                 absence_type = undefined,
                 confirmed = undefined,
-                dates =[] ) {
+                schedule_dates =[] ) {
         this.type = 'task';
         this._id = _id;
         this.id = id;
@@ -22,7 +22,7 @@ class CalendarItem {
         this.end_date = end_date;
         this.absence_type = absence_type;
         this.confirmed = confirmed;
-        this.dates = dates;
+        this.schedule_dates = schedule_dates;
 
     }
 }
